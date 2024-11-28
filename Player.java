@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Player {
@@ -88,5 +89,14 @@ public class Player {
 
     public void setFoot(boolean foot) {
         this.foot = foot;
+    }
+    private ArrayList<String> positions;
+
+    public ArrayList<String> getPositions() {
+        return positions;
+    }
+
+    public void setPositions(ArrayList<String> positions) {
+        this.positions = positions;
     }
 }
