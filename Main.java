@@ -5,7 +5,7 @@ public class Main {
     public static void main(String args[])
     {
         Formation hasomango = new Formation();
-        hasomango.setFormation_name("A3_5_2");
+        hasomango.setFormation_name("A4_3_1_2");
         // Object of graph is created.
         Formation.Graph<Integer> g = hasomango.create_graph();
 
