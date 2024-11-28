@@ -77,10 +77,10 @@ public class Player {
 
     private boolean foot;
     private HashMap<String, Integer> skills;
-    public HashMap getSkills(){
+    public HashMap<String, Integer> getSkills(){
         return this.skills;
     }
-    public void setSkills(HashMap skills){
+    public void setSkills(HashMap<String, Integer> skills){
         this.skills = skills;
     }
     public boolean isFoot() {

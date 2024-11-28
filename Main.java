@@ -4,12 +4,15 @@ public class Main {
 
     public static void main(String args[])
     {
+        Formation hasomango = new Formation();
+        hasomango.setFormation_name("A3_5_2");
         // Object of graph is created.
-        Formation.Graph<Integer> g = new Formation.Graph<Integer>();
+        Formation.Graph<Integer> g = hasomango.create_graph();
 
         // edges are added.
         // Since the graph is bidirectional,
         // so boolean bidirectional is passed as true.
+        /*
         g.addEdge(0, 1, true);
         g.addEdge(0, 4, true);
         g.addEdge(1, 2, true);
@@ -34,5 +37,7 @@ public class Main {
         g.hasVertex(5);
         g.neighbours(1);
 
+         */
+        System.out.println("Graph:\n" + g.toString());
     }
 }

@@ -1,7 +1,103 @@
 import java.util.*;
 public class Formation {
-    // Java program to implement Graph
-// with the help of Generics
+    private String formation_name;
+    public Graph create_graph(){
+        Graph<Integer> the_graph = new Graph<Integer>();
+        switch(this.formation_name){
+            case "A3_4_3":
+                the_graph.addEdge(0,1,true);
+                the_graph.addEdge(0,2,true);
+                the_graph.addEdge(0,3,true);
+                the_graph.addEdge(1,2,true);
+                the_graph.addEdge(1,4,true);
+                the_graph.addEdge(2,3,true);
+                the_graph.addEdge(2,5,true);
+                the_graph.addEdge(2,6,true);
+                the_graph.addEdge(3,7,true);
+                the_graph.addEdge(4,8,true);
+                the_graph.addEdge(4,5,true);
+                the_graph.addEdge(5,6,true);
+                the_graph.addEdge(5,10,true);
+                the_graph.addEdge(6,7,true);
+                the_graph.addEdge(6,10,true);
+                the_graph.addEdge(7,9,true);
+                the_graph.addEdge(8,10,true);
+                the_graph.addEdge(9,10,true);
+                break;
+            case "A3_4_1_2":
+                the_graph.addEdge(0,1,true);
+                the_graph.addEdge(0,2,true);
+                the_graph.addEdge(0,3,true);
+                the_graph.addEdge(1,2,true);
+                the_graph.addEdge(1,4,true);
+                the_graph.addEdge(2,3,true);
+                the_graph.addEdge(2,5,true);
+                the_graph.addEdge(2,6,true);
+                the_graph.addEdge(3,7,true);
+                the_graph.addEdge(4,8,true);
+                the_graph.addEdge(4,5,true);
+                the_graph.addEdge(5,6,true);
+                the_graph.addEdge(5,10,true);
+                the_graph.addEdge(6,7,true);
+                the_graph.addEdge(6,10,true);
+                the_graph.addEdge(7,9,true);
+                the_graph.addEdge(8,10,true);
+                the_graph.addEdge(9,10,true);
+                the_graph.addEdge(8,9,true);
+                break;
+            case "A3_4_2_1":
+                the_graph.addEdge(0,1,true);
+                the_graph.addEdge(0,2,true);
+                the_graph.addEdge(0,3,true);
+                the_graph.addEdge(1,2,true);
+                the_graph.addEdge(1,4,true);
+                the_graph.addEdge(2,3,true);
+                the_graph.addEdge(2,5,true);
+                the_graph.addEdge(2,6,true);
+                the_graph.addEdge(3,7,true);
+                the_graph.addEdge(4,8,true);
+                the_graph.addEdge(4,5,true);
+                the_graph.addEdge(5,6,true);
+                the_graph.addEdge(5,8,true);
+                the_graph.addEdge(6,7,true);
+                the_graph.addEdge(6,9,true);
+                the_graph.addEdge(7,9,true);
+                the_graph.addEdge(8,10,true);
+                the_graph.addEdge(9,10,true);
+                break;
+            case "A3_5_2":
+                the_graph.addEdge(0,1,true);
+                the_graph.addEdge(0,2,true);
+                the_graph.addEdge(0,3,true);
+                the_graph.addEdge(1,2,true);
+                the_graph.addEdge(1,4,true);
+                the_graph.addEdge(1,5,true);
+                the_graph.addEdge(2,3,true);
+                the_graph.addEdge(2,5,true);
+                the_graph.addEdge(2,6,true);
+                the_graph.addEdge(3,6,true);
+                the_graph.addEdge(3,7,true);
+                the_graph.addEdge(4,8,true);
+                the_graph.addEdge(4,5,true);
+                the_graph.addEdge(5,6,true);
+                the_graph.addEdge(5,10,true);
+                the_graph.addEdge(6,7,true);
+                the_graph.addEdge(6,10,true);
+                the_graph.addEdge(7,9,true);
+                the_graph.addEdge(8,10,true);
+                the_graph.addEdge(9,10,true);
+                the_graph.addEdge(8,9,true);
+                break;
+        }
+        return the_graph;
+    }
+    public String getFormation_name() {
+        return formation_name;
+    }
+
+    public void setFormation_name(String formation_name) {
+        this.formation_name = formation_name;
+    }
     static class Graph<T> {
 
         // We use Hashmap to store the edges in the graph
@@ -26,7 +122,7 @@ public class Formation {
                 addVertex(destination);
 
             map.get(source).add(destination);
-            if (bidirectional == true) {
+            if (bidirectional) {
                 map.get(destination).add(source);
             }
         }
@@ -46,7 +142,7 @@ public class Formation {
             for (T v : map.keySet()) {
                 count += map.get(v).size();
             }
-            if (bidirection == true) {
+            if (bidirection) {
                 count = count / 2;
             }
             System.out.println("The graph has " + count
