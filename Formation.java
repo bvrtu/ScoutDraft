@@ -1,8 +1,9 @@
 import java.util.*;
 public class Formation {
+    private Player[] players = new Player[11];
     private String formation_name;
+    Graph<Integer> the_graph = new Graph<Integer>();
     public Graph create_graph(){
-        Graph<Integer> the_graph = new Graph<Integer>();
         switch(this.formation_name){
             case "A3_4_3":
                 the_graph.addEdge(0,1,true);
@@ -109,26 +110,26 @@ public class Formation {
                 the_graph.addEdge(8,10,true);
                 the_graph.addEdge(9,10,true);
                 break;
-                case "A4_1_4_1":
-                    the_graph.addEdge(0,1,true);
-                    the_graph.addEdge(0,2,true);
-                    the_graph.addEdge(1,2,true);
-                    the_graph.addEdge(1,4,true);
-                    the_graph.addEdge(1,6,true);
-                    the_graph.addEdge(2,3,true);
-                    the_graph.addEdge(2,6,true);
-                    the_graph.addEdge(3,7,true);
-                    the_graph.addEdge(4,5,true);
-                    the_graph.addEdge(5,8,true);
-                    the_graph.addEdge(5,9,true);
-                    the_graph.addEdge(6,8,true);
-                    the_graph.addEdge(6,10,true);
-                    the_graph.addEdge(7,9,true);
-                    the_graph.addEdge(7,10,true);
-                    the_graph.addEdge(8,9,true);
-                    the_graph.addEdge(8,10,true);
-                    the_graph.addEdge(9,10,true);
-                    break;
+            case "A4_1_4_1":
+                the_graph.addEdge(0,1,true);
+                the_graph.addEdge(0,2,true);
+                the_graph.addEdge(1,2,true);
+                the_graph.addEdge(1,4,true);
+                the_graph.addEdge(1,6,true);
+                the_graph.addEdge(2,3,true);
+                the_graph.addEdge(2,6,true);
+                the_graph.addEdge(3,7,true);
+                the_graph.addEdge(4,5,true);
+                the_graph.addEdge(5,8,true);
+                the_graph.addEdge(5,9,true);
+                the_graph.addEdge(6,8,true);
+                the_graph.addEdge(6,10,true);
+                the_graph.addEdge(7,9,true);
+                the_graph.addEdge(7,10,true);
+                the_graph.addEdge(8,9,true);
+                the_graph.addEdge(8,10,true);
+                the_graph.addEdge(9,10,true);
+                break;
             case "A4_2_2_2":
                 the_graph.addEdge(0,1,true);
                 the_graph.addEdge(0,2,true);
@@ -358,6 +359,27 @@ public class Formation {
     public void setFormation_name(String formation_name) {
         this.formation_name = formation_name;
     }
+    public Player[] getPlayers() {
+        return players;
+    }
+    public void setPlayers(Player[] players) {
+        this.players = players;
+    }
+    public  void checkLinks(int index){
+        if(players[index]== null) System.out.println("The position is empty.");
+        else if(the_graph.neighbours(index).isEmpty()) System.out.println("Neighbours are empty.");
+         else {
+             for(int i :the_graph.neighbours(index)){
+                 if(players[i] == null) continue;
+                 int rank = 0;
+                if(Objects.equals(players[index].getLeague(), players[i].getLeague())) rank++;
+                if(Objects.equals(players[index].getNation(), players[i].getNation())) rank++;
+                if(Objects.equals(players[index].getTeam_name(), players[i].getTeam_name())) rank++;
+                System.out.println(players[index].getName() + "has link rank " + String.valueOf(rank)
+                 + "with" + players[i].getName() + ".");
+            }
+         }
+    }
     static class Graph<T> {
 
         // We use Hashmap to store the edges in the graph
@@ -368,7 +390,6 @@ public class Formation {
         {
             map.put(s, new LinkedList<T>());
         }
-
         // This function adds the edge
         // between source to destination
         public void addEdge(T source, T destination,
@@ -386,7 +407,6 @@ public class Formation {
                 map.get(destination).add(source);
             }
         }
-
         // This function gives the count of vertices
         public void getVertexCount()
         {
@@ -439,13 +459,14 @@ public class Formation {
             }
         }
 
-        public void neighbours(T s)
+        public ArrayList<T> neighbours(T s)
         {
             if(!map.containsKey(s))
-                return ;
-            System.out.println("The neighbours of "+s+" are");
+                return null;
+            ArrayList<T> neighbours = new ArrayList<>();
             for(T w:map.get(s))
-                System.out.print(w+",");
+                neighbours.add(w);
+            return neighbours;
         }
 
         // Prints the adjancency list of each vertex.

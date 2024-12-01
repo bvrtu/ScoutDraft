@@ -8,6 +8,23 @@ public class Main {
         hasomango.setFormation_name("A4_3_1_2");
         // Object of graph is created.
         Formation.Graph<Integer> g = hasomango.create_graph();
+        Player Hasan = new Player();
+        Hasan.setName("Hasan Efe");
+        Hasan.setAge(23);
+        Hasan.setLeague("TSL");
+        Hasan.setNation("Turkey");
+        Hasan.setTeam_name("FB");
+        Player Bartu = new Player();
+        Bartu.setName("Bartu");
+        Bartu.setAge(23);
+        Bartu.setLeague("TSL");
+        Bartu.setNation("Turkey");
+        Bartu.setTeam_name("FB");
+        Player[] biz = new Player[11];
+        biz[0] = Hasan;
+        biz[1] = Bartu;
+        hasomango.setPlayers(biz);
+        hasomango.checkLinks(0);
 
         // edges are added.
         // Since the graph is bidirectional,
