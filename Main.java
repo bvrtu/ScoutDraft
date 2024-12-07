@@ -1,9 +1,11 @@
+package ScoutDraft;
+
 import java.util.HashMap;
 public class Main {
 
     public static void main(String args[])
     {
-        Formation hasomango = new Formation();
+        /*Formation hasomango = new Formation();
         hasomango.setFormation_name("A4_3_1_2");
         // Object of graph is created.
         Formation.Graph<Integer> g = hasomango.create_graph();
@@ -23,7 +25,7 @@ public class Main {
         biz[0] = Hasan;
         biz[1] = Bartu;
         hasomango.setPlayers(biz);
-        hasomango.checkLinks(0);
+        hasomango.checkLinks(0);*/
 
         // edges are added.
         // Since the graph is bidirectional,
@@ -54,6 +56,10 @@ public class Main {
         g.neighbours(1);
 
          */
-        System.out.println("Graph:\n" + g.toString());
+        // System.out.println("Graph:\n" + g.toString());
+
+        Gui gui = new Gui();
+
+        gui.show();
     }
 }
