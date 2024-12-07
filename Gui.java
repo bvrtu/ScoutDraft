@@ -7,6 +7,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class Gui {
     private JFrame mainFrame;
@@ -108,7 +110,7 @@ public class Gui {
         playPanel.setLayout(new GridLayout(1, 3, 20, 0));
 
         JButton button1 = new JButton("Build Your Team");
-        JButton button2 = new JButton("2");
+        JButton button2 = new JButton("Random Draft");
         JButton button3 = new JButton("3");
 
         button1.setPreferredSize(new Dimension(150, 50));
@@ -120,6 +122,7 @@ public class Gui {
         playPanel.add(button3);
 
         button1.addActionListener(e -> openFormationSelectionWindow());
+        button2.addActionListener(e -> showRandomFormations());
 
         JPanel container = new JPanel(new GridBagLayout());
         container.setBackground(Color.WHITE);
@@ -157,10 +160,22 @@ public class Gui {
         formationImageLabel = new JLabel();
         formationImageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        JButton okButton = new JButton("OK");
+        okButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        okButton.setEnabled(false);
+
         // Seçim işlemi
         selectButton.addActionListener(e -> {
             String selectedFormation = (String) formationComboBox.getSelectedItem();
             updateFormationImage(selectedFormation); // Formasyon görselini güncelle
+            okButton.setEnabled(true); // OK butonunu etkinleştir
+        });
+
+        okButton.addActionListener(e -> {
+            selectButton.setEnabled(false); // Select Formation butonunu devre dışı bırak
+            formationComboBox.setEnabled(false); // ComboBox'ı devre dışı bırak
+            okButton.setEnabled(false); // OK butonunu da devre dışı bırak
+            JOptionPane.showMessageDialog(formationFrame, "Formation selection confirmed!");
         });
 
         // Panele formasyonları ve butonu ekle
@@ -168,6 +183,9 @@ public class Gui {
         formationPanel.add(formationComboBox);
         formationPanel.add(Box.createVerticalStrut(20));
         formationPanel.add(selectButton);
+        formationPanel.add(Box.createVerticalStrut(10));
+        formationPanel.add(okButton);
+        formationPanel.add(Box.createVerticalStrut(20));
         formationPanel.add(formationImageLabel); // Formasyon resmini ekle
 
         // İçeriği ortalamak için kapsayıcı panel
@@ -192,6 +210,91 @@ public class Gui {
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Image not found for the selected formation.", "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    private void showRandomFormations() {
+        // Formasyonlar dizisi
+        String[] formations = {"3-4-3", "3-4-1-2", "3-4-2-1", "3-5-2", "4-1-2-1-2", "4-1-4-1", "4-2-2-2", "4-2-3-1",
+                "4-3-1-2", "4-3-2-1", "4-3-3", "4-4-1-1", "4-4-2", "4-5-1", "5-2-2-1", "5-2-1-2", "5-3-2"};
+
+        // Formasyon listesini oluştur
+        ArrayList<String> formationList = new ArrayList<>();
+        Collections.addAll(formationList, formations);
+
+        // Karıştır ve ilk 5'i seç
+        Collections.shuffle(formationList);
+        String[] randomFormations = formationList.subList(0, 5).toArray(new String[0]);
+
+        // Seçilen formasyonları yazdır (kontrol için)
+        for (String formation : randomFormations) {
+            System.out.println(formation);
+        }
+
+        // Kullanıcıya formasyonları seçtirecek pencereyi aç
+        JFrame formationFrame = new JFrame("Random Draft");
+        formationFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        formationFrame.setSize(screenSize);
+
+        JPanel formationPanel = new JPanel();
+        formationPanel.setLayout(new BoxLayout(formationPanel, BoxLayout.Y_AXIS));
+
+        JLabel instructionLabel = new JLabel("Please select one of the following formations:");
+        instructionLabel.setFont(new Font("Arial", Font.PLAIN, 24));
+        instructionLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        // ComboBox ile rastgele formasyonları göster
+        JComboBox<String> formationComboBox = new JComboBox<>(randomFormations);
+        formationComboBox.setFont(new Font("Arial", Font.PLAIN, 24));
+        formationComboBox.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        // Seçim butonu
+        JButton selectButton = new JButton("Select Formation");
+        selectButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        // "OK" butonu
+        JButton okButton = new JButton("OK");
+        okButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        okButton.setEnabled(false); // Başlangıçta devre dışı
+
+        // Formasyon görseli için label
+        formationImageLabel = new JLabel();
+        formationImageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        // Seçim işlemi
+        selectButton.addActionListener(e -> {
+            String selectedFormation = (String) formationComboBox.getSelectedItem();
+            updateFormationImage(selectedFormation); // Formasyon görselini güncelle
+            okButton.setEnabled(true); // OK butonunu etkinleştir
+        });
+
+        // OK butonuna basıldığında seçim kilitlensin
+        okButton.addActionListener(e -> {
+            selectButton.setEnabled(false); // Select Formation butonunu devre dışı bırak
+            formationComboBox.setEnabled(false); // ComboBox'ı devre dışı bırak
+            okButton.setEnabled(false); // OK butonunu da devre dışı bırak
+            JOptionPane.showMessageDialog(formationFrame, "Formation selection confirmed!");
+        });
+
+        // Panele formasyonları ve butonları ekle
+        formationPanel.add(Box.createVerticalStrut(100)); // Boşluk
+        formationPanel.add(instructionLabel);
+        formationPanel.add(Box.createVerticalStrut(20));
+        formationPanel.add(formationComboBox);
+        formationPanel.add(Box.createVerticalStrut(20));
+        formationPanel.add(selectButton);
+        formationPanel.add(Box.createVerticalStrut(10));
+        formationPanel.add(okButton);
+        formationPanel.add(Box.createVerticalStrut(20));
+        formationPanel.add(formationImageLabel); // Formasyon resmini ekle
+
+        // İçeriği ortalamak için kapsayıcı panel
+        JPanel container = new JPanel(new GridBagLayout());
+        container.add(formationPanel);
+
+        formationFrame.add(container);
+        formationFrame.setVisible(true);
     }
 
     private Point[] getFormationBoxCoordinates(String selectedFormation) {
