@@ -198,7 +198,7 @@ public class Gui {
 
     // Seçilen formasyonun görselini mevcut pencereye ekleyen metot
     private void updateFormationImage(String selectedFormation) {
-        String imagePath = "/Users/bartu/Desktop/images/" + selectedFormation + ".png"; // Formasyon ismiyle uyumlu resim ismi
+        String imagePath = "/Users/bartu/Desktop/ScoutDraft/ScoutDraft/images/" + selectedFormation + ".png"; // Formasyon ismiyle uyumlu resim ismi
 
         try {
             ImageIcon formationImage = new ImageIcon(ImageIO.read(new File(imagePath)));
