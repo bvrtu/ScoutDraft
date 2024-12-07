@@ -176,6 +176,7 @@ public class Gui {
             formationComboBox.setEnabled(false); // ComboBox'ı devre dışı bırak
             okButton.setEnabled(false); // OK butonunu da devre dışı bırak
             JOptionPane.showMessageDialog(formationFrame, "Formation selection confirmed!");
+            addClickableButtons();
         });
 
         // Panele formasyonları ve butonu ekle
@@ -206,7 +207,6 @@ public class Gui {
 
             boxCoordinates = getFormationBoxCoordinates(selectedFormation); // Koordinatları al
             clearPreviousButtons();
-            addClickableButtons(); // Koordinatlara göre butonları yerleştir
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Image not found for the selected formation.", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -275,6 +275,7 @@ public class Gui {
             formationComboBox.setEnabled(false); // ComboBox'ı devre dışı bırak
             okButton.setEnabled(false); // OK butonunu da devre dışı bırak
             JOptionPane.showMessageDialog(formationFrame, "Formation selection confirmed!");
+            addClickableButtons();
         });
 
         // Panele formasyonları ve butonları ekle
