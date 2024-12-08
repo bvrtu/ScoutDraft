@@ -1,6 +1,5 @@
 import java.sql.*;
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Connect {
@@ -34,7 +33,7 @@ public class Connect {
             var conn = DriverManager.getConnection("jdbc:sqlite:database.db");
             var stmt = conn.createStatement();
             var create = "CREATE TABLE IF NOT EXISTS PlayerAttributes(" +
-                    "    ID INT PRIMARY KEY,n" +
+                    "    ID INT PRIMARY KEY," +
                     "    Name VARCHAR(255)," +
                     "    Club VARCHAR(255)," +
                     "    CA INT," +
@@ -107,7 +106,7 @@ public class Connect {
                     Agg, TRO, One_v_One, Fin, Bra, Wor, Agi, Sta, Kic, Bal, Dri, Han, Thr, Str, Aer,
                     Pac, Acc, Fir, Hea, Dec, Det, Cnt, Cor, Ldr, Mar, Cro, Ant, Fla, Pas, Pen, Pos,
                     Ref, Fre, Cmp, Tea, Tec, Tck, OtB, Lon, Vis, Nat, Pun, Jum, Division
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
                 """;
 
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:database.db");
@@ -182,6 +181,7 @@ public class Connect {
         connect();
         create_table();
         Scanner sc = new Scanner(new File("fm24eng.csv"));
+
         sc.nextLine();
         while(sc.hasNextLine()){
             String row = sc.nextLine();
@@ -205,6 +205,5 @@ public class Connect {
                     Integer.parseInt(cols[52]),cols[53]);
         }
         sc.close();
-
     }
 }
