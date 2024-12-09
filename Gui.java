@@ -13,6 +13,8 @@ public class Gui {
     private JButton authorsButton;
     private JButton playButton;
 
+    private JFrame playFrame = new JFrame("Play Options");
+
     private JLabel formationImageLabel; // Formasyon resmini gösterecek label
 
     private JButton[] formationButtons; // Fotoğraf üzerindeki butonları tutacak dizi
@@ -21,7 +23,7 @@ public class Gui {
     private Point[] boxCoordinates;
 
     private String lastSelectedFormation = "";
-    private Formation currentFormation;
+    private Formation currentFormation = new Formation();
 
     public Gui() {
         initializeMainGUI();
@@ -70,7 +72,21 @@ public class Gui {
     }
 
     private void openAuthorsWindow() {
+        mainFrame.setVisible(false);
         JFrame authorsFrame = new JFrame("Authors");
+
+        JButton backButton = new JButton("Back to Main Screen");
+        backButton.setBounds(50, 50, 200, 30);
+        authorsFrame.add(backButton);
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                authorsFrame.dispose();// Yeni pencereyi gizle
+                mainFrame.setVisible(true); // İlk pencereyi göster
+            }
+        });
+
         authorsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -101,11 +117,28 @@ public class Gui {
     }
 
     private void openPlayWindow() {
-        JFrame playFrame = new JFrame("Play Options");
+        mainFrame.setVisible(false);
+
+        JButton backButton = new JButton("Back to Main Screen");
+        backButton.setBounds(50, 50, 200, 30);
+        playFrame.add(backButton);
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                playFrame.dispose();// Yeni pencereyi gizle
+                mainFrame.setVisible(true); // İlk pencereyi göster
+            }
+        });
+
         playFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        playFrame.setSize(screenSize);
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Dimension screenSize = kit.getScreenSize();
+        int screenWidth = screenSize.width;
+        int screenHeight = screenSize.height;
+        playFrame.setSize(screenWidth/2,screenHeight/2);
+        playFrame.setLocation(screenWidth/4,screenHeight/4);
 
         JPanel playPanel = new JPanel();
         playPanel.setLayout(new GridLayout(1, 3, 20, 0));
@@ -134,8 +167,23 @@ public class Gui {
     }
 
     private void openFormationSelectionWindow() {
+        playFrame.setVisible(false);
+
         JFrame formationFrame = new JFrame("Build Your Team");
         formationFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        JButton backButton = new JButton("Back to Play Options");
+        backButton.setBounds(50, 50, 200, 30);
+        formationFrame.add(backButton);
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                formationFrame.dispose();// Yeni pencereyi gizle
+                playFrame.setVisible(true); // İlk pencereyi göster
+                mainFrame.dispose();
+            }
+        });
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         formationFrame.setSize(screenSize);
@@ -216,6 +264,24 @@ public class Gui {
     }
 
     private void showRandomFormations() {
+        playFrame.setVisible(false);
+
+        JFrame formationFrame = new JFrame("Random Draft");
+        formationFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        JButton backButton = new JButton("Back to Play Options");
+        backButton.setBounds(50, 50, 200, 30);
+        formationFrame.add(backButton);
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                formationFrame.dispose();// Yeni pencereyi gizle
+                playFrame.setVisible(true); // İlk pencereyi göster
+                mainFrame.dispose();
+            }
+        });
+
         // Formasyonlar dizisi
         String[] formations = {"3-4-3", "3-4-1-2", "3-4-2-1", "3-5-2", "4-1-2-1-2", "4-1-4-1", "4-2-2-2", "4-2-3-1",
                 "4-3-1-2", "4-3-2-1", "4-3-3", "4-4-1-1", "4-4-2", "4-5-1", "5-2-2-1", "5-2-1-2", "5-3-2"};
@@ -232,10 +298,6 @@ public class Gui {
         for (String formation : randomFormations) {
             System.out.println(formation);
         }
-
-        // Kullanıcıya formasyonları seçtirecek pencereyi aç
-        JFrame formationFrame = new JFrame("Random Draft");
-        formationFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         formationFrame.setSize(screenSize);
