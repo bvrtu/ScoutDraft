@@ -25,6 +25,10 @@ public class Gui {
     private String lastSelectedFormation = "";
     private Formation currentFormation = new Formation();
 
+    private boolean isRandom = false;
+    private boolean isBuildTeam = false;
+    private boolean isSearchPlayer = false;
+
     public Gui() {
         initializeMainGUI();
     }
@@ -168,6 +172,9 @@ public class Gui {
     }
 
     private void openFormationSelectionWindow() {
+        isBuildTeam = true;
+        isRandom = false;
+
         playFrame.setVisible(false);
 
         JFrame formationFrame = new JFrame("Build Your Team");
@@ -266,6 +273,9 @@ public class Gui {
     }
 
     private void showRandomFormations() {
+        isRandom = true;
+        isBuildTeam = false;
+
         playFrame.setVisible(false);
 
         JFrame formationFrame = new JFrame("Random Draft");
@@ -431,9 +441,18 @@ public class Gui {
             }
         });
 
+        JPanel searchButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton searchButton = new JButton("Search");
+        searchButton.addActionListener(e -> {
+            // "Add" düğmesi tıklama olayını özelleştirebilirsiniz
+            JOptionPane.showMessageDialog(searchFrame, "Add button clicked!");
+        });
+        searchButtonPanel.add(searchButton);
+
         // Üst paneli kapsayan bir ana panel
         JPanel combinedTopPanel = new JPanel(new BorderLayout());
         combinedTopPanel.add(topPanel, BorderLayout.CENTER);
+        combinedTopPanel.add(searchButtonPanel, BorderLayout.SOUTH);
         combinedTopPanel.add(topRightPanel, BorderLayout.NORTH);
 
         // Alt panel (Boş başlıyor)
@@ -505,24 +524,30 @@ public class Gui {
             @Override
             public void actionPerformed(ActionEvent e) {
                 searchFrame.dispose();// Yeni pencereyi gizle
-                playFrame.setVisible(true); // İlk pencereyi göster
+                playFrame.dispose(); // İlk pencereyi göster
                 mainFrame.dispose();
             }
         });
 
-        JPanel addButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        // Ortalanmış "Add" ve "Search" düğmeleri için panel
+        JPanel buttonPanel = new JPanel(new GridLayout(2, 1, 10, 10)); // 2 satır, 1 sütun, aralık 10px
+        JButton searchButton = new JButton("Search");
+        searchButton.addActionListener(e -> {
+            // "Search" butonuna tıklandığında yapılacak işlemler
+            JOptionPane.showMessageDialog(searchFrame, "Search button clicked!");
+        });
         JButton addButton = new JButton("Add");
         addButton.addActionListener(e -> {
-            // "Add" düğmesi tıklama olayını özelleştirebilirsiniz
-            // DEĞİŞECEK
+            // "Add" butonuna tıklandığında yapılacak işlemler
             JOptionPane.showMessageDialog(searchFrame, "Add button clicked!");
         });
-        addButtonPanel.add(addButton);
+        buttonPanel.add(searchButton);
+        buttonPanel.add(addButton);
 
         // Üst paneli kapsayan bir ana panel
         JPanel combinedTopPanel = new JPanel(new BorderLayout());
         combinedTopPanel.add(topPanel, BorderLayout.CENTER);
-        combinedTopPanel.add(addButtonPanel, BorderLayout.SOUTH);
+        combinedTopPanel.add(buttonPanel, BorderLayout.SOUTH);
         combinedTopPanel.add(topRightPanel, BorderLayout.NORTH);
 
         // Alt panel (Boş başlıyor)
@@ -695,14 +720,25 @@ public class Gui {
     // Butona tıklandığında oyuncu seçme işlemi
     private void selectPlayer(int boxIndex) {
         if (currentFormation.getPositions().get(boxIndex) != null)
-        if(currentFormation.getPlayers()[currentFormation.getPositions().get(boxIndex)] != null) {
-            openSearchWindow2();
-            System.out.println("Expecting an action from the user...");
-        } else {
-            // Buraya oyuncu değiştir ya da oyuncuyu görüntüle diye iki seçenek sunan bi pencere açılır.
-            openSearchWindow2();
-            System.out.println("Expecting an action from the user...");
-        }
+            if(currentFormation.getPlayers()[currentFormation.getPositions().get(boxIndex)] != null) {
+                if (isBuildTeam) {
+                    openSearchWindow2();
+                } else if (isRandom) {
+                    JOptionPane.showMessageDialog(null,"Random");
+                } else {
+                    openSearchWindow();
+                }
+                System.out.println("Expecting an action from the user...");
+            } else {
+                if (isBuildTeam) {
+                    openSearchWindow2();
+                } else if (isRandom) {
+                    JOptionPane.showMessageDialog(null,"Random");
+                } else {
+                    openSearchWindow();
+                }
+                System.out.println("Expecting an action from the user...");
+            }
         // Burada seçilen kutu ile ilişkili bir oyuncu seçebilirsiniz
         // Örneğin, kutuya tıklanmasıyla ilgili oyuncu bilgisi alınabilir.
         JOptionPane.showMessageDialog(null, "You selected box: " + (boxIndex));
