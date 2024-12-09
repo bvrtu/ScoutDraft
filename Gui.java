@@ -20,6 +20,9 @@ public class Gui {
 
     private Point[] boxCoordinates;
 
+    private String lastSelectedFormation = "";
+    private Formation currentFormation;
+
     public Gui() {
         initializeMainGUI();
     }
@@ -174,6 +177,8 @@ public class Gui {
             formationComboBox.setEnabled(false); // ComboBox'ı devre dışı bırak
             okButton.setEnabled(false); // OK butonunu da devre dışı bırak
             JOptionPane.showMessageDialog(formationFrame, "Formation selection confirmed!");
+            lastSelectedFormation = (String) formationComboBox.getSelectedItem();
+            currentFormation.setFormation_name(lastSelectedFormation);
             addClickableButtons();
         });
 
@@ -274,6 +279,8 @@ public class Gui {
             okButton.setEnabled(false); // OK butonunu da devre dışı bırak
             JOptionPane.showMessageDialog(formationFrame, "Formation selection confirmed!");
             addClickableButtons();
+            lastSelectedFormation = (String) formationComboBox.getSelectedItem();
+            currentFormation.setFormation_name(lastSelectedFormation);
         });
 
         // Panele formasyonları ve butonları ekle
