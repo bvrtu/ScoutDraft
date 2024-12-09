@@ -228,6 +228,7 @@ public class Gui {
             JOptionPane.showMessageDialog(formationFrame, "Formation selection confirmed!");
             lastSelectedFormation = (String) formationComboBox.getSelectedItem();
             currentFormation.setFormation_name(lastSelectedFormation);
+            currentFormation.create_graph();
             addClickableButtons();
         });
 
@@ -344,6 +345,7 @@ public class Gui {
             addClickableButtons();
             lastSelectedFormation = (String) formationComboBox.getSelectedItem();
             currentFormation.setFormation_name(lastSelectedFormation);
+            currentFormation.create_graph();
         });
 
         // Panele formasyonları ve butonları ekle
@@ -432,6 +434,95 @@ public class Gui {
         // Üst paneli kapsayan bir ana panel
         JPanel combinedTopPanel = new JPanel(new BorderLayout());
         combinedTopPanel.add(topPanel, BorderLayout.CENTER);
+        combinedTopPanel.add(topRightPanel, BorderLayout.NORTH);
+
+        // Alt panel (Boş başlıyor)
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setBorder(BorderFactory.createTitledBorder("Query Results"));
+
+        // Üst ve alt panelleri yeni pencereye ekleme
+        searchFrame.add(combinedTopPanel, BorderLayout.NORTH);
+        searchFrame.add(bottomPanel, BorderLayout.CENTER);
+
+        searchFrame.setVisible(true);
+    }
+
+    private void openSearchWindow2() {
+        // Yeni pencere
+        JFrame searchFrame = new JFrame("Search Player");
+        searchFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Dimension screenSize = kit.getScreenSize();
+        searchFrame.setSize(screenSize);
+        searchFrame.setLayout(new BorderLayout());
+
+        // Üst panel
+        JPanel topPanel = new JPanel();
+        topPanel.setLayout(new GridLayout(5, 2, 10, 10)); // 5 satır, 2 sütun, aralık 10px
+
+        // Name için text area
+        topPanel.add(new JLabel("Name:"));
+        JTextField nameField = new JTextField();
+        topPanel.add(nameField);
+
+        // Nation için dropdown list
+        topPanel.add(new JLabel("Nation:"));
+        // DEĞİŞECEK
+        JComboBox<String> nationDropdown = new JComboBox<>(new String[]{"USA", "Germany", "Brazil", "Japan", "Others"});
+        topPanel.add(nationDropdown);
+
+        // Age için aralık combobox'ları
+        topPanel.add(new JLabel("Age Range:"));
+        JPanel agePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        // DEĞİŞEBİLİR
+        JComboBox<Integer> minAge = new JComboBox<>(generateRange(15, 100));
+        JComboBox<Integer> maxAge = new JComboBox<>(generateRange(15, 100));
+        agePanel.add(new JLabel("Min:"));
+        agePanel.add(minAge);
+        agePanel.add(new JLabel("Max:"));
+        agePanel.add(maxAge);
+        topPanel.add(agePanel);
+
+        // Current Ability için combobox
+        topPanel.add(new JLabel("Current Ability:"));
+        // DEĞİŞECEK
+        JComboBox<String> abilityDropdown = new JComboBox<>(new String[]{"Low", "Medium", "High", "Elite"});
+        topPanel.add(abilityDropdown);
+
+        // Division için dropdown list
+        topPanel.add(new JLabel("Division:"));
+        // DEĞİŞECEK
+        JComboBox<String> divisionDropdown = new JComboBox<>(new String[]{"Division 1", "Division 2", "Division 3", "Others"});
+        topPanel.add(divisionDropdown);
+
+        // Sağ üst köşe için panel ve buton
+        JPanel topRightPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        JButton backButton = new JButton("Back to Play Options");
+        backButton.setBounds(50, 50, 200, 30);
+        topRightPanel.add(backButton);
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                searchFrame.dispose();// Yeni pencereyi gizle
+                playFrame.setVisible(true); // İlk pencereyi göster
+                mainFrame.dispose();
+            }
+        });
+
+        JPanel addButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton addButton = new JButton("Add");
+        addButton.addActionListener(e -> {
+            // "Add" düğmesi tıklama olayını özelleştirebilirsiniz
+            // DEĞİŞECEK
+            JOptionPane.showMessageDialog(searchFrame, "Add button clicked!");
+        });
+        addButtonPanel.add(addButton);
+
+        // Üst paneli kapsayan bir ana panel
+        JPanel combinedTopPanel = new JPanel(new BorderLayout());
+        combinedTopPanel.add(topPanel, BorderLayout.CENTER);
+        combinedTopPanel.add(addButtonPanel, BorderLayout.SOUTH);
         combinedTopPanel.add(topRightPanel, BorderLayout.NORTH);
 
         // Alt panel (Boş başlıyor)
@@ -603,12 +694,15 @@ public class Gui {
 
     // Butona tıklandığında oyuncu seçme işlemi
     private void selectPlayer(int boxIndex) {
-        if(currentFormation.getPlayers()[currentFormation.getPositions().get(boxIndex)] != null)
-            // Bartu buraya tablo olan windowu açan methodu çağıracak.
+        if (currentFormation.getPositions().get(boxIndex) != null)
+        if(currentFormation.getPlayers()[currentFormation.getPositions().get(boxIndex)] != null) {
+            openSearchWindow2();
             System.out.println("Expecting an action from the user...");
-        else
+        } else {
             // Buraya oyuncu değiştir ya da oyuncuyu görüntüle diye iki seçenek sunan bi pencere açılır.
+            openSearchWindow2();
             System.out.println("Expecting an action from the user...");
+        }
         // Burada seçilen kutu ile ilişkili bir oyuncu seçebilirsiniz
         // Örneğin, kutuya tıklanmasıyla ilgili oyuncu bilgisi alınabilir.
         JOptionPane.showMessageDialog(null, "You selected box: " + (boxIndex));
