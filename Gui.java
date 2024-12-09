@@ -145,7 +145,7 @@ public class Gui {
 
         JButton button1 = new JButton("Build Your Team");
         JButton button2 = new JButton("Random Draft");
-        JButton button3 = new JButton("3");
+        JButton button3 = new JButton("Search Player");
 
         button1.setPreferredSize(new Dimension(150, 50));
         button2.setPreferredSize(new Dimension(150, 50));
@@ -157,6 +157,7 @@ public class Gui {
 
         button1.addActionListener(e -> openFormationSelectionWindow());
         button2.addActionListener(e -> showRandomFormations());
+        button3.addActionListener(e -> openSearchWindow());
 
         JPanel container = new JPanel(new GridBagLayout());
         container.setBackground(Color.WHITE);
@@ -363,6 +364,94 @@ public class Gui {
 
         formationFrame.add(container);
         formationFrame.setVisible(true);
+    }
+
+    private void openSearchWindow() {
+        // Yeni pencere
+        JFrame searchFrame = new JFrame("Search Player");
+        searchFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Dimension screenSize = kit.getScreenSize();
+        searchFrame.setSize(screenSize);
+        searchFrame.setLayout(new BorderLayout());
+
+        // Üst panel
+        JPanel topPanel = new JPanel();
+        topPanel.setLayout(new GridLayout(5, 2, 10, 10)); // 5 satır, 2 sütun, aralık 10px
+
+        // Name için text area
+        topPanel.add(new JLabel("Name:"));
+        JTextField nameField = new JTextField();
+        topPanel.add(nameField);
+
+        // Nation için dropdown list
+        topPanel.add(new JLabel("Nation:"));
+        // DEĞİŞECEK
+        JComboBox<String> nationDropdown = new JComboBox<>(new String[]{"USA", "Germany", "Brazil", "Japan", "Others"});
+        topPanel.add(nationDropdown);
+
+        // Age için aralık combobox'ları
+        topPanel.add(new JLabel("Age Range:"));
+        JPanel agePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        // DEĞİŞEBİLİR
+        JComboBox<Integer> minAge = new JComboBox<>(generateRange(15, 100));
+        JComboBox<Integer> maxAge = new JComboBox<>(generateRange(15, 100));
+        agePanel.add(new JLabel("Min:"));
+        agePanel.add(minAge);
+        agePanel.add(new JLabel("Max:"));
+        agePanel.add(maxAge);
+        topPanel.add(agePanel);
+
+        // Current Ability için combobox
+        topPanel.add(new JLabel("Current Ability:"));
+        // DEĞİŞECEK
+        JComboBox<String> abilityDropdown = new JComboBox<>(new String[]{"Low", "Medium", "High", "Elite"});
+        topPanel.add(abilityDropdown);
+
+        // Division için dropdown list
+        topPanel.add(new JLabel("Division:"));
+        // DEĞİŞECEK
+        JComboBox<String> divisionDropdown = new JComboBox<>(new String[]{"Division 1", "Division 2", "Division 3", "Others"});
+        topPanel.add(divisionDropdown);
+
+        // Sağ üst köşe için panel ve buton
+        JPanel topRightPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        JButton backButton = new JButton("Back to Play Options");
+        backButton.setBounds(50, 50, 200, 30);
+        topRightPanel.add(backButton);
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                searchFrame.dispose();// Yeni pencereyi gizle
+                playFrame.setVisible(true); // İlk pencereyi göster
+                mainFrame.dispose();
+            }
+        });
+
+        // Üst paneli kapsayan bir ana panel
+        JPanel combinedTopPanel = new JPanel(new BorderLayout());
+        combinedTopPanel.add(topPanel, BorderLayout.CENTER);
+        combinedTopPanel.add(topRightPanel, BorderLayout.NORTH);
+
+        // Alt panel (Boş başlıyor)
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setBorder(BorderFactory.createTitledBorder("Query Results"));
+
+        // Üst ve alt panelleri yeni pencereye ekleme
+        searchFrame.add(combinedTopPanel, BorderLayout.NORTH);
+        searchFrame.add(bottomPanel, BorderLayout.CENTER);
+
+        searchFrame.setVisible(true);
+    }
+    // DEĞİŞEBİLİR
+    // Yaş aralığı için yardımcı metod
+    private static Integer[] generateRange(int start, int end) {
+        Integer[] range = new Integer[end - start + 1];
+        for (int i = 0; i < range.length; i++) {
+            range[i] = start + i;
+        }
+        return range;
     }
 
     private Point[] getFormationBoxCoordinates(String selectedFormation) {
