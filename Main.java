@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.sql.*;
 public class Main {
 
     public static void main(String args[])
@@ -55,7 +56,8 @@ public class Main {
 
          */
         // System.out.println("Graph:\n" + g.toString());
-
+        ResultSet output = DatabaseAction.search("Messi");
+        System.out.println(output);
         Gui gui = new Gui();
 
         gui.show();

@@ -9,7 +9,7 @@ public class Formation {
     Graph<Integer> the_graph = new Graph<Integer>();
     public Graph create_graph(){
         switch(this.formation_name){
-            case "A3_4_3":
+            case "3-4-3":
                 the_graph.addEdge(0,1,true);
                 the_graph.addEdge(0,2,true);
                 the_graph.addEdge(0,3,true);
@@ -42,7 +42,7 @@ public class Formation {
                 positions.put(0,10);
 
                 break;
-            case "A3_4_1_2":
+            case "3-4-1-2":
                 the_graph.addEdge(0,1,true);
                 the_graph.addEdge(0,2,true);
                 the_graph.addEdge(0,3,true);
@@ -76,7 +76,7 @@ public class Formation {
                 positions.put(0,10);
 
                 break;
-            case "A3_4_2_1":
+            case "3-4-2-1":
                 the_graph.addEdge(0,1,true);
                 the_graph.addEdge(0,2,true);
                 the_graph.addEdge(0,3,true);
@@ -109,7 +109,7 @@ public class Formation {
                 positions.put(0,10);
 
                 break;
-            case "A3_5_2":
+            case "3-5-2":
                 the_graph.addEdge(0,1,true);
                 the_graph.addEdge(0,2,true);
                 the_graph.addEdge(0,3,true);
@@ -145,7 +145,7 @@ public class Formation {
                 positions.put(0,10);
 
                 break;
-            case "A4_1_2_1_2":
+            case "4-1-2-1-2":
                 the_graph.addEdge(0,1,true);
                 the_graph.addEdge(0,2,true);
                 the_graph.addEdge(1,2,true);
@@ -179,7 +179,7 @@ public class Formation {
                 positions.put(0,10);
 
                 break;
-            case "A4_1_4_1":
+            case "4-1-4-1":
                 the_graph.addEdge(0,1,true);
                 the_graph.addEdge(0,2,true);
                 the_graph.addEdge(1,2,true);
@@ -212,7 +212,7 @@ public class Formation {
                 positions.put(0,9);
 
                 break;
-            case "A4_2_2_2":
+            case "4-2-2-2":
                 the_graph.addEdge(0,1,true);
                 the_graph.addEdge(0,2,true);
                 the_graph.addEdge(1,2,true);
@@ -244,7 +244,7 @@ public class Formation {
                 positions.put(0,10);
 
                 break;
-            case "A4_2_3_1":
+            case "4-2-3-1":
                 the_graph.addEdge(0,1,true);
                 the_graph.addEdge(0,2,true);
                 the_graph.addEdge(1,2,true);
@@ -278,7 +278,7 @@ public class Formation {
                 positions.put(0,9);
 
                 break;
-            case "A4_3_1_2":
+            case "4-3-1-2":
                 the_graph.addEdge(0,1,true);
                 the_graph.addEdge(0,2,true);
                 the_graph.addEdge(1,2,true);
@@ -312,7 +312,7 @@ public class Formation {
                 positions.put(0,10);
 
                 break;
-            case "A4_3_2_1":
+            case "4-3-2-1":
                 the_graph.addEdge(0,1,true);
                 the_graph.addEdge(0,2,true);
                 the_graph.addEdge(1,2,true);
@@ -344,7 +344,7 @@ public class Formation {
                 positions.put(0,10);
 
                 break;
-            case "A4_3_3":
+            case "4-3-3":
                 the_graph.addEdge(0,1,true);
                 the_graph.addEdge(0,2,true);
                 the_graph.addEdge(1,2,true);
@@ -375,7 +375,7 @@ public class Formation {
                 positions.put(0,10);
 
                 break;
-            case "A4_4_1_1":
+            case "4-4-1-1":
                 the_graph.addEdge(0,1,true);
                 the_graph.addEdge(0,2,true);
                 the_graph.addEdge(1,2,true);
@@ -407,7 +407,7 @@ public class Formation {
                 positions.put(0,9);
 
                 break;
-            case "A4_4_2":
+            case "4-4-2":
                 the_graph.addEdge(0,1,true);
                 the_graph.addEdge(0,2,true);
                 the_graph.addEdge(1,2,true);
@@ -439,7 +439,7 @@ public class Formation {
                 positions.put(0,9);
 
                 break;
-            case "A4_5_1":
+            case "4-5-1":
                 the_graph.addEdge(0,1,true);
                 the_graph.addEdge(0,2,true);
                 the_graph.addEdge(1,2,true);
@@ -470,7 +470,7 @@ public class Formation {
                 positions.put(0,9);
 
                 break;
-            case "A5_2_2_1":
+            case "5-2-2-1":
                 the_graph.addEdge(0,1,true);
                 the_graph.addEdge(0,2,true);
                 the_graph.addEdge(0,3,true);
@@ -505,7 +505,7 @@ public class Formation {
                 positions.put(0,10);
 
                 break;
-            case "A5_2_1_2":
+            case "5-2-1-2":
                 the_graph.addEdge(0,1,true);
                 the_graph.addEdge(0,2,true);
                 the_graph.addEdge(0,3,true);
@@ -539,7 +539,7 @@ public class Formation {
                 positions.put(0,10);
 
                 break;
-            case "A5_3_2":
+            case "5-3-2":
                 the_graph.addEdge(0,1,true);
                 the_graph.addEdge(0,2,true);
                 the_graph.addEdge(0,3,true);

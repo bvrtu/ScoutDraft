@@ -452,6 +452,7 @@ public class Gui {
 
     // Butona tıklandığında oyuncu seçme işlemi
     private void selectPlayer(int boxIndex) {
+
         // Burada seçilen kutu ile ilişkili bir oyuncu seçebilirsiniz
         // Örneğin, kutuya tıklanmasıyla ilgili oyuncu bilgisi alınabilir.
         JOptionPane.showMessageDialog(null, "You selected box: " + (boxIndex));
