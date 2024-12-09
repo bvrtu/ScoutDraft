@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.sql.*;
 public class Main {
@@ -56,8 +57,10 @@ public class Main {
 
          */
         // System.out.println("Graph:\n" + g.toString());
-        ResultSet output = DatabaseAction.search("Messi");
-        System.out.println(output);
+        ArrayList<Player> output = DatabaseAction.search("");
+        for (Player p : output){
+            System.out.println(p.toString());
+        }
         Gui gui = new Gui();
 
         gui.show();

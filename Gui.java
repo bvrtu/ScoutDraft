@@ -514,7 +514,12 @@ public class Gui {
 
     // Butona tıklandığında oyuncu seçme işlemi
     private void selectPlayer(int boxIndex) {
-
+        if(currentFormation.getPlayers()[currentFormation.getPositions().get(boxIndex)] != null)
+            // Bartu buraya tablo olan windowu açan methodu çağıracak.
+            System.out.println("Expecting an action from the user...");
+        else
+            // Buraya oyuncu değiştir ya da oyuncuyu görüntüle diye iki seçenek sunan bi pencere açılır.
+            System.out.println("Expecting an action from the user...");
         // Burada seçilen kutu ile ilişkili bir oyuncu seçebilirsiniz
         // Örneğin, kutuya tıklanmasıyla ilgili oyuncu bilgisi alınabilir.
         JOptionPane.showMessageDialog(null, "You selected box: " + (boxIndex));

@@ -99,4 +99,7 @@ public class Player {
     public void setPositions(ArrayList<String> positions) {
         this.positions = positions;
     }
+    public String toString(){
+        return this.name + " " + String.valueOf(this.id) + " " + String.valueOf(this.overall);
+    }
 }
