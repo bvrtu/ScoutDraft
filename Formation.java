@@ -1,6 +1,10 @@
 import java.util.*;
 public class Formation {
     private Player[] players = new Player[11];
+    private HashMap<Integer, Integer> positions = new HashMap<Integer, Integer>();
+    public HashMap<Integer, Integer> getPositions(){
+        return this.positions;
+    }
     private String formation_name;
     Graph<Integer> the_graph = new Graph<Integer>();
     public Graph create_graph(){
@@ -24,6 +28,19 @@ public class Formation {
                 the_graph.addEdge(7,9,true);
                 the_graph.addEdge(8,10,true);
                 the_graph.addEdge(9,10,true);
+
+                positions.put(10,0);
+                positions.put(9,3);
+                positions.put(8,2);
+                positions.put(7,1);
+                positions.put(6,7);
+                positions.put(5,6);
+                positions.put(4,5);
+                positions.put(3,4);
+                positions.put(2,9);
+                positions.put(1,8);
+                positions.put(0,10);
+
                 break;
             case "A3_4_1_2":
                 the_graph.addEdge(0,1,true);
@@ -45,6 +62,19 @@ public class Formation {
                 the_graph.addEdge(8,10,true);
                 the_graph.addEdge(9,10,true);
                 the_graph.addEdge(8,9,true);
+
+                positions.put(10,0);
+                positions.put(9,3);
+                positions.put(8,2);
+                positions.put(7,1);
+                positions.put(6,7);
+                positions.put(5,6);
+                positions.put(4,5);
+                positions.put(3,4);
+                positions.put(2,9);
+                positions.put(1,8);
+                positions.put(0,10);
+
                 break;
             case "A3_4_2_1":
                 the_graph.addEdge(0,1,true);
@@ -65,6 +95,19 @@ public class Formation {
                 the_graph.addEdge(7,9,true);
                 the_graph.addEdge(8,10,true);
                 the_graph.addEdge(9,10,true);
+
+                positions.put(10,0);
+                positions.put(9,3);
+                positions.put(8,2);
+                positions.put(7,1);
+                positions.put(6,7);
+                positions.put(5,6);
+                positions.put(4,5);
+                positions.put(3,4);
+                positions.put(2,9);
+                positions.put(1,8);
+                positions.put(0,10);
+
                 break;
             case "A3_5_2":
                 the_graph.addEdge(0,1,true);
@@ -88,6 +131,19 @@ public class Formation {
                 the_graph.addEdge(8,10,true);
                 the_graph.addEdge(9,10,true);
                 the_graph.addEdge(8,9,true);
+
+                positions.put(10,0);
+                positions.put(9,3);
+                positions.put(8,2);
+                positions.put(7,1);
+                positions.put(6,7);
+                positions.put(5,6);
+                positions.put(4,5);
+                positions.put(3,4);
+                positions.put(2,9);
+                positions.put(1,8);
+                positions.put(0,10);
+
                 break;
             case "A4_1_2_1_2":
                 the_graph.addEdge(0,1,true);
@@ -109,6 +165,19 @@ public class Formation {
                 the_graph.addEdge(8,9,true);
                 the_graph.addEdge(8,10,true);
                 the_graph.addEdge(9,10,true);
+
+                positions.put(10,0);
+                positions.put(9,3);
+                positions.put(8,6);
+                positions.put(7,4);
+                positions.put(6,7);
+                positions.put(5,2);
+                positions.put(4,1);
+                positions.put(3,5);
+                positions.put(2,9);
+                positions.put(1,8);
+                positions.put(0,10);
+
                 break;
             case "A4_1_4_1":
                 the_graph.addEdge(0,1,true);
@@ -129,6 +198,19 @@ public class Formation {
                 the_graph.addEdge(8,9,true);
                 the_graph.addEdge(8,10,true);
                 the_graph.addEdge(9,10,true);
+
+                positions.put(10,0);
+                positions.put(9,3);
+                positions.put(8,6);
+                positions.put(7,4);
+                positions.put(6,7);
+                positions.put(5,2);
+                positions.put(4,1);
+                positions.put(3,5);
+                positions.put(2,10);
+                positions.put(1,8);
+                positions.put(0,9);
+
                 break;
             case "A4_2_2_2":
                 the_graph.addEdge(0,1,true);
@@ -148,6 +230,19 @@ public class Formation {
                 the_graph.addEdge(7,9,true);
                 the_graph.addEdge(8,10,true);
                 the_graph.addEdge(9,10,true);
+
+                positions.put(10,0);
+                positions.put(9,3);
+                positions.put(8,8);
+                positions.put(7,4);
+                positions.put(6,7);
+                positions.put(5,2);
+                positions.put(4,1);
+                positions.put(3,5);
+                positions.put(2,6);
+                positions.put(1,9);
+                positions.put(0,10);
+
                 break;
             case "A4_2_3_1":
                 the_graph.addEdge(0,1,true);
@@ -169,6 +264,19 @@ public class Formation {
                 the_graph.addEdge(7,10,true);
                 the_graph.addEdge(8,10,true);
                 the_graph.addEdge(9,10,true);
+
+                positions.put(10,0);
+                positions.put(9,6);
+                positions.put(8,10);
+                positions.put(7,8);
+                positions.put(6,3);
+                positions.put(5,2);
+                positions.put(4,1);
+                positions.put(3,4);
+                positions.put(2,7);
+                positions.put(1,5);
+                positions.put(0,9);
+
                 break;
             case "A4_3_1_2":
                 the_graph.addEdge(0,1,true);
@@ -190,6 +298,19 @@ public class Formation {
                 the_graph.addEdge(8,9,true);
                 the_graph.addEdge(8,10,true);
                 the_graph.addEdge(9,10,true);
+
+                positions.put(10,0);
+                positions.put(9,7);
+                positions.put(8,6);
+                positions.put(7,5);
+                positions.put(6,3);
+                positions.put(5,2);
+                positions.put(4,1);
+                positions.put(3,4);
+                positions.put(2,9);
+                positions.put(1,8);
+                positions.put(0,10);
+
                 break;
             case "A4_3_2_1":
                 the_graph.addEdge(0,1,true);
@@ -209,6 +330,19 @@ public class Formation {
                 the_graph.addEdge(7,9,true);
                 the_graph.addEdge(8,10,true);
                 the_graph.addEdge(9,10,true);
+
+                positions.put(10,0);
+                positions.put(9,7);
+                positions.put(8,6);
+                positions.put(7,5);
+                positions.put(6,3);
+                positions.put(5,2);
+                positions.put(4,1);
+                positions.put(3,4);
+                positions.put(2,9);
+                positions.put(1,8);
+                positions.put(0,10);
+
                 break;
             case "A4_3_3":
                 the_graph.addEdge(0,1,true);
@@ -227,6 +361,19 @@ public class Formation {
                 the_graph.addEdge(7,9,true);
                 the_graph.addEdge(8,10,true);
                 the_graph.addEdge(9,10,true);
+
+                positions.put(10,0);
+                positions.put(9,7);
+                positions.put(8,6);
+                positions.put(7,5);
+                positions.put(6,3);
+                positions.put(5,2);
+                positions.put(4,1);
+                positions.put(3,4);
+                positions.put(2,9);
+                positions.put(1,8);
+                positions.put(0,10);
+
                 break;
             case "A4_4_1_1":
                 the_graph.addEdge(0,1,true);
@@ -246,6 +393,19 @@ public class Formation {
                 the_graph.addEdge(7,9,true);
                 the_graph.addEdge(8,10,true);
                 the_graph.addEdge(9,10,true);
+
+                positions.put(10,0);
+                positions.put(9,8);
+                positions.put(8,10);
+                positions.put(7,6);
+                positions.put(6,3);
+                positions.put(5,2);
+                positions.put(4,1);
+                positions.put(3,4);
+                positions.put(2,7);
+                positions.put(1,5);
+                positions.put(0,9);
+
                 break;
             case "A4_4_2":
                 the_graph.addEdge(0,1,true);
@@ -265,6 +425,19 @@ public class Formation {
                 the_graph.addEdge(7,9,true);
                 the_graph.addEdge(8,9,true);
                 the_graph.addEdge(9,10,true);
+
+                positions.put(10,0);
+                positions.put(9,8);
+                positions.put(8,10);
+                positions.put(7,6);
+                positions.put(6,3);
+                positions.put(5,2);
+                positions.put(4,1);
+                positions.put(3,4);
+                positions.put(2,7);
+                positions.put(1,5);
+                positions.put(0,9);
+
                 break;
             case "A4_5_1":
                 the_graph.addEdge(0,1,true);
@@ -283,6 +456,19 @@ public class Formation {
                 the_graph.addEdge(8,9,true);
                 the_graph.addEdge(8,10,true);
                 the_graph.addEdge(9,10,true);
+
+                positions.put(10,0);
+                positions.put(9,10);
+                positions.put(8,6);
+                positions.put(7,8);
+                positions.put(6,3);
+                positions.put(5,2);
+                positions.put(4,1);
+                positions.put(3,4);
+                positions.put(2,7);
+                positions.put(1,5);
+                positions.put(0,9);
+
                 break;
             case "A5_2_2_1":
                 the_graph.addEdge(0,1,true);
@@ -305,6 +491,19 @@ public class Formation {
                 the_graph.addEdge(7,9,true);
                 the_graph.addEdge(8,10,true);
                 the_graph.addEdge(9,10,true);
+
+                positions.put(10,0);
+                positions.put(9,3);
+                positions.put(8,2);
+                positions.put(7,1);
+                positions.put(6,7);
+                positions.put(5,6);
+                positions.put(4,5);
+                positions.put(3,4);
+                positions.put(2,9);
+                positions.put(1,8);
+                positions.put(0,10);
+
                 break;
             case "A5_2_1_2":
                 the_graph.addEdge(0,1,true);
@@ -326,6 +525,19 @@ public class Formation {
                 the_graph.addEdge(8,10,true);
                 the_graph.addEdge(9,10,true);
                 the_graph.addEdge(8,9,true);
+
+                positions.put(10,0);
+                positions.put(9,3);
+                positions.put(8,2);
+                positions.put(7,1);
+                positions.put(6,7);
+                positions.put(5,6);
+                positions.put(4,5);
+                positions.put(3,4);
+                positions.put(2,9);
+                positions.put(1,8);
+                positions.put(0,10);
+
                 break;
             case "A5_3_2":
                 the_graph.addEdge(0,1,true);
@@ -347,6 +559,19 @@ public class Formation {
                 the_graph.addEdge(8,9,true);
                 the_graph.addEdge(8,10,true);
                 the_graph.addEdge(9,10,true);
+
+                positions.put(10,0);
+                positions.put(9,3);
+                positions.put(8,2);
+                positions.put(7,1);
+                positions.put(6,7);
+                positions.put(5,6);
+                positions.put(4,5);
+                positions.put(3,4);
+                positions.put(2,9);
+                positions.put(1,10);
+                positions.put(0,8);
+
                 break;
 
         }

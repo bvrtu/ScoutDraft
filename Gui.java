@@ -422,7 +422,7 @@ public class Gui {
         // Fotoğrafın üstüne görünmez butonlar yerleştirme
         for (int i = 0; i < numOfBoxes; i++) {
             final int boxIndex = i;
-            formationButtons[i] = new JButton();
+            formationButtons[i] = new JButton("" + i);
             Point boxPoint = boxCoordinates[i]; // Koordinatları al
 
             formationButtons[i].setBounds(boxPoint.x, boxPoint.y, 70, 70); // Koordinatlara göre buton yerleştir
@@ -447,7 +447,7 @@ public class Gui {
     private void selectPlayer(int boxIndex) {
         // Burada seçilen kutu ile ilişkili bir oyuncu seçebilirsiniz
         // Örneğin, kutuya tıklanmasıyla ilgili oyuncu bilgisi alınabilir.
-        JOptionPane.showMessageDialog(null, "You selected box: " + (boxIndex + 1));
+        JOptionPane.showMessageDialog(null, "You selected box: " + (boxIndex));
     }
 
     public void show() {
