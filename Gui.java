@@ -455,7 +455,7 @@ public class Gui {
         // Current Ability için combobox
         topPanel.add(new JLabel("Current Ability:"));
         // DEĞİŞECEK
-        JComboBox<String> abilityDropdown = new JComboBox<>(new String[]{"Low", "Medium", "High", "Elite"});
+        JComboBox<Integer> abilityDropdown = new JComboBox<>(generateRange(0,200));
         topPanel.add(abilityDropdown);
 
         // Division için dropdown list
@@ -488,7 +488,7 @@ public class Gui {
             String nation = (String) nationDropdown.getSelectedItem();
             Integer minAgeValue = (Integer) minAge.getSelectedItem();
             Integer maxAgeValue = (Integer) maxAge.getSelectedItem();
-            String ability = (String) abilityDropdown.getSelectedItem();
+            Integer ability = (Integer) abilityDropdown.getSelectedItem();
             String division = (String) divisionDropdown.getSelectedItem();
         });
         searchButtonPanel.add(searchButton);
@@ -549,7 +549,7 @@ public class Gui {
         // Current Ability için combobox
         topPanel.add(new JLabel("Current Ability:"));
         // DEĞİŞECEK
-        JComboBox<String> abilityDropdown = new JComboBox<>(new String[]{"Low", "Medium", "High", "Elite"});
+        JComboBox<Integer> abilityDropdown = new JComboBox<>(generateRange(0,200));
         topPanel.add(abilityDropdown);
 
         // Division için dropdown list
@@ -583,7 +583,7 @@ public class Gui {
             String nation = (String) nationDropdown.getSelectedItem();
             Integer minAgeValue = (Integer) minAge.getSelectedItem();
             Integer maxAgeValue = (Integer) maxAge.getSelectedItem();
-            String ability = (String) abilityDropdown.getSelectedItem();
+            Integer ability = (Integer) abilityDropdown.getSelectedItem();
             String division = (String) divisionDropdown.getSelectedItem();
         });
         JButton addButton = new JButton("Add");
