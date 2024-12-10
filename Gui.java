@@ -27,7 +27,8 @@ public class Gui {
 
     private boolean isRandom = false;
     private boolean isBuildTeam = false;
-    private boolean isSearchPlayer = false;
+
+    JLabel[] labels = new JLabel[11];
 
     public Gui() {
         initializeMainGUI();
@@ -237,6 +238,7 @@ public class Gui {
             currentFormation.setFormation_name(lastSelectedFormation);
             currentFormation.create_graph();
             addClickableButtons();
+            addFormationLabels(lastSelectedFormation, formationImageLabel);
         });
 
         // Panele formasyonları ve butonu ekle
@@ -255,6 +257,41 @@ public class Gui {
 
         formationFrame.add(container);
         formationFrame.setVisible(true);
+    }
+
+    private void addFormationLabels(String selectedFormation, JLabel formationImageLabel) {
+        Point[] coordinates = getFormationBoxCoordinates(selectedFormation);
+
+        for (int i = 0; i < coordinates.length; i++) {
+            labels[i] = new JLabel("Link Rank: 0", SwingConstants.CENTER);
+            labels[i].setBounds(coordinates[i].x - 90, coordinates[i].y + 20, 90, 20);
+            labels[i].setOpaque(true);
+
+            labels[i].setBackground(Color.RED);
+            labels[i].setForeground(Color.WHITE);
+
+            formationImageLabel.add(labels[i]);
+        }
+
+        formationImageLabel.repaint();
+    }
+
+    private void updateLinkRank(int index, int rank) {
+        if (index >= 0 && index < labels.length) {
+            JLabel label = labels[index];
+
+            label.setText("Link Rank: " + rank);
+
+            if (rank == 0) {
+                label.setBackground(Color.RED);
+            } else if (rank == 1 || rank == 2) {
+                label.setBackground(Color.YELLOW);
+            } else if (rank == 3) {
+                label.setBackground(Color.GREEN);
+            }
+
+            label.repaint();
+        }
     }
 
     // Seçilen formasyonun görselini mevcut pencereye ekleyen metot
@@ -356,6 +393,7 @@ public class Gui {
             lastSelectedFormation = (String) formationComboBox.getSelectedItem();
             currentFormation.setFormation_name(lastSelectedFormation);
             currentFormation.create_graph();
+            addFormationLabels(lastSelectedFormation, formationImageLabel);
         });
 
         // Panele formasyonları ve butonları ekle
@@ -444,8 +482,14 @@ public class Gui {
         JPanel searchButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JButton searchButton = new JButton("Search");
         searchButton.addActionListener(e -> {
-            // "Add" düğmesi tıklama olayını özelleştirebilirsiniz
-            JOptionPane.showMessageDialog(searchFrame, "Add button clicked!");
+            // "Search" düğmesi tıklama olayını özelleştirebilirsiniz
+            JOptionPane.showMessageDialog(searchFrame, "Search button clicked!");
+            String name = nameField.getText();
+            String nation = (String) nationDropdown.getSelectedItem();
+            Integer minAgeValue = (Integer) minAge.getSelectedItem();
+            Integer maxAgeValue = (Integer) maxAge.getSelectedItem();
+            String ability = (String) abilityDropdown.getSelectedItem();
+            String division = (String) divisionDropdown.getSelectedItem();
         });
         searchButtonPanel.add(searchButton);
 
@@ -535,6 +579,12 @@ public class Gui {
         searchButton.addActionListener(e -> {
             // "Search" butonuna tıklandığında yapılacak işlemler
             JOptionPane.showMessageDialog(searchFrame, "Search button clicked!");
+            String name = nameField.getText();
+            String nation = (String) nationDropdown.getSelectedItem();
+            Integer minAgeValue = (Integer) minAge.getSelectedItem();
+            Integer maxAgeValue = (Integer) maxAge.getSelectedItem();
+            String ability = (String) abilityDropdown.getSelectedItem();
+            String division = (String) divisionDropdown.getSelectedItem();
         });
         JButton addButton = new JButton("Add");
         addButton.addActionListener(e -> {

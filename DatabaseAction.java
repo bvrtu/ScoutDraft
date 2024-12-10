@@ -2,13 +2,14 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class DatabaseAction {
-    public static ResultSet quary(String word) {
+    public static ResultSet query(String name, String nation, Integer minAge, Integer maxAge, String ability, String division) {
         String query = "SELECT * FROM PlayerAttributes WHERE Name LIKE ?";
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:database.db");
              PreparedStatement pstmt = conn.prepareStatement(query)) {
 
             // Parametreyi ayarla
-            pstmt.setString(1, "%" + word + "%");
+            // PARAMETRELERİN HEPSİNİ BURAYA ATINCA HATA VERİYOR. TEK STRİNG İSTİYOR.
+            pstmt.setString(1, "%" + "" + "%");
 
             // Sorguyu çalıştır ve sonucu döndür
             return pstmt.executeQuery();
@@ -17,8 +18,8 @@ public class DatabaseAction {
             return null;
         }
     }
-    public static ArrayList<Player> search(String word) {
-        ResultSet output = quary(word);
+    public static ArrayList<Player> search(String name, String nation, Integer minAge, Integer maxAge, String ability, String division) {
+        ResultSet output = query(name, nation, minAge, maxAge, ability, division);
         ArrayList<Player> resultPlayers = new ArrayList<>();
         try{
             int i = 0;
