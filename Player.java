@@ -10,6 +10,13 @@ public class Player {
     private String team_name;
     private String league;
     private int height;
+    private HashMap<String, Integer> canPlay = new HashMap<>();
+    public HashMap<String, Integer> getCanPlay() {
+        return this.canPlay;
+    }
+    public void setCanPlay(String abs) {
+
+    }
 
     public String getName() {
         return name;

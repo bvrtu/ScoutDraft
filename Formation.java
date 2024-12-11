@@ -1,9 +1,9 @@
 import java.util.*;
 public class Formation {
     private Player[] players = new Player[11];
-    private HashMap<Integer, Integer> positions = new HashMap<Integer, Integer>();
-    public HashMap<Integer, Integer> getPositions(){
-        return this.positions;
+    private HashMap<Integer, Integer> uiToGraph = new HashMap<Integer, Integer>();
+    public HashMap<Integer, Integer> getUiToGraph(){
+        return this.uiToGraph;
     }
     private String formation_name;
     Graph<Integer> the_graph = new Graph<Integer>();
@@ -29,17 +29,17 @@ public class Formation {
                 the_graph.addEdge(8,10,true);
                 the_graph.addEdge(9,10,true);
 
-                positions.put(10,0);
-                positions.put(9,3);
-                positions.put(8,2);
-                positions.put(7,1);
-                positions.put(6,7);
-                positions.put(5,6);
-                positions.put(4,5);
-                positions.put(3,4);
-                positions.put(2,9);
-                positions.put(1,8);
-                positions.put(0,10);
+                uiToGraph.put(10,0);
+                uiToGraph.put(9,3);
+                uiToGraph.put(8,2);
+                uiToGraph.put(7,1);
+                uiToGraph.put(6,7);
+                uiToGraph.put(5,6);
+                uiToGraph.put(4,5);
+                uiToGraph.put(3,4);
+                uiToGraph.put(2,9);
+                uiToGraph.put(1,8);
+                uiToGraph.put(0,10);
 
                 break;
             case "3-4-1-2":
@@ -63,17 +63,17 @@ public class Formation {
                 the_graph.addEdge(9,10,true);
                 the_graph.addEdge(8,9,true);
 
-                positions.put(10,0);
-                positions.put(9,3);
-                positions.put(8,2);
-                positions.put(7,1);
-                positions.put(6,7);
-                positions.put(5,6);
-                positions.put(4,5);
-                positions.put(3,4);
-                positions.put(2,9);
-                positions.put(1,8);
-                positions.put(0,10);
+                uiToGraph.put(10,0);
+                uiToGraph.put(9,3);
+                uiToGraph.put(8,2);
+                uiToGraph.put(7,1);
+                uiToGraph.put(6,7);
+                uiToGraph.put(5,6);
+                uiToGraph.put(4,5);
+                uiToGraph.put(3,4);
+                uiToGraph.put(2,9);
+                uiToGraph.put(1,8);
+                uiToGraph.put(0,10);
 
                 break;
             case "3-4-2-1":
@@ -96,17 +96,17 @@ public class Formation {
                 the_graph.addEdge(8,10,true);
                 the_graph.addEdge(9,10,true);
 
-                positions.put(10,0);
-                positions.put(9,3);
-                positions.put(8,2);
-                positions.put(7,1);
-                positions.put(6,7);
-                positions.put(5,6);
-                positions.put(4,5);
-                positions.put(3,4);
-                positions.put(2,9);
-                positions.put(1,8);
-                positions.put(0,10);
+                uiToGraph.put(10,0);
+                uiToGraph.put(9,3);
+                uiToGraph.put(8,2);
+                uiToGraph.put(7,1);
+                uiToGraph.put(6,7);
+                uiToGraph.put(5,6);
+                uiToGraph.put(4,5);
+                uiToGraph.put(3,4);
+                uiToGraph.put(2,9);
+                uiToGraph.put(1,8);
+                uiToGraph.put(0,10);
 
                 break;
             case "3-5-2":
@@ -132,17 +132,17 @@ public class Formation {
                 the_graph.addEdge(9,10,true);
                 the_graph.addEdge(8,9,true);
 
-                positions.put(10,0);
-                positions.put(9,3);
-                positions.put(8,2);
-                positions.put(7,1);
-                positions.put(6,7);
-                positions.put(5,6);
-                positions.put(4,5);
-                positions.put(3,4);
-                positions.put(2,9);
-                positions.put(1,8);
-                positions.put(0,10);
+                uiToGraph.put(10,0);
+                uiToGraph.put(9,3);
+                uiToGraph.put(8,2);
+                uiToGraph.put(7,1);
+                uiToGraph.put(6,7);
+                uiToGraph.put(5,6);
+                uiToGraph.put(4,5);
+                uiToGraph.put(3,4);
+                uiToGraph.put(2,9);
+                uiToGraph.put(1,8);
+                uiToGraph.put(0,10);
 
                 break;
             case "4-1-2-1-2":
@@ -166,17 +166,17 @@ public class Formation {
                 the_graph.addEdge(8,10,true);
                 the_graph.addEdge(9,10,true);
 
-                positions.put(10,0);
-                positions.put(9,3);
-                positions.put(8,6);
-                positions.put(7,4);
-                positions.put(6,7);
-                positions.put(5,2);
-                positions.put(4,1);
-                positions.put(3,5);
-                positions.put(2,9);
-                positions.put(1,8);
-                positions.put(0,10);
+                uiToGraph.put(10,0);
+                uiToGraph.put(9,3);
+                uiToGraph.put(8,6);
+                uiToGraph.put(7,4);
+                uiToGraph.put(6,7);
+                uiToGraph.put(5,2);
+                uiToGraph.put(4,1);
+                uiToGraph.put(3,5);
+                uiToGraph.put(2,9);
+                uiToGraph.put(1,8);
+                uiToGraph.put(0,10);
 
                 break;
             case "4-1-4-1":
@@ -199,17 +199,17 @@ public class Formation {
                 the_graph.addEdge(8,10,true);
                 the_graph.addEdge(9,10,true);
 
-                positions.put(10,0);
-                positions.put(9,3);
-                positions.put(8,6);
-                positions.put(7,4);
-                positions.put(6,7);
-                positions.put(5,2);
-                positions.put(4,1);
-                positions.put(3,5);
-                positions.put(2,10);
-                positions.put(1,8);
-                positions.put(0,9);
+                uiToGraph.put(10,0);
+                uiToGraph.put(9,3);
+                uiToGraph.put(8,6);
+                uiToGraph.put(7,4);
+                uiToGraph.put(6,7);
+                uiToGraph.put(5,2);
+                uiToGraph.put(4,1);
+                uiToGraph.put(3,5);
+                uiToGraph.put(2,10);
+                uiToGraph.put(1,8);
+                uiToGraph.put(0,9);
 
                 break;
             case "4-2-2-2":
@@ -231,17 +231,17 @@ public class Formation {
                 the_graph.addEdge(8,10,true);
                 the_graph.addEdge(9,10,true);
 
-                positions.put(10,0);
-                positions.put(9,3);
-                positions.put(8,8);
-                positions.put(7,4);
-                positions.put(6,7);
-                positions.put(5,2);
-                positions.put(4,1);
-                positions.put(3,5);
-                positions.put(2,6);
-                positions.put(1,9);
-                positions.put(0,10);
+                uiToGraph.put(10,0);
+                uiToGraph.put(9,3);
+                uiToGraph.put(8,8);
+                uiToGraph.put(7,4);
+                uiToGraph.put(6,7);
+                uiToGraph.put(5,2);
+                uiToGraph.put(4,1);
+                uiToGraph.put(3,5);
+                uiToGraph.put(2,6);
+                uiToGraph.put(1,9);
+                uiToGraph.put(0,10);
 
                 break;
             case "4-2-3-1":
@@ -265,17 +265,17 @@ public class Formation {
                 the_graph.addEdge(8,10,true);
                 the_graph.addEdge(9,10,true);
 
-                positions.put(10,0);
-                positions.put(9,6);
-                positions.put(8,10);
-                positions.put(7,8);
-                positions.put(6,3);
-                positions.put(5,2);
-                positions.put(4,1);
-                positions.put(3,4);
-                positions.put(2,7);
-                positions.put(1,5);
-                positions.put(0,9);
+                uiToGraph.put(10,0);
+                uiToGraph.put(9,6);
+                uiToGraph.put(8,10);
+                uiToGraph.put(7,8);
+                uiToGraph.put(6,3);
+                uiToGraph.put(5,2);
+                uiToGraph.put(4,1);
+                uiToGraph.put(3,4);
+                uiToGraph.put(2,7);
+                uiToGraph.put(1,5);
+                uiToGraph.put(0,9);
 
                 break;
             case "4-3-1-2":
@@ -299,17 +299,17 @@ public class Formation {
                 the_graph.addEdge(8,10,true);
                 the_graph.addEdge(9,10,true);
 
-                positions.put(10,0);
-                positions.put(9,7);
-                positions.put(8,6);
-                positions.put(7,5);
-                positions.put(6,3);
-                positions.put(5,2);
-                positions.put(4,1);
-                positions.put(3,4);
-                positions.put(2,9);
-                positions.put(1,8);
-                positions.put(0,10);
+                uiToGraph.put(10,0);
+                uiToGraph.put(9,7);
+                uiToGraph.put(8,6);
+                uiToGraph.put(7,5);
+                uiToGraph.put(6,3);
+                uiToGraph.put(5,2);
+                uiToGraph.put(4,1);
+                uiToGraph.put(3,4);
+                uiToGraph.put(2,9);
+                uiToGraph.put(1,8);
+                uiToGraph.put(0,10);
 
                 break;
             case "4-3-2-1":
@@ -331,17 +331,17 @@ public class Formation {
                 the_graph.addEdge(8,10,true);
                 the_graph.addEdge(9,10,true);
 
-                positions.put(10,0);
-                positions.put(9,7);
-                positions.put(8,6);
-                positions.put(7,5);
-                positions.put(6,3);
-                positions.put(5,2);
-                positions.put(4,1);
-                positions.put(3,4);
-                positions.put(2,9);
-                positions.put(1,8);
-                positions.put(0,10);
+                uiToGraph.put(10,0);
+                uiToGraph.put(9,7);
+                uiToGraph.put(8,6);
+                uiToGraph.put(7,5);
+                uiToGraph.put(6,3);
+                uiToGraph.put(5,2);
+                uiToGraph.put(4,1);
+                uiToGraph.put(3,4);
+                uiToGraph.put(2,9);
+                uiToGraph.put(1,8);
+                uiToGraph.put(0,10);
 
                 break;
             case "4-3-3":
@@ -362,17 +362,17 @@ public class Formation {
                 the_graph.addEdge(8,10,true);
                 the_graph.addEdge(9,10,true);
 
-                positions.put(10,0);
-                positions.put(9,7);
-                positions.put(8,6);
-                positions.put(7,5);
-                positions.put(6,3);
-                positions.put(5,2);
-                positions.put(4,1);
-                positions.put(3,4);
-                positions.put(2,9);
-                positions.put(1,8);
-                positions.put(0,10);
+                uiToGraph.put(10,0);
+                uiToGraph.put(9,7);
+                uiToGraph.put(8,6);
+                uiToGraph.put(7,5);
+                uiToGraph.put(6,3);
+                uiToGraph.put(5,2);
+                uiToGraph.put(4,1);
+                uiToGraph.put(3,4);
+                uiToGraph.put(2,9);
+                uiToGraph.put(1,8);
+                uiToGraph.put(0,10);
 
                 break;
             case "4-4-1-1":
@@ -394,17 +394,17 @@ public class Formation {
                 the_graph.addEdge(8,10,true);
                 the_graph.addEdge(9,10,true);
 
-                positions.put(10,0);
-                positions.put(9,8);
-                positions.put(8,10);
-                positions.put(7,6);
-                positions.put(6,3);
-                positions.put(5,2);
-                positions.put(4,1);
-                positions.put(3,4);
-                positions.put(2,7);
-                positions.put(1,5);
-                positions.put(0,9);
+                uiToGraph.put(10,0);
+                uiToGraph.put(9,8);
+                uiToGraph.put(8,10);
+                uiToGraph.put(7,6);
+                uiToGraph.put(6,3);
+                uiToGraph.put(5,2);
+                uiToGraph.put(4,1);
+                uiToGraph.put(3,4);
+                uiToGraph.put(2,7);
+                uiToGraph.put(1,5);
+                uiToGraph.put(0,9);
 
                 break;
             case "4-4-2":
@@ -426,17 +426,17 @@ public class Formation {
                 the_graph.addEdge(8,9,true);
                 the_graph.addEdge(9,10,true);
 
-                positions.put(10,0);
-                positions.put(9,8);
-                positions.put(8,10);
-                positions.put(7,6);
-                positions.put(6,3);
-                positions.put(5,2);
-                positions.put(4,1);
-                positions.put(3,4);
-                positions.put(2,7);
-                positions.put(1,5);
-                positions.put(0,9);
+                uiToGraph.put(10,0);
+                uiToGraph.put(9,8);
+                uiToGraph.put(8,10);
+                uiToGraph.put(7,6);
+                uiToGraph.put(6,3);
+                uiToGraph.put(5,2);
+                uiToGraph.put(4,1);
+                uiToGraph.put(3,4);
+                uiToGraph.put(2,7);
+                uiToGraph.put(1,5);
+                uiToGraph.put(0,9);
 
                 break;
             case "4-5-1":
@@ -457,17 +457,17 @@ public class Formation {
                 the_graph.addEdge(8,10,true);
                 the_graph.addEdge(9,10,true);
 
-                positions.put(10,0);
-                positions.put(9,10);
-                positions.put(8,6);
-                positions.put(7,8);
-                positions.put(6,3);
-                positions.put(5,2);
-                positions.put(4,1);
-                positions.put(3,4);
-                positions.put(2,7);
-                positions.put(1,5);
-                positions.put(0,9);
+                uiToGraph.put(10,0);
+                uiToGraph.put(9,10);
+                uiToGraph.put(8,6);
+                uiToGraph.put(7,8);
+                uiToGraph.put(6,3);
+                uiToGraph.put(5,2);
+                uiToGraph.put(4,1);
+                uiToGraph.put(3,4);
+                uiToGraph.put(2,7);
+                uiToGraph.put(1,5);
+                uiToGraph.put(0,9);
 
                 break;
             case "5-2-2-1":
@@ -492,17 +492,17 @@ public class Formation {
                 the_graph.addEdge(8,10,true);
                 the_graph.addEdge(9,10,true);
 
-                positions.put(10,0);
-                positions.put(9,3);
-                positions.put(8,2);
-                positions.put(7,1);
-                positions.put(6,7);
-                positions.put(5,6);
-                positions.put(4,5);
-                positions.put(3,4);
-                positions.put(2,9);
-                positions.put(1,8);
-                positions.put(0,10);
+                uiToGraph.put(10,0);
+                uiToGraph.put(9,3);
+                uiToGraph.put(8,2);
+                uiToGraph.put(7,1);
+                uiToGraph.put(6,7);
+                uiToGraph.put(5,6);
+                uiToGraph.put(4,5);
+                uiToGraph.put(3,4);
+                uiToGraph.put(2,9);
+                uiToGraph.put(1,8);
+                uiToGraph.put(0,10);
 
                 break;
             case "5-2-1-2":
@@ -526,17 +526,17 @@ public class Formation {
                 the_graph.addEdge(9,10,true);
                 the_graph.addEdge(8,9,true);
 
-                positions.put(10,0);
-                positions.put(9,3);
-                positions.put(8,2);
-                positions.put(7,1);
-                positions.put(6,7);
-                positions.put(5,6);
-                positions.put(4,5);
-                positions.put(3,4);
-                positions.put(2,9);
-                positions.put(1,8);
-                positions.put(0,10);
+                uiToGraph.put(10,0);
+                uiToGraph.put(9,3);
+                uiToGraph.put(8,2);
+                uiToGraph.put(7,1);
+                uiToGraph.put(6,7);
+                uiToGraph.put(5,6);
+                uiToGraph.put(4,5);
+                uiToGraph.put(3,4);
+                uiToGraph.put(2,9);
+                uiToGraph.put(1,8);
+                uiToGraph.put(0,10);
 
                 break;
             case "5-3-2":
@@ -560,17 +560,17 @@ public class Formation {
                 the_graph.addEdge(8,10,true);
                 the_graph.addEdge(9,10,true);
 
-                positions.put(10,0);
-                positions.put(9,3);
-                positions.put(8,2);
-                positions.put(7,1);
-                positions.put(6,7);
-                positions.put(5,6);
-                positions.put(4,5);
-                positions.put(3,4);
-                positions.put(2,9);
-                positions.put(1,10);
-                positions.put(0,8);
+                uiToGraph.put(10,0);
+                uiToGraph.put(9,3);
+                uiToGraph.put(8,2);
+                uiToGraph.put(7,1);
+                uiToGraph.put(6,7);
+                uiToGraph.put(5,6);
+                uiToGraph.put(4,5);
+                uiToGraph.put(3,4);
+                uiToGraph.put(2,9);
+                uiToGraph.put(1,10);
+                uiToGraph.put(0,8);
 
                 break;
 
@@ -594,6 +594,7 @@ public class Formation {
         if(players[index]== null) System.out.println("The position is empty.");
         else if(the_graph.neighbours(index).isEmpty()) System.out.println("Neighbours are empty.");
          else {
+             ArrayList<Link> links = new ArrayList<>();
              for(int i :the_graph.neighbours(index)){
                  if(players[i] == null) continue;
                  int rank = 0;
@@ -602,8 +603,20 @@ public class Formation {
                 if(Objects.equals(players[index].getTeam_name(), players[i].getTeam_name())) rank++;
                 System.out.println(players[index].getName() + "has link rank " + String.valueOf(rank)
                  + "with" + players[i].getName() + ".");
+                links.add(new Link(rank,index,i));
+
             }
          }
+    }
+    class Link{
+        public Link(int rank, int vertex1, int vertex2){
+            this.rank = rank;
+            this.vertex1 = vertex1;
+            this.vertex2 = vertex2;
+        }
+        int rank;
+        int vertex1;
+        int vertex2;
     }
     static class Graph<T> {
 
