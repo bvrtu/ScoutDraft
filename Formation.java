@@ -590,11 +590,12 @@ public class Formation {
     public void setPlayers(Player[] players) {
         this.players = players;
     }
-    public  void checkLinks(int index){
+    public  ArrayList<Link> checkLinks(int index){
+        index = uiToGraph.get(index);
+        ArrayList<Link> links = new ArrayList<>();
         if(players[index]== null) System.out.println("The position is empty.");
         else if(the_graph.neighbours(index).isEmpty()) System.out.println("Neighbours are empty.");
          else {
-             ArrayList<Link> links = new ArrayList<>();
              for(int i :the_graph.neighbours(index)){
                  if(players[i] == null) continue;
                  int rank = 0;
@@ -607,8 +608,9 @@ public class Formation {
 
             }
          }
+         return links;
     }
-    class Link{
+    public class Link{
         public Link(int rank, int vertex1, int vertex2){
             this.rank = rank;
             this.vertex1 = vertex1;
