@@ -769,8 +769,8 @@ public class Gui {
 
     // Butona tıklandığında oyuncu seçme işlemi
     private void selectPlayer(int boxIndex) {
-        if (currentFormation.getPositions().get(boxIndex) != null)
-            if(currentFormation.getPlayers()[currentFormation.getPositions().get(boxIndex)] != null) {
+        if (currentFormation.getUiToGraph().get(boxIndex) != null)
+            if(currentFormation.getPlayers()[currentFormation.getUiToGraph().get(boxIndex)] != null) {
                 if (isBuildTeam) {
                     openSearchWindow2();
                 } else if (isRandom) {
