@@ -57,9 +57,14 @@ public class Main {
 
          */
         // System.out.println("Graph:\n" + g.toString());
-        ArrayList<Player> output = DatabaseAction.search("");
+        /*ArrayList<Player> output = DatabaseAction.search("");
         for (Player p : output){
             System.out.println(p.toString());
+        }
+         */
+        ArrayList<Player> output = DatabaseAction.query("Messi");
+        for(Player p : output){
+            System.out.println(p);
         }
         Gui gui = new Gui();
 

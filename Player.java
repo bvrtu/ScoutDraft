@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Player {
     private String name;
@@ -14,8 +15,25 @@ public class Player {
     public HashMap<String, Integer> getCanPlay() {
         return this.canPlay;
     }
-    public void setCanPlay(String abs) {
+    public Player(String name, float id, float overall, String nation, int age, String team_name, int height) {
+        this.name = name;
+        this.id = id;
+        this.overall = (int) overall;
+        this.nation = nation;
+        this.age = age;
+        this.team_name = team_name;
+        this.height = height;
+    }
+    public void setCanPlay(String abs, String form) {
+        ArrayList<String> canplayat = new ArrayList<>();
+        canplayat.addAll(List.of(abs.split(",")));
+        switch(form){
+            case "3-4-3":
+                if(canplayat.contains("ST")){
+                    canPlay.put("ST",0);
+                }
 
+        }
     }
 
     public String getName() {
@@ -107,6 +125,6 @@ public class Player {
         this.positions = positions;
     }
     public String toString(){
-        return this.name + " " + String.valueOf(this.id) + " " + String.valueOf(this.overall);
+        return "Name: " + this.name + " ID:" + String.valueOf(this.id) + " Overall:" + String.valueOf(this.overall);
     }
 }
