@@ -296,7 +296,7 @@ public class Gui {
 
     // Seçilen formasyonun görselini mevcut pencereye ekleyen metot
     private void updateFormationImage(String selectedFormation) {
-        String imagePath = "/Users/bartu/Desktop/ScoutDraft/ScoutDraft/images/" + selectedFormation + ".png"; // Formasyon ismiyle uyumlu resim ismi
+        String imagePath = "/Users/bartu/Desktop/ScoutDraft/images/" + selectedFormation + ".png"; // Formasyon ismiyle uyumlu resim ismi
 
         try {
             ImageIcon formationImage = new ImageIcon(ImageIO.read(new File(imagePath)));
@@ -530,14 +530,12 @@ public class Gui {
 
         // Nation için dropdown list
         topPanel.add(new JLabel("Nation:"));
-        // DEĞİŞECEK
         JComboBox<String> nationDropdown = new JComboBox<>(new String[]{"USA", "Germany", "Brazil", "Japan", "Others"});
         topPanel.add(nationDropdown);
 
         // Age için aralık combobox'ları
         topPanel.add(new JLabel("Age Range:"));
         JPanel agePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        // DEĞİŞEBİLİR
         JComboBox<Integer> minAge = new JComboBox<>(generateRange(15, 100));
         JComboBox<Integer> maxAge = new JComboBox<>(generateRange(15, 100));
         agePanel.add(new JLabel("Min:"));
@@ -548,27 +546,24 @@ public class Gui {
 
         // Current Ability için combobox
         topPanel.add(new JLabel("Current Ability:"));
-        // DEĞİŞECEK
-        JComboBox<Integer> abilityDropdown = new JComboBox<>(generateRange(0,200));
+        JComboBox<Integer> abilityDropdown = new JComboBox<>(generateRange(0, 200));
         topPanel.add(abilityDropdown);
 
         // Division için dropdown list
         topPanel.add(new JLabel("Division:"));
-        // DEĞİŞECEK
         JComboBox<String> divisionDropdown = new JComboBox<>(new String[]{"Division 1", "Division 2", "Division 3", "Others"});
         topPanel.add(divisionDropdown);
 
         // Sağ üst köşe için panel ve buton
         JPanel topRightPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         JButton backButton = new JButton("Back to Play Options");
-        backButton.setBounds(50, 50, 200, 30);
         topRightPanel.add(backButton);
 
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                searchFrame.dispose();// Yeni pencereyi gizle
-                playFrame.dispose(); // İlk pencereyi göster
+                searchFrame.dispose(); // Yeni pencereyi kapat
+                playFrame.dispose();  // İlk pencereyi göster
                 mainFrame.dispose();
             }
         });
@@ -576,23 +571,49 @@ public class Gui {
         // Ortalanmış "Add" ve "Search" düğmeleri için panel
         JPanel buttonPanel = new JPanel(new GridLayout(2, 1, 10, 10)); // 2 satır, 1 sütun, aralık 10px
         JButton searchButton = new JButton("Search");
-        searchButton.addActionListener(e -> {
-            // "Search" butonuna tıklandığında yapılacak işlemler
-            JOptionPane.showMessageDialog(searchFrame, "Search button clicked!");
-            String name = nameField.getText();
-            String nation = (String) nationDropdown.getSelectedItem();
-            Integer minAgeValue = (Integer) minAge.getSelectedItem();
-            Integer maxAgeValue = (Integer) maxAge.getSelectedItem();
-            Integer ability = (Integer) abilityDropdown.getSelectedItem();
-            String division = (String) divisionDropdown.getSelectedItem();
-        });
         JButton addButton = new JButton("Add");
+        buttonPanel.add(searchButton);
+        buttonPanel.add(addButton);
+
+        // Alt panel (Sonuçların gösterileceği yer)
+        JPanel bottomPanel = new JPanel(new BorderLayout());
+        bottomPanel.setBorder(BorderFactory.createTitledBorder("Query Results"));
+
         addButton.addActionListener(e -> {
             // "Add" butonuna tıklandığında yapılacak işlemler
             JOptionPane.showMessageDialog(searchFrame, "Add button clicked!");
         });
-        buttonPanel.add(searchButton);
-        buttonPanel.add(addButton);
+
+        // "Search" butonuna basıldığında yapılacak işlemler
+        searchButton.addActionListener(e -> {
+            String name = nameField.getText();
+            ArrayList<Player> results = DatabaseAction.query(name); // Query fonksiyonundan sonuçları al
+            if (results.isEmpty()) {
+                JOptionPane.showMessageDialog(searchFrame, "No players found!");
+                return;
+            }
+
+            // Sonuçları JTable ile göster
+            String[] columnNames = {"Name", "ID", "Nation", "Age", "Club", "Height"};
+            Object[][] data = new Object[results.size()][6];
+            for (int i = 0; i < results.size(); i++) {
+                Player player = results.get(i);
+                data[i][0] = player.getName();
+                data[i][1] = player.getId();
+                data[i][2] = player.getNation();
+                data[i][3] = player.getAge();
+                data[i][4] = player.getTeam_name();
+                data[i][5] = player.getHeight();
+            }
+
+            JTable resultTable = new JTable(data, columnNames);
+            resultTable.setDefaultEditor(Object.class, null);
+            JScrollPane scrollPane = new JScrollPane(resultTable);
+            bottomPanel.removeAll(); // Eski sonuçları kaldır
+            bottomPanel.add(scrollPane, BorderLayout.CENTER); // Yeni tabloyu ekle
+            bottomPanel.revalidate(); // Paneli yeniden çiz
+            bottomPanel.repaint();
+        });
 
         // Üst paneli kapsayan bir ana panel
         JPanel combinedTopPanel = new JPanel(new BorderLayout());
@@ -600,16 +621,13 @@ public class Gui {
         combinedTopPanel.add(buttonPanel, BorderLayout.SOUTH);
         combinedTopPanel.add(topRightPanel, BorderLayout.NORTH);
 
-        // Alt panel (Boş başlıyor)
-        JPanel bottomPanel = new JPanel();
-        bottomPanel.setBorder(BorderFactory.createTitledBorder("Query Results"));
-
         // Üst ve alt panelleri yeni pencereye ekleme
         searchFrame.add(combinedTopPanel, BorderLayout.NORTH);
         searchFrame.add(bottomPanel, BorderLayout.CENTER);
 
         searchFrame.setVisible(true);
     }
+
     // DEĞİŞEBİLİR
     // Yaş aralığı için yardımcı metod
     private static Integer[] generateRange(int start, int end) {
