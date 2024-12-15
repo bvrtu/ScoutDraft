@@ -28,6 +28,8 @@ public class Gui {
     private boolean isRandom = false;
     private boolean isBuildTeam = false;
 
+    private int selectedBoxIndex = -1;
+
     JLabel[] labels = new JLabel[11];
 
     public Gui() {
@@ -579,10 +581,8 @@ public class Gui {
         JPanel bottomPanel = new JPanel(new BorderLayout());
         bottomPanel.setBorder(BorderFactory.createTitledBorder("Query Results"));
 
-        addButton.addActionListener(e -> {
-            // "Add" butonuna tıklandığında yapılacak işlemler
-            JOptionPane.showMessageDialog(searchFrame, "Add button clicked!");
-        });
+        // Seçilen oyuncuyu tutacak bir değişken
+        final Player[] selectedPlayer = new Player[1];
 
         // "Search" butonuna basıldığında yapılacak işlemler
         searchButton.addActionListener(e -> {
@@ -613,6 +613,25 @@ public class Gui {
             bottomPanel.add(scrollPane, BorderLayout.CENTER); // Yeni tabloyu ekle
             bottomPanel.revalidate(); // Paneli yeniden çiz
             bottomPanel.repaint();
+
+            // Tabloya tıklama özelliği ekleyerek seçilen oyuncuyu kaydetme
+            resultTable.getSelectionModel().addListSelectionListener(e1 -> {
+                int selectedRow = resultTable.getSelectedRow();
+                if (selectedRow != -1) {
+                    selectedPlayer[0] = results.get(selectedRow); // Seçilen oyuncuyu kaydet
+                }
+            });
+        });
+
+        // "Add" butonuna basıldığında yapılacak işlemler
+        addButton.addActionListener(e -> {
+            if (selectedPlayer[0] != null) {
+                // Seçilen oyuncuyu UI'deki butona ekle
+                formationButtons[selectedBoxIndex].setText(selectedPlayer[0].getName()); // Buton üzerinde oyuncu ismini göster
+                searchFrame.dispose(); // Arama penceresini kapat
+            } else {
+                JOptionPane.showMessageDialog(searchFrame, "No player selected!");
+            }
         });
 
         // Üst paneli kapsayan bir ana panel
@@ -787,6 +806,7 @@ public class Gui {
 
     // Butona tıklandığında oyuncu seçme işlemi
     private void selectPlayer(int boxIndex) {
+        selectedBoxIndex = boxIndex;
         if (currentFormation.getUiToGraph().get(boxIndex) != null)
             if(currentFormation.getPlayers()[currentFormation.getUiToGraph().get(boxIndex)] != null) {
                 if (isBuildTeam) {
