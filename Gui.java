@@ -278,20 +278,20 @@ public class Gui {
         formationImageLabel.repaint();
     }
 
-    private void updateLinkRank(int index, int rank) {
+    private void updateLinkRank(int index) {
         if (index >= 0 && index < labels.length) {
             JLabel label = labels[index];
-
-            label.setText("Link Rank: " + rank);
-
-            if (rank == 0) {
-                label.setBackground(Color.RED);
-            } else if (rank == 1 || rank == 2) {
-                label.setBackground(Color.YELLOW);
-            } else if (rank == 3) {
-                label.setBackground(Color.GREEN);
+            ArrayList<Formation.Link> links = currentFormation.checkLinks(index);
+            for (Formation.Link link : links) {
+                if (link.rank == 0) {
+                    label.setBackground(Color.RED);
+                } else if (link.rank == 1 || link.rank == 2) {
+                    label.setBackground(Color.YELLOW);
+                } else if (link.rank == 3) {
+                    label.setBackground(Color.GREEN);
+                }
+                label.setText("Link Rank: " + link.rank);
             }
-
             label.repaint();
         }
     }
@@ -627,7 +627,9 @@ public class Gui {
         addButton.addActionListener(e -> {
             if (selectedPlayer[0] != null) {
                 // Seçilen oyuncuyu UI'deki butona ekle
-                formationButtons[selectedBoxIndex].setText(selectedPlayer[0].getName()); // Buton üzerinde oyuncu ismini göster
+                currentFormation.addPlayer(selectedPlayer[0],selectedBoxIndex);
+                formationButtons[selectedBoxIndex].setText(selectedPlayer[0].getName());// Buton üzerinde oyuncu ismini göster
+                updateLinkRank(selectedBoxIndex);
                 searchFrame.dispose(); // Arama penceresini kapat
             } else {
                 JOptionPane.showMessageDialog(searchFrame, "No player selected!");

@@ -590,6 +590,9 @@ public class Formation {
     public void setPlayers(Player[] players) {
         this.players = players;
     }
+    public void addPlayer(Player player, int index) {
+        players[uiToGraph.get(index)] = player;
+    }
     public  ArrayList<Link> checkLinks(int index){
         index = uiToGraph.get(index);
         ArrayList<Link> links = new ArrayList<>();
