@@ -298,7 +298,7 @@ public class Gui {
 
     // Seçilen formasyonun görselini mevcut pencereye ekleyen metot
     private void updateFormationImage(String selectedFormation) {
-        String imagePath = "/Users/bartu/Desktop/ScoutDraft/images/" + selectedFormation + ".png"; // Formasyon ismiyle uyumlu resim ismi
+        String imagePath = "images/" + selectedFormation + ".png"; // Formasyon ismiyle uyumlu resim ismi
 
         try {
             ImageIcon formationImage = new ImageIcon(ImageIO.read(new File(imagePath)));
@@ -587,7 +587,7 @@ public class Gui {
         // "Search" butonuna basıldığında yapılacak işlemler
         searchButton.addActionListener(e -> {
             String name = nameField.getText();
-            ArrayList<Player> results = DatabaseAction.query(name); // Query fonksiyonundan sonuçları al
+            ArrayList<Player> results = DatabaseAction.query(name,0,0,0); // Query fonksiyonundan sonuçları al
             if (results.isEmpty()) {
                 JOptionPane.showMessageDialog(searchFrame, "No players found!");
                 return;

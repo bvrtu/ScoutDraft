@@ -29,10 +29,7 @@ public class Player {
         canplayat.addAll(List.of(abs.split(",")));
         switch(form){
             case "3-4-3":
-                if(canplayat.contains("ST")){
-                    canPlay.put("ST",0);
-                }
-
+                if(canplayat.contains("ST")) canPlay.put("ST",0);
         }
     }
 
@@ -125,6 +122,6 @@ public class Player {
         this.positions = positions;
     }
     public String toString(){
-        return "Name: " + this.name + " ID:" + String.valueOf(this.id) + " Overall:" + String.valueOf(this.overall);
+        return "Name: " + this.name + " Team: "+ this.team_name +" ID:" + String.valueOf(this.id) + " Overall:" + String.valueOf(this.overall);
     }
 }

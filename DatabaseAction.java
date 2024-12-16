@@ -2,7 +2,11 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class DatabaseAction {
-    public static ArrayList<Player> query(String name) {
+    public static ArrayList<Player> query(String name, float ID, int height, int age){
+        String add_to_query = "";
+        if(ID != 0) add_to_query = add_to_query + " AND ID =" + String.valueOf(ID);
+        if(height != 0) add_to_query = add_to_query + " AND Height =" + String.valueOf(height);
+        if(age != 0) add_to_query = add_to_query + " AND Age =" + String.valueOf(age);
         String query = "SELECT * FROM PlayerAttributes WHERE Name LIKE ?";
         ArrayList<Player> results = new ArrayList<>();
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:database.db");
@@ -11,7 +15,7 @@ public class DatabaseAction {
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
                     results.add( new Player(rs.getString("Name"),rs.getInt("ID"),
-                            0,rs.getString("Nat"), rs.getInt("Age"),
+                            0,rs.getString("Nati"), rs.getInt("Age"),
                             rs.getString("Club"), rs.getInt("height")));
                 }
             }

@@ -3,7 +3,7 @@ import java.util.HashMap;
 import java.sql.*;
 public class Main {
 
-    public static void main(String args[])
+    public static void main(String[] args)
     {
         /*Formation hasomango = new Formation();
         hasomango.setFormation_name("A4_3_1_2");
@@ -62,7 +62,7 @@ public class Main {
             System.out.println(p.toString());
         }
          */
-        ArrayList<Player> output = DatabaseAction.query("Messi");
+        ArrayList<Player> output = DatabaseAction.query("",0,0,0);
         for(Player p : output){
             System.out.println(p);
         }

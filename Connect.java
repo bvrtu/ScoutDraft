@@ -41,7 +41,7 @@ public class Connect {
                     "    Height DECIMAL(5, 2)," +
                     "    Nati VARCHAR(50)," +
                     "    Preferred_Foot VARCHAR(10)," +
-                    "    Position VARCHAR(50),\n" +
+                    "    Position VARCHAR(50)," +
                     "    Transfer_Value VARCHAR(50)," +
                     "    Agg INT," +
                     "    TRO INT," +
