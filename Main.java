@@ -62,10 +62,10 @@ public class Main {
             System.out.println(p.toString());
         }
          */
-        ArrayList<Player> output = DatabaseAction.query("",0,0,0);
+        /*ArrayList<Player> output = DatabaseAction.query("",0,0,0);
         for(Player p : output){
             System.out.println(p);
-        }
+        }*/
         Gui gui = new Gui();
 
         gui.show();

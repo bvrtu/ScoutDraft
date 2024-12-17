@@ -419,6 +419,8 @@ public class Gui {
     }
 
     private void openSearchWindow() {
+        playFrame.setVisible(false);
+
         // Yeni pencere
         JFrame searchFrame = new JFrame("Search Player");
         searchFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -438,72 +440,137 @@ public class Gui {
 
         // Nation için dropdown list
         topPanel.add(new JLabel("Nation:"));
-        // DEĞİŞECEK
-        JComboBox<String> nationDropdown = new JComboBox<>(new String[]{"USA", "Germany", "Brazil", "Japan", "Others"});
+        JComboBox<String> nationDropdown = new JComboBox<>(new String[]{
+                "", "AFG", "ALB", "ANG", "ANT", "ARG", "ARM", "ARO", "AUT", "AZE", "BEL", "BEN",
+                "BIH", "BLR", "BLZ", "BOL", "BUL", "CAN", "CHA", "CHN", "CIV", "COL", "COM", "CPV",
+                "CRO", "CUB", "CZE", "DEN", "DOM", "DZA", "ECU", "EGY", "ENG", "EQG", "EST", "ETH",
+                "FIJ", "FIN", "FRO", "GAB", "GAM", "GEO", "GER", "GIB", "GNB", "GRE", "GUI", "GUM",
+                "GUY", "HAI", "HKG", "HON", "HUN", "IDN", "IRL", "IRN", "IRQ", "ISL", "ISR", "ITA",
+                "JAM", "JOR", "JPN", "KEN", "KOS", "KSA", "KRG", "KOR", "KOS", "KSA", "KIR", "KAZ",
+                "LBR", "LBY", "LCA", "LVA", "MAC", "MAR", "MDA", "MDV", "MEX", "MLI", "MLT", "MNE",
+                "MOZ", "NAM", "NED", "NGA", "NIR", "NLD", "NOR", "NZL", "OMA", "PAN", "PER", "PHI",
+                "PNG", "POL", "POR", "PRK", "PUR", "QAT", "ROM", "ROU", "RWA", "SAM", "SEN", "SGP",
+                "SLE", "SLV", "SMR", "SOM", "SRB", "SUR", "SVK", "SVN", "SWE", "SYN", "SYR", "TAN",
+                "TCH", "THA", "TGO", "TUN", "TUR", "UKR", "URU", "USA", "VAN", "VIE", "VEN", "ZAM",
+                "ZIM"
+        });
+
+        nationDropdown.setSelectedIndex(0);
         topPanel.add(nationDropdown);
 
         // Age için aralık combobox'ları
-        topPanel.add(new JLabel("Age Range:"));
+        topPanel.add(new JLabel("Age:"));
         JPanel agePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        // DEĞİŞEBİLİR
-        JComboBox<Integer> minAge = new JComboBox<>(generateRange(15, 100));
-        JComboBox<Integer> maxAge = new JComboBox<>(generateRange(15, 100));
-        agePanel.add(new JLabel("Min:"));
-        agePanel.add(minAge);
-        agePanel.add(new JLabel("Max:"));
-        agePanel.add(maxAge);
+        JComboBox<Integer> age = new JComboBox<>(generateRange(15, 100));
+        age.insertItemAt(null, 0);
+        age.setSelectedIndex(0);
+        agePanel.add(new JLabel());
+        agePanel.add(age);
         topPanel.add(agePanel);
 
         // Current Ability için combobox
         topPanel.add(new JLabel("Current Ability:"));
-        // DEĞİŞECEK
-        JComboBox<Integer> abilityDropdown = new JComboBox<>(generateRange(0,200));
+        JComboBox<Integer> abilityDropdown = new JComboBox<>(generateRange(0, 200));
+        abilityDropdown.insertItemAt(null, 0);
+        abilityDropdown.setSelectedIndex(0);
         topPanel.add(abilityDropdown);
 
         // Division için dropdown list
         topPanel.add(new JLabel("Division:"));
-        // DEĞİŞECEK
-        JComboBox<String> divisionDropdown = new JComboBox<>(new String[]{"Division 1", "Division 2", "Division 3", "Others"});
+        JComboBox<String> divisionDropdown = new JComboBox<>(new String[]{
+                "", "-", "3. Liga", "Austrian Premier Division", "Argentine Premier Division", "Brazilian National First Division",
+                "Brazilian National Second Division", "Bundesliga", "Bundesliga 2", "Canadian Premier League", "Chinese Super League",
+                "Cinch Premiership", "Colombian First Division", "Croatian First League", "Czech First Division", "Egyptian Premier League",
+                "English Premier Division", "Eredivisie", "French Ligue 1", "Greek Super League 1", "Hana 1Q K LEAGUE 1", "Israeli Premier League", "Italian Serie A",
+                "Italian Serie B", "Italian Serie C/A", "Italian Serie C/B", "Italian Serie C/C", "J1 League", "J2 League",
+                "J3 League", "JD Cymru Premier", "Japanese J-League", "Kazakhstan Premier League", "K League 1", "Ligue 1 Uber Eats",
+                "Ligue 2 BKT", "Mexican First Division", "Major League Soccer", "Norwegian Premier Division", "Persian Gulf Premier League",
+                "PKO Bank Polski Ekstraklasa", "Portuguese Premier League", "Qatar League", "Qatar Stars League", "Russian Premier League",
+                "Saudi Professional League", "Serbian SuperLeague", "Sky Bet Championship", "Sky Bet League One", "Sky Bet League Two",
+                "Spanish First Division", "Spanish Second Division", "Swedish Premier Division", "Swiss Super League", "Turkish 1. League",
+                "Turkish 2. League Red Group", "Turkish 2. League White Group", "Turkish 3. League Group 1", "Turkish 3. League Group 2",
+                "Turkish 3. League Group 3", "Turkish 3. League Group 4", "Turkish Super League", "UAE Professional League", "Ukrainian Premier League",
+                "Uruguayan First Division", "Vanarama National League", "Vanarama National League North", "Vanarama National League South",});
+
+        divisionDropdown.setSelectedIndex(0);
         topPanel.add(divisionDropdown);
 
         // Sağ üst köşe için panel ve buton
         JPanel topRightPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         JButton backButton = new JButton("Back to Play Options");
-        backButton.setBounds(50, 50, 200, 30);
         topRightPanel.add(backButton);
 
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                searchFrame.dispose();// Yeni pencereyi gizle
-                playFrame.setVisible(true); // İlk pencereyi göster
+                searchFrame.dispose(); // Yeni pencereyi kapat
+                playFrame.setVisible(true);  // İlk pencereyi göster
                 mainFrame.dispose();
             }
         });
 
-        JPanel searchButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        // Ortalanmış "Add" ve "Search" düğmeleri için panel
+        JPanel buttonPanel = new JPanel(new GridLayout(2, 1, 10, 10)); // 2 satır, 1 sütun, aralık 10px
         JButton searchButton = new JButton("Search");
+        buttonPanel.add(searchButton);
+
+        // Alt panel (Sonuçların gösterileceği yer)
+        JPanel bottomPanel = new JPanel(new BorderLayout());
+        bottomPanel.setBorder(BorderFactory.createTitledBorder("Query Results"));
+
+        // Seçilen oyuncuyu tutacak bir değişken
+        final Player[] selectedPlayer = new Player[1];
+
+        // "Search" butonuna basıldığında yapılacak işlemler
         searchButton.addActionListener(e -> {
-            // "Search" düğmesi tıklama olayını özelleştirebilirsiniz
-            JOptionPane.showMessageDialog(searchFrame, "Search button clicked!");
             String name = nameField.getText();
             String nation = (String) nationDropdown.getSelectedItem();
-            Integer minAgeValue = (Integer) minAge.getSelectedItem();
-            Integer maxAgeValue = (Integer) maxAge.getSelectedItem();
+            Integer ageValue = (Integer) age.getSelectedItem();
             Integer ability = (Integer) abilityDropdown.getSelectedItem();
             String division = (String) divisionDropdown.getSelectedItem();
+
+            ArrayList<Player> results = DatabaseAction.query(name, nation, ageValue, ability, division); // Query fonksiyonundan sonuçları al
+
+            if (results.isEmpty()) {
+                JOptionPane.showMessageDialog(searchFrame, "No players found!");
+                return;
+            }
+
+            // Sonuçları JTable ile göster
+            String[] columnNames = {"ID", "Name", "Age", "Nation", "Club", "Current Ability"};
+            Object[][] data = new Object[results.size()][6];
+            for (int i = 0; i < results.size(); i++) {
+                Player player = results.get(i);
+                data[i][0] = player.getId();
+                data[i][1] = player.getName();
+                data[i][2] = player.getAge();
+                data[i][3] = player.getNation();
+                data[i][4] = player.getTeam_name();
+                data[i][5] = player.getOverall();
+            }
+
+            JTable resultTable = new JTable(data, columnNames);
+            resultTable.setDefaultEditor(Object.class, null);
+            JScrollPane scrollPane = new JScrollPane(resultTable);
+            bottomPanel.removeAll(); // Eski sonuçları kaldır
+            bottomPanel.add(scrollPane, BorderLayout.CENTER); // Yeni tabloyu ekle
+            bottomPanel.revalidate(); // Paneli yeniden çiz
+            bottomPanel.repaint();
+
+            // Tabloya tıklama özelliği ekleyerek seçilen oyuncuyu kaydetme
+            resultTable.getSelectionModel().addListSelectionListener(e1 -> {
+                int selectedRow = resultTable.getSelectedRow();
+                if (selectedRow != -1) {
+                    selectedPlayer[0] = results.get(selectedRow); // Seçilen oyuncuyu kaydet
+                }
+            });
         });
-        searchButtonPanel.add(searchButton);
 
         // Üst paneli kapsayan bir ana panel
         JPanel combinedTopPanel = new JPanel(new BorderLayout());
         combinedTopPanel.add(topPanel, BorderLayout.CENTER);
-        combinedTopPanel.add(searchButtonPanel, BorderLayout.SOUTH);
+        combinedTopPanel.add(buttonPanel, BorderLayout.SOUTH);
         combinedTopPanel.add(topRightPanel, BorderLayout.NORTH);
-
-        // Alt panel (Boş başlıyor)
-        JPanel bottomPanel = new JPanel();
-        bottomPanel.setBorder(BorderFactory.createTitledBorder("Query Results"));
 
         // Üst ve alt panelleri yeni pencereye ekleme
         searchFrame.add(combinedTopPanel, BorderLayout.NORTH);
@@ -532,28 +599,59 @@ public class Gui {
 
         // Nation için dropdown list
         topPanel.add(new JLabel("Nation:"));
-        JComboBox<String> nationDropdown = new JComboBox<>(new String[]{"USA", "Germany", "Brazil", "Japan", "Others"});
+        JComboBox<String> nationDropdown = new JComboBox<>(new String[]{
+                "", "AFG", "ALB", "ANG", "ANT", "ARG", "ARM", "ARO", "AUT", "AZE", "BEL", "BEN",
+                "BIH", "BLR", "BLZ", "BOL", "BUL", "CAN", "CHA", "CHN", "CIV", "COL", "COM", "CPV",
+                "CRO", "CUB", "CZE", "DEN", "DOM", "DZA", "ECU", "EGY", "ENG", "EQG", "EST", "ETH",
+                "FIJ", "FIN", "FRO", "GAB", "GAM", "GEO", "GER", "GIB", "GNB", "GRE", "GUI", "GUM",
+                "GUY", "HAI", "HKG", "HON", "HUN", "IDN", "IRL", "IRN", "IRQ", "ISL", "ISR", "ITA",
+                "JAM", "JOR", "JPN", "KEN", "KOS", "KSA", "KRG", "KOR", "KOS", "KSA", "KIR", "KAZ",
+                "LBR", "LBY", "LCA", "LVA", "MAC", "MAR", "MDA", "MDV", "MEX", "MLI", "MLT", "MNE",
+                "MOZ", "NAM", "NED", "NGA", "NIR", "NLD", "NOR", "NZL", "OMA", "PAN", "PER", "PHI",
+                "PNG", "POL", "POR", "PRK", "PUR", "QAT", "ROM", "ROU", "RWA", "SAM", "SEN", "SGP",
+                "SLE", "SLV", "SMR", "SOM", "SRB", "SUR", "SVK", "SVN", "SWE", "SYN", "SYR", "TAN",
+                "TCH", "THA", "TGO", "TUN", "TUR", "UKR", "URU", "USA", "VAN", "VIE", "VEN", "ZAM",
+                "ZIM"
+        });
+
+        nationDropdown.setSelectedIndex(0);
         topPanel.add(nationDropdown);
 
         // Age için aralık combobox'ları
-        topPanel.add(new JLabel("Age Range:"));
+        topPanel.add(new JLabel("Age:"));
         JPanel agePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JComboBox<Integer> minAge = new JComboBox<>(generateRange(15, 100));
-        JComboBox<Integer> maxAge = new JComboBox<>(generateRange(15, 100));
-        agePanel.add(new JLabel("Min:"));
-        agePanel.add(minAge);
-        agePanel.add(new JLabel("Max:"));
-        agePanel.add(maxAge);
+        JComboBox<Integer> age = new JComboBox<>(generateRange(15, 100));
+        age.insertItemAt(null, 0);
+        age.setSelectedIndex(0);
+        agePanel.add(new JLabel());
+        agePanel.add(age);
         topPanel.add(agePanel);
 
         // Current Ability için combobox
         topPanel.add(new JLabel("Current Ability:"));
         JComboBox<Integer> abilityDropdown = new JComboBox<>(generateRange(0, 200));
+        abilityDropdown.insertItemAt(null, 0);
+        abilityDropdown.setSelectedIndex(0);
         topPanel.add(abilityDropdown);
 
         // Division için dropdown list
         topPanel.add(new JLabel("Division:"));
-        JComboBox<String> divisionDropdown = new JComboBox<>(new String[]{"Division 1", "Division 2", "Division 3", "Others"});
+        JComboBox<String> divisionDropdown = new JComboBox<>(new String[]{
+                "", "-", "3. Liga", "Austrian Premier Division", "Argentine Premier Division", "Brazilian National First Division",
+                "Brazilian National Second Division", "Bundesliga", "Bundesliga 2", "Canadian Premier League", "Chinese Super League",
+                "Cinch Premiership", "Colombian First Division", "Croatian First League", "Czech First Division", "Egyptian Premier League",
+                "English Premier Division", "Eredivisie", "French Ligue 1", "Greek Super League 1", "Hana 1Q K LEAGUE 1", "Israeli Premier League", "Italian Serie A",
+                "Italian Serie B", "Italian Serie C/A", "Italian Serie C/B", "Italian Serie C/C", "J1 League", "J2 League",
+                "J3 League", "JD Cymru Premier", "Japanese J-League", "Kazakhstan Premier League", "K League 1", "Ligue 1 Uber Eats",
+                "Ligue 2 BKT", "Mexican First Division", "Major League Soccer", "Norwegian Premier Division", "Persian Gulf Premier League",
+                "PKO Bank Polski Ekstraklasa", "Portuguese Premier League", "Qatar League", "Qatar Stars League", "Russian Premier League",
+                "Saudi Professional League", "Serbian SuperLeague", "Sky Bet Championship", "Sky Bet League One", "Sky Bet League Two",
+                "Spanish First Division", "Spanish Second Division", "Swedish Premier Division", "Swiss Super League", "Turkish 1. League",
+                "Turkish 2. League Red Group", "Turkish 2. League White Group", "Turkish 3. League Group 1", "Turkish 3. League Group 2",
+                "Turkish 3. League Group 3", "Turkish 3. League Group 4", "Turkish Super League", "UAE Professional League", "Ukrainian Premier League",
+                "Uruguayan First Division", "Vanarama National League", "Vanarama National League North", "Vanarama National League South",});
+
+        divisionDropdown.setSelectedIndex(0);
         topPanel.add(divisionDropdown);
 
         // Sağ üst köşe için panel ve buton
@@ -587,23 +685,29 @@ public class Gui {
         // "Search" butonuna basıldığında yapılacak işlemler
         searchButton.addActionListener(e -> {
             String name = nameField.getText();
-            ArrayList<Player> results = DatabaseAction.query(name,0,0,0); // Query fonksiyonundan sonuçları al
+            String nation = (String) nationDropdown.getSelectedItem();
+            Integer ageValue = (Integer) age.getSelectedItem();
+            Integer ability = (Integer) abilityDropdown.getSelectedItem();
+            String division = (String) divisionDropdown.getSelectedItem();
+
+            ArrayList<Player> results = DatabaseAction.query(name, nation, ageValue, ability, division); // Query fonksiyonundan sonuçları al
+
             if (results.isEmpty()) {
                 JOptionPane.showMessageDialog(searchFrame, "No players found!");
                 return;
             }
 
             // Sonuçları JTable ile göster
-            String[] columnNames = {"Name", "ID", "Nation", "Age", "Club", "Height"};
+            String[] columnNames = {"ID", "Name", "Age", "Nation", "Club", "Current Ability"};
             Object[][] data = new Object[results.size()][6];
             for (int i = 0; i < results.size(); i++) {
                 Player player = results.get(i);
-                data[i][0] = player.getName();
-                data[i][1] = player.getId();
-                data[i][2] = player.getNation();
-                data[i][3] = player.getAge();
+                data[i][0] = player.getId();
+                data[i][1] = player.getName();
+                data[i][2] = player.getAge();
+                data[i][3] = player.getNation();
                 data[i][4] = player.getTeam_name();
-                data[i][5] = player.getHeight();
+                data[i][5] = player.getOverall();
             }
 
             JTable resultTable = new JTable(data, columnNames);
