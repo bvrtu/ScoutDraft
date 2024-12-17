@@ -17,6 +17,7 @@ public class Gui {
     private JButton playButton;
 
     private JFrame playFrame = new JFrame("Play Options");
+    private JFrame formationFrame;
 
     private JLabel formationImageLabel; // Formasyon resmini gösterecek label
 
@@ -30,6 +31,7 @@ public class Gui {
 
     private boolean isRandom = false;
     private boolean isBuildTeam = false;
+    private boolean isOnlySearch = true;
 
     private int selectedBoxIndex = -1;
 
@@ -180,10 +182,11 @@ public class Gui {
     private void openFormationSelectionWindow() {
         isBuildTeam = true;
         isRandom = false;
+        isOnlySearch = false;
 
         playFrame.setVisible(false);
 
-        JFrame formationFrame = new JFrame("Build Your Team");
+        formationFrame = new JFrame("Build Your Team");
         formationFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JButton backButton = new JButton("Back to Play Options");
@@ -317,10 +320,11 @@ public class Gui {
     private void showRandomFormations() {
         isRandom = true;
         isBuildTeam = false;
+        isOnlySearch = false;
 
         playFrame.setVisible(false);
 
-        JFrame formationFrame = new JFrame("Random Draft");
+        formationFrame = new JFrame("Random Draft");
         formationFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JButton backButton = new JButton("Back to Play Options");
@@ -500,7 +504,12 @@ public class Gui {
 
         // Sağ üst köşe için panel ve buton
         JPanel topRightPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        JButton backButton = new JButton("Back to Play Options");
+        JButton backButton;
+        if (isOnlySearch) {
+            backButton = new JButton("Back to Formation Window");
+        } else {
+            backButton = new JButton("Back to Play Options");
+        }
         topRightPanel.add(backButton);
 
         backButton.addActionListener(new ActionListener() {
@@ -509,6 +518,9 @@ public class Gui {
                 searchFrame.dispose(); // Yeni pencereyi kapat
                 playFrame.setVisible(true);  // İlk pencereyi göster
                 mainFrame.dispose();
+                if (isOnlySearch) {
+                    formationFrame.setVisible(true);
+                }
             }
         });
 
@@ -584,6 +596,7 @@ public class Gui {
     }
 
     private void openSearchWindow2() {
+        isOnlySearch = false;
         // Yeni pencere
         JFrame searchFrame = new JFrame("Search Player");
         searchFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -660,7 +673,7 @@ public class Gui {
 
         // Sağ üst köşe için panel ve buton
         JPanel topRightPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        JButton backButton = new JButton("Back to Play Options");
+        JButton backButton = new JButton("Back to Formation Window");
         topRightPanel.add(backButton);
 
         backButton.addActionListener(new ActionListener() {
@@ -669,6 +682,7 @@ public class Gui {
                 searchFrame.dispose(); // Yeni pencereyi kapat
                 playFrame.dispose();  // İlk pencereyi göster
                 mainFrame.dispose();
+                formationFrame.setVisible(true);
             }
         });
 
@@ -750,7 +764,7 @@ public class Gui {
 
                 // Oyuncu bilgilerini birleştir ve HTML formatında, font boyutunu küçült
                 String buttonText = String.format(
-                        "<html><center><span style='font-size:7px;'>%s<br>%s<br>%s<br>%s</span></center></html>",
+                        "<html><center><span style='font-size:5px;'>%s<br>%s<br>%s<br>%s</span></center></html>",
                         selectedPlayer[0].getName(),
                         selectedPlayer[0].getNation(),
                         selectedPlayer[0].getTeam_name(),
@@ -762,6 +776,7 @@ public class Gui {
 
                 updateLinkRank(selectedBoxIndex);
                 searchFrame.dispose(); // Arama penceresini kapat
+                formationFrame.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(searchFrame, "No player selected!");
             }
@@ -943,19 +958,27 @@ public class Gui {
         if (currentFormation.getUiToGraph().get(boxIndex) != null)
             if(currentFormation.getPlayers()[currentFormation.getUiToGraph().get(boxIndex)] != null) {
                 if (isBuildTeam) {
+                    formationFrame.setVisible(false);
                     openSearchWindow2();
                 } else if (isRandom) {
-                    JOptionPane.showMessageDialog(null,"Random");
+                    isOnlySearch = false;
+                    formationFrame.setVisible(false);
+                    openRandomPlayerWindow();
                 } else {
+                    formationFrame.setVisible(false);
                     openSearchWindow();
                 }
                 System.out.println("Expecting an action from the user...");
             } else {
                 if (isBuildTeam) {
+                    formationFrame.setVisible(false);
                     openSearchWindow2();
                 } else if (isRandom) {
-                    JOptionPane.showMessageDialog(null,"Random");
+                    isOnlySearch = false;
+                    formationFrame.setVisible(false);
+                    openRandomPlayerWindow();
                 } else {
+                    formationFrame.setVisible(false);
                     openSearchWindow();
                 }
                 System.out.println("Expecting an action from the user...");
@@ -963,6 +986,83 @@ public class Gui {
         // Burada seçilen kutu ile ilişkili bir oyuncu seçebilirsiniz
         // Örneğin, kutuya tıklanmasıyla ilgili oyuncu bilgisi alınabilir.
         JOptionPane.showMessageDialog(null, "You selected box: " + (boxIndex));
+    }
+
+    private void openRandomPlayerWindow() {
+        isOnlySearch = false;
+        // Yeni pencereyi tam ekran olarak aç
+        JFrame randomPlayerFrame = new JFrame("Select Random Player");
+        randomPlayerFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        // Ekran boyutuna göre pencereyi tam ekran yap
+        randomPlayerFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //randomPlayerFrame.setUndecorated(true); // Pencere kenarlarını ve başlığını gizle
+        randomPlayerFrame.setLayout(new GridLayout(2, 3)); // 2 satır, 3 sütun için 5 buton
+
+        // Mevcut oyuncu listesini al
+        ArrayList<Player> availablePlayers = getAvailablePlayers(); // Implement this method
+
+        // Listeyi karıştır ve 5 oyuncu seç
+        Collections.shuffle(availablePlayers);
+        ArrayList<Player> randomPlayers = new ArrayList<>(availablePlayers.subList(0, 5));
+
+        // Butonları oluştur ve her birine oyuncu bilgilerini ekle
+        for (Player player : randomPlayers) {
+            JButton playerButton = new JButton();
+            String buttonText = String.format(
+                    "<html><center><span style='font-size:15px;'>%s<br>%s<br>%s<br>%s</span></center></html>",
+                    player.getName(),
+                    player.getNation(),
+                    player.getTeam_name(),
+                    player.getLeague()
+            );
+            playerButton.setText(buttonText);
+
+            // Butona tıklama aksiyonunu ekle
+            playerButton.addActionListener(e -> {
+                // Seçilen oyuncuyu forma ekle
+                currentFormation.addPlayer(player, selectedBoxIndex);
+                String selectedPlayerText = String.format(
+                        "<html><center><span style='font-size:5px;'>%s<br>%s<br>%s<br>%s</span></center></html>",
+                        player.getName(),
+                        player.getNation(),
+                        player.getTeam_name(),
+                        player.getLeague()
+                );
+                formationButtons[selectedBoxIndex].setText(selectedPlayerText); // UI butonunu güncelle
+
+                randomPlayerFrame.dispose();  // Rastgele oyuncu penceresini kapat
+                formationFrame.setVisible(true);  // Ana pencereyi tekrar görünür yap
+                updateLinkRank(selectedBoxIndex); // Link sırasını güncelle
+            });
+
+            // Butonu pencereye ekle
+            randomPlayerFrame.add(playerButton);
+        }
+
+        randomPlayerFrame.setVisible(true);  // Rastgele oyuncu seçme penceresini göster
+    }
+
+    private ArrayList<Player> getAvailablePlayers() {
+        ArrayList<Player> availablePlayers = new ArrayList<>();
+        ArrayList<Player> allPlayers = DatabaseAction.query(null,null,null,null,null);
+
+        for (Player player : allPlayers) { // assuming allPlayers is the list of all players
+            if (!isPlayerSelected(player)) { // Implement this check
+                availablePlayers.add(player);
+            }
+        }
+
+        return availablePlayers;
+    }
+
+    private boolean isPlayerSelected(Player player) {
+        for (Player p : currentFormation.getPlayers()) {
+            if (p != null && p.getId() == player.getId()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void show() {
