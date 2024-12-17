@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Player {
     private String name;
-    private float id;
+    private int id;
     private int overall;
     private String nation;
     private int age;
@@ -15,7 +15,7 @@ public class Player {
     public HashMap<String, Integer> getCanPlay() {
         return this.canPlay;
     }
-    public Player(String name, float id, float overall, String nation, int age, String team_name, int height) {
+    public Player(String name, int id, float overall, String nation, int age, String team_name, int height, String league) {
         this.name = name;
         this.id = id;
         this.overall = (int) overall;
@@ -23,6 +23,7 @@ public class Player {
         this.age = age;
         this.team_name = team_name;
         this.height = height;
+        this.league = league;
     }
     public void setCanPlay(String abs, String form) {
         ArrayList<String> canplayat = new ArrayList<>();
@@ -41,11 +42,11 @@ public class Player {
         this.name = name;
     }
 
-    public float getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(float id) {
+    public void setId(int id) {
         this.id = id;
     }
 

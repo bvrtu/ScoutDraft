@@ -46,7 +46,8 @@ public class DatabaseAction {
                             rs.getString("Nati"),
                             rs.getInt("Age"),
                             rs.getString("Club"),
-                            rs.getInt("Height")
+                            rs.getInt("Height"),
+                            rs.getString("Division")
                     ));
                 }
             }

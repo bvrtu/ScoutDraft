@@ -3,10 +3,13 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 public class Gui {
     private JFrame mainFrame;
@@ -537,8 +540,8 @@ public class Gui {
             }
 
             // Sonuçları JTable ile göster
-            String[] columnNames = {"ID", "Name", "Age", "Nation", "Club", "Current Ability"};
-            Object[][] data = new Object[results.size()][6];
+            String[] columnNames = {"ID", "Name", "Age", "Nation", "Club", "Current Ability", "League"};
+            Object[][] data = new Object[results.size()][7];
             for (int i = 0; i < results.size(); i++) {
                 Player player = results.get(i);
                 data[i][0] = player.getId();
@@ -547,6 +550,7 @@ public class Gui {
                 data[i][3] = player.getNation();
                 data[i][4] = player.getTeam_name();
                 data[i][5] = player.getOverall();
+                data[i][6] = player.getLeague();
             }
 
             JTable resultTable = new JTable(data, columnNames);
@@ -698,8 +702,8 @@ public class Gui {
             }
 
             // Sonuçları JTable ile göster
-            String[] columnNames = {"ID", "Name", "Age", "Nation", "Club", "Current Ability"};
-            Object[][] data = new Object[results.size()][6];
+            String[] columnNames = {"ID", "Name", "Age", "Nation", "Club", "Current Ability", "League"};
+            Object[][] data = new Object[results.size()][7];
             for (int i = 0; i < results.size(); i++) {
                 Player player = results.get(i);
                 data[i][0] = player.getId();
@@ -708,6 +712,7 @@ public class Gui {
                 data[i][3] = player.getNation();
                 data[i][4] = player.getTeam_name();
                 data[i][5] = player.getOverall();
+                data[i][6] = player.getLeague();
             }
 
             JTable resultTable = new JTable(data, columnNames);
@@ -717,6 +722,16 @@ public class Gui {
             bottomPanel.add(scrollPane, BorderLayout.CENTER); // Yeni tabloyu ekle
             bottomPanel.revalidate(); // Paneli yeniden çiz
             bottomPanel.repaint();
+
+            // TableRowSorter ekleyerek sıralama özelliği ekle
+            TableRowSorter<TableModel> sorter = new TableRowSorter<>(resultTable.getModel());
+
+            // ID ve Overall sütunları için sayısal sıralama
+            sorter.setComparator(0, Comparator.comparingInt(o -> Integer.parseInt(o.toString()))); // ID sütunu
+            sorter.setComparator(5, Comparator.comparingInt(o -> Integer.parseInt(o.toString()))); // Overall sütunu
+
+            resultTable.setRowSorter(sorter);
+
 
             // Tabloya tıklama özelliği ekleyerek seçilen oyuncuyu kaydetme
             resultTable.getSelectionModel().addListSelectionListener(e1 -> {
@@ -731,8 +746,20 @@ public class Gui {
         addButton.addActionListener(e -> {
             if (selectedPlayer[0] != null) {
                 // Seçilen oyuncuyu UI'deki butona ekle
-                currentFormation.addPlayer(selectedPlayer[0],selectedBoxIndex);
-                formationButtons[selectedBoxIndex].setText(selectedPlayer[0].getName());// Buton üzerinde oyuncu ismini göster
+                currentFormation.addPlayer(selectedPlayer[0], selectedBoxIndex);
+
+                // Oyuncu bilgilerini birleştir ve HTML formatında, font boyutunu küçült
+                String buttonText = String.format(
+                        "<html><center><span style='font-size:7px;'>%s<br>%s<br>%s<br>%s</span></center></html>",
+                        selectedPlayer[0].getName(),
+                        selectedPlayer[0].getNation(),
+                        selectedPlayer[0].getTeam_name(),
+                        selectedPlayer[0].getLeague()
+                );
+
+                // Buton üzerinde oyuncu bilgilerini göster
+                formationButtons[selectedBoxIndex].setText(buttonText);
+
                 updateLinkRank(selectedBoxIndex);
                 searchFrame.dispose(); // Arama penceresini kapat
             } else {
