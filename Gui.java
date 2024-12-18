@@ -8,6 +8,7 @@ import javax.swing.table.TableRowSorter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -802,7 +803,24 @@ public class Gui {
                     selectedPlayerPositions[0] = String.join(", ", selectedPlayer[0].getPositions());
 
                     selectedPlayer[0].setCanPlay(selectedPlayerPositions[0].toString(),lastSelectedFormation);
-                    valuesList = new ArrayList<>(selectedPlayer[0].getCanPlay().values());
+                    valuesList = new ArrayList<>();
+
+                    Collection<String> stringValues = selectedPlayer[0].getCanPlay().values();
+
+                    for (String value : stringValues) {
+                        try {
+                            // Split the string by commas
+                            String[] parts = value.split(",");
+
+                            // Convert each part to an integer and add it to valuesList
+                            for (String part : parts) {
+                                valuesList.add(Integer.parseInt(part.trim()));
+                            }
+                        } catch (NumberFormatException ex) {
+                            System.out.println("Invalid number format in: " + value);
+                        }
+                    }
+
                     isCanPlay = valuesList.contains(selectedBoxIndex);
                 }
             });
