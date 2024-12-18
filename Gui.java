@@ -214,6 +214,8 @@ public class Gui {
                 formationFrame.dispose();// Yeni pencereyi gizle
                 playFrame.setVisible(true); // İlk pencereyi göster
                 mainFrame.dispose();
+                resetState();  // Reset the formation and state
+                clearPreviousButtons();
             }
         });
 
@@ -352,6 +354,8 @@ public class Gui {
                 formationFrame.dispose();// Yeni pencereyi gizle
                 playFrame.setVisible(true); // İlk pencereyi göster
                 mainFrame.dispose();
+                resetState();  // Reset the formation and state
+                clearPreviousButtons();
             }
         });
 
@@ -541,6 +545,8 @@ public class Gui {
                 if (isOnlySearch) {
                     formationFrame.setVisible(true);
                 }
+                resetState();  // Reset the formation and state
+                clearPreviousButtons();
             }
         });
 
@@ -963,12 +969,41 @@ public class Gui {
     }
 
     private void clearPreviousButtons() {
-        // Önceki butonları temizle
+        // Remove all the buttons
         if (formationButtons != null) {
             for (JButton button : formationButtons) {
                 formationImageLabel.remove(button);
             }
         }
+        // Clear button text and reset any state associated with the buttons
+        formationButtons = new JButton[numOfBoxes];
+        for (int i = 0; i < numOfBoxes; i++) {
+            formationButtons[i] = new JButton(""); // Clear text
+            formationButtons[i].setBounds(boxCoordinates[i].x, boxCoordinates[i].y, 70, 70);
+            // Reset event listeners, or add new ones as needed
+            final int boxIndex = i;
+            formationButtons[i].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    selectPlayer(boxIndex);
+                }
+            });
+        }
+    }
+
+    private void resetState() {
+        // Reset player assignments in the formation
+        Player[] players = currentFormation.getPlayers();
+        for (int i = 0; i < players.length; i++) {
+            players[i] = null;  // Clear each player's assignment
+        }
+
+        // Reset other state variables
+        selectedBoxIndex = -1;
+        isBuildTeam = false;
+        isRandom = false;
+        isOnlySearch = false;
+        // You can add more flags here as necessary
     }
 
     private void addClickableButtons() {
