@@ -35,6 +35,10 @@ public class Gui {
 
     private int selectedBoxIndex = -1;
 
+    private ArrayList<Integer> valuesList;
+
+    private boolean isCanPlay;
+
     JLabel[] labels = new JLabel[11];
 
     public Gui() {
@@ -138,7 +142,7 @@ public class Gui {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                playFrame.dispose();// Yeni pencereyi gizle
+                playFrame.dispose(); // Yeni pencereyi gizle
                 mainFrame.setVisible(true); // İlk pencereyi göster
             }
         });
@@ -149,33 +153,44 @@ public class Gui {
         Dimension screenSize = kit.getScreenSize();
         int screenWidth = screenSize.width;
         int screenHeight = screenSize.height;
-        playFrame.setSize(screenWidth/2,screenHeight/2);
-        playFrame.setLocation(screenWidth/4,screenHeight/4);
+        playFrame.setSize(screenWidth / 2, screenHeight / 2);
+        playFrame.setLocation(screenWidth / 4, screenHeight / 4);
 
         JPanel playPanel = new JPanel();
-        playPanel.setLayout(new GridLayout(1, 3, 20, 0));
+        playPanel.setLayout(new GridBagLayout());
+        playPanel.setBackground(Color.WHITE);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10); // Margin ayarları
+        gbc.gridx = 0; // İlk sütun
+        gbc.gridy = GridBagConstraints.RELATIVE; // Satırları otomatik artır
 
         JButton button1 = new JButton("Build Your Team");
-        JButton button2 = new JButton("Random Draft");
-        JButton button3 = new JButton("Search Player");
-
+        JLabel label1 = new JLabel("Create your own team by selecting players for each position with position restrictions.");
         button1.setPreferredSize(new Dimension(150, 50));
+
+        JButton button2 = new JButton("Random Draft");
+        JLabel label2 = new JLabel("Generate a random team and try your luck without position restrictions.");
         button2.setPreferredSize(new Dimension(150, 50));
+
+        JButton button3 = new JButton("Search Player");
+        JLabel label3 = new JLabel("Search players for just scouting.");
         button3.setPreferredSize(new Dimension(150, 50));
 
-        playPanel.add(button1);
-        playPanel.add(button2);
-        playPanel.add(button3);
+        // Button ve açıklama label'larını sıralı ekle
+        playPanel.add(button1, gbc);
+        playPanel.add(label1, gbc);
+        playPanel.add(button2, gbc);
+        playPanel.add(label2, gbc);
+        playPanel.add(button3, gbc);
+        playPanel.add(label3, gbc);
 
+        // Butonlara aksiyon ekleme
         button1.addActionListener(e -> openFormationSelectionWindow());
         button2.addActionListener(e -> showRandomFormations());
         button3.addActionListener(e -> openSearchWindow());
 
-        JPanel container = new JPanel(new GridBagLayout());
-        container.setBackground(Color.WHITE);
-        container.add(playPanel);
-
-        playFrame.add(container);
+        playFrame.add(playPanel);
         playFrame.setVisible(true);
     }
 
@@ -721,6 +736,8 @@ public class Gui {
         // Seçilen oyuncuyu tutacak bir değişken
         final Player[] selectedPlayer = new Player[1];
 
+        final String[] selectedPlayerPositions = new String[1];
+
         // "Search" butonuna basıldığında yapılacak işlemler
         searchButton.addActionListener(e -> {
             String name = nameField.getText();
@@ -775,13 +792,19 @@ public class Gui {
                 int selectedRow = resultTable.getSelectedRow();
                 if (selectedRow != -1) {
                     selectedPlayer[0] = results.get(selectedRow); // Seçilen oyuncuyu kaydet
+
+                    selectedPlayerPositions[0] = String.join(", ", selectedPlayer[0].getPositions());
+
+                    selectedPlayer[0].setCanPlay(selectedPlayerPositions[0].toString(),lastSelectedFormation);
+                    valuesList = new ArrayList<>(selectedPlayer[0].getCanPlay().values());
+                    isCanPlay = valuesList.contains(selectedBoxIndex);
                 }
             });
         });
 
         // "Add" butonuna basıldığında yapılacak işlemler
         addButton.addActionListener(e -> {
-            if (selectedPlayer[0] != null) {
+            if (selectedPlayer[0] != null && isCanPlay) {
                 // Seçilen oyuncuyu UI'deki butona ekle
                 currentFormation.addPlayer(selectedPlayer[0], selectedBoxIndex);
 
@@ -801,7 +824,7 @@ public class Gui {
                 searchFrame.dispose(); // Arama penceresini kapat
                 formationFrame.setVisible(true);
             } else {
-                JOptionPane.showMessageDialog(searchFrame, "No player selected!");
+                JOptionPane.showMessageDialog(null, "Selected player not valid for this position.");
             }
         });
 
