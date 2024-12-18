@@ -1036,38 +1036,33 @@ public class Gui {
     // Butona tıklandığında oyuncu seçme işlemi
     private void selectPlayer(int boxIndex) {
         selectedBoxIndex = boxIndex;
-        if (currentFormation.getUiToGraph().get(boxIndex) != null)
-            if(currentFormation.getPlayers()[currentFormation.getUiToGraph().get(boxIndex)] != null) {
-                if (isBuildTeam) {
-                    formationFrame.setVisible(false);
-                    openSearchWindow2();
-                } else if (isRandom) {
-                    isOnlySearch = false;
-                    formationFrame.setVisible(false);
-                    openRandomPlayerWindow();
-                } else {
-                    formationFrame.setVisible(false);
-                    openSearchWindow();
-                }
-                System.out.println("Expecting an action from the user...");
-            } else {
-                if (isBuildTeam) {
-                    formationFrame.setVisible(false);
-                    openSearchWindow2();
-                } else if (isRandom) {
-                    isOnlySearch = false;
-                    formationFrame.setVisible(false);
-                    openRandomPlayerWindow();
-                } else {
-                    formationFrame.setVisible(false);
-                    openSearchWindow();
-                }
-                System.out.println("Expecting an action from the user...");
-            }
-        // Burada seçilen kutu ile ilişkili bir oyuncu seçebilirsiniz
-        // Örneğin, kutuya tıklanmasıyla ilgili oyuncu bilgisi alınabilir.
+
+        // Check if a player is assigned to this box
+        Integer playerIndex = currentFormation.getUiToGraph().get(boxIndex);
+        if (playerIndex != null && currentFormation.getPlayers()[playerIndex] != null) {
+            // Player is already assigned, handle accordingly
+            System.out.println("Expecting an action from the user...");
+        } else {
+            // No player assigned to this box, handle accordingly
+            System.out.println("Expecting an action from the user...");
+        }
+
+        // Handle the user actions for building team, random player, or search
         if (isBuildTeam) {
-        JOptionPane.showMessageDialog(null, "You selected box: " + (boxIndex));
+            formationFrame.setVisible(false);
+            openSearchWindow2();
+        } else if (isRandom) {
+            isOnlySearch = false;
+            formationFrame.setVisible(false);
+            openRandomPlayerWindow();
+        } else {
+            formationFrame.setVisible(false);
+            openSearchWindow();
+        }
+
+        // Additional message for team building mode
+        if (isBuildTeam) {
+            JOptionPane.showMessageDialog(null, "You selected box: " + boxIndex);
         }
     }
 
