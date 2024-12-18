@@ -438,7 +438,7 @@ public class Gui {
 
         // Üst panel
         JPanel topPanel = new JPanel();
-        topPanel.setLayout(new GridLayout(5, 2, 10, 10)); // 5 satır, 2 sütun, aralık 10px
+        topPanel.setLayout(new GridLayout(6, 2, 10, 10)); // 5 satır, 2 sütun, aralık 10px
 
         // Name için text area
         topPanel.add(new JLabel("Name:"));
@@ -502,6 +502,11 @@ public class Gui {
         divisionDropdown.setSelectedIndex(0);
         topPanel.add(divisionDropdown);
 
+        topPanel.add(new JLabel("Position:"));
+        JComboBox<String> positionsDropdown = new JComboBox<>(new String[]{"", "GK", "CB", "RB", "LB", "RWB", "LWB", "CDM", "CM", "CAM", "RW", "LW", "ST"});
+        positionsDropdown.setSelectedIndex(0);
+        topPanel.add(positionsDropdown);
+
         // Sağ üst köşe için panel ve buton
         JPanel topRightPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         JButton backButton;
@@ -525,7 +530,7 @@ public class Gui {
         });
 
         // Ortalanmış "Add" ve "Search" düğmeleri için panel
-        JPanel buttonPanel = new JPanel(new GridLayout(2, 1, 10, 10)); // 2 satır, 1 sütun, aralık 10px
+        JPanel buttonPanel = new JPanel(new GridLayout(1, 1, 10, 10)); // 2 satır, 1 sütun, aralık 10px
         JButton searchButton = new JButton("Search");
         buttonPanel.add(searchButton);
 
@@ -543,8 +548,9 @@ public class Gui {
             Integer ageValue = (Integer) age.getSelectedItem();
             Integer ability = (Integer) abilityDropdown.getSelectedItem();
             String division = (String) divisionDropdown.getSelectedItem();
+            String position = (String) positionsDropdown.getSelectedItem();
 
-            ArrayList<Player> results = DatabaseAction.query(name, nation, ageValue, ability, division); // Query fonksiyonundan sonuçları al
+            ArrayList<Player> results = DatabaseAction.query(name, nation, ageValue, ability, division, position); // Query fonksiyonundan sonuçları al
 
             if (results.isEmpty()) {
                 JOptionPane.showMessageDialog(searchFrame, "No players found!");
@@ -552,8 +558,8 @@ public class Gui {
             }
 
             // Sonuçları JTable ile göster
-            String[] columnNames = {"ID", "Name", "Age", "Nation", "Club", "Current Ability", "League"};
-            Object[][] data = new Object[results.size()][7];
+            String[] columnNames = {"ID", "Name", "Age", "Nation", "Club", "Current Ability", "League", "Positions"};
+            Object[][] data = new Object[results.size()][8];
             for (int i = 0; i < results.size(); i++) {
                 Player player = results.get(i);
                 data[i][0] = player.getId();
@@ -563,6 +569,7 @@ public class Gui {
                 data[i][4] = player.getTeam_name();
                 data[i][5] = player.getOverall();
                 data[i][6] = player.getLeague();
+                data[i][7] = String.join(", ", player.getPositions());
             }
 
             JTable resultTable = new JTable(data, columnNames);
@@ -616,7 +623,7 @@ public class Gui {
 
         // Üst panel
         JPanel topPanel = new JPanel();
-        topPanel.setLayout(new GridLayout(5, 2, 10, 10)); // 5 satır, 2 sütun, aralık 10px
+        topPanel.setLayout(new GridLayout(6, 2, 10, 10)); // 5 satır, 2 sütun, aralık 10px
 
         // Name için text area
         topPanel.add(new JLabel("Name:"));
@@ -680,6 +687,11 @@ public class Gui {
         divisionDropdown.setSelectedIndex(0);
         topPanel.add(divisionDropdown);
 
+        topPanel.add(new JLabel("Position:"));
+        JComboBox<String> positionsDropdown = new JComboBox<>(new String[]{"", "GK", "CB", "RB", "LB", "RWB", "LWB", "CDM", "CM", "CAM", "RW", "LW", "ST"});
+        positionsDropdown.setSelectedIndex(0);
+        topPanel.add(positionsDropdown);
+
         // Sağ üst köşe için panel ve buton
         JPanel topRightPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         JButton backButton = new JButton("Back to Formation Window");
@@ -716,8 +728,9 @@ public class Gui {
             Integer ageValue = (Integer) age.getSelectedItem();
             Integer ability = (Integer) abilityDropdown.getSelectedItem();
             String division = (String) divisionDropdown.getSelectedItem();
+            String position = (String) positionsDropdown.getSelectedItem();
 
-            ArrayList<Player> results = DatabaseAction.query(name, nation, ageValue, ability, division); // Query fonksiyonundan sonuçları al
+            ArrayList<Player> results = DatabaseAction.query(name, nation, ageValue, ability, division, position); // Query fonksiyonundan sonuçları al
 
             if (results.isEmpty()) {
                 JOptionPane.showMessageDialog(searchFrame, "No players found!");
@@ -725,8 +738,8 @@ public class Gui {
             }
 
             // Sonuçları JTable ile göster
-            String[] columnNames = {"ID", "Name", "Age", "Nation", "Club", "Current Ability", "League"};
-            Object[][] data = new Object[results.size()][7];
+            String[] columnNames = {"ID", "Name", "Age", "Nation", "Club", "Current Ability", "League", "Positions"};
+            Object[][] data = new Object[results.size()][8];
             for (int i = 0; i < results.size(); i++) {
                 Player player = results.get(i);
                 data[i][0] = player.getId();
@@ -736,6 +749,7 @@ public class Gui {
                 data[i][4] = player.getTeam_name();
                 data[i][5] = player.getOverall();
                 data[i][6] = player.getLeague();
+                data[i][7] = String.join(", ", player.getPositions());
             }
 
             JTable resultTable = new JTable(data, columnNames);
@@ -994,7 +1008,9 @@ public class Gui {
             }
         // Burada seçilen kutu ile ilişkili bir oyuncu seçebilirsiniz
         // Örneğin, kutuya tıklanmasıyla ilgili oyuncu bilgisi alınabilir.
+        if (isBuildTeam) {
         JOptionPane.showMessageDialog(null, "You selected box: " + (boxIndex));
+        }
     }
 
     private void openRandomPlayerWindow() {
@@ -1054,7 +1070,7 @@ public class Gui {
 
     private ArrayList<Player> getAvailablePlayers() {
         ArrayList<Player> availablePlayers = new ArrayList<>();
-        ArrayList<Player> allPlayers = DatabaseAction.query(null,null,null,null,null);
+        ArrayList<Player> allPlayers = DatabaseAction.query(null,null,null,null,null,null);
 
         for (Player player : allPlayers) { // assuming allPlayers is the list of all players
             if (!isPlayerSelected(player)) { // Implement this check

@@ -15,7 +15,7 @@ public class Player {
     public HashMap<String, Integer> getCanPlay() {
         return this.canPlay;
     }
-    public Player(String name, int id, float overall, String nation, int age, String team_name, String league) {
+    public Player(String name, int id, float overall, String nation, int age, String team_name, String league, String position) {
         this.name = name;
         this.id = id;
         this.overall = (int) overall;
@@ -24,6 +24,13 @@ public class Player {
         this.team_name = team_name;
         this.height = height;
         this.league = league;
+        this.positions = new ArrayList<>();
+        this.positions.add(position);
+    }
+    public void addPosition(String position) {
+        if (!this.positions.contains(position)) {
+            this.positions.add(position);
+        }
     }
     public void setCanPlay(String abs, String form) {
         ArrayList<String> canplayat = new ArrayList<>();
@@ -31,6 +38,225 @@ public class Player {
         switch(form){
             case "3-4-3":
                 if(canplayat.contains("ST")) canPlay.put("ST",0);
+                if(canplayat.contains("LW")) canPlay.put("LW",1);
+                if(canplayat.contains("RW")) canPlay.put("RW",2);
+                if(canplayat.contains("LM")) canPlay.put("LM",3);
+                if(canplayat.contains("CM")) canPlay.put("CM",4);
+                if(canplayat.contains("CM")) canPlay.put("CM",5);
+                if(canplayat.contains("RM")) canPlay.put("RM",6);
+                if(canplayat.contains("CB")) canPlay.put("CB",7);
+                if(canplayat.contains("CB")) canPlay.put("CB",8);
+                if(canplayat.contains("CB")) canPlay.put("CB",9);
+                if(canplayat.contains("GK")) canPlay.put("GK",10);
+                break;
+            case "3-4-1-2":
+                if(canplayat.contains("CAM")) canPlay.put("CAM",0);
+                if(canplayat.contains("ST")) canPlay.put("ST",1);
+                if(canplayat.contains("ST")) canPlay.put("ST",2);
+                if(canplayat.contains("LM")) canPlay.put("LM",3);
+                if(canplayat.contains("CM")) canPlay.put("CM",4);
+                if(canplayat.contains("CM")) canPlay.put("CM",5);
+                if(canplayat.contains("RM")) canPlay.put("RM",6);
+                if(canplayat.contains("CB")) canPlay.put("CB",7);
+                if(canplayat.contains("CB")) canPlay.put("CB",8);
+                if(canplayat.contains("CB")) canPlay.put("CB",9);
+                if(canplayat.contains("GK")) canPlay.put("GK",10);
+                break;
+            case "3-4-2-1":
+                if(canplayat.contains("ST")) canPlay.put("ST",0);
+                if(canplayat.contains("ST")) canPlay.put("ST",1);
+                if(canplayat.contains("ST")) canPlay.put("ST",2);
+                if(canplayat.contains("LM")) canPlay.put("LM",3);
+                if(canplayat.contains("CM")) canPlay.put("CM",4);
+                if(canplayat.contains("CM")) canPlay.put("CM",5);
+                if(canplayat.contains("RM")) canPlay.put("RM",6);
+                if(canplayat.contains("CB")) canPlay.put("CB",7);
+                if(canplayat.contains("CB")) canPlay.put("CB",8);
+                if(canplayat.contains("CB")) canPlay.put("CB",9);
+                if(canplayat.contains("GK")) canPlay.put("GK",10);
+                break;
+            case "3-5-2":
+                if(canplayat.contains("CAM")) canPlay.put("CAM",0);
+                if(canplayat.contains("ST")) canPlay.put("ST",1);
+                if(canplayat.contains("ST")) canPlay.put("ST",2);
+                if(canplayat.contains("LM")) canPlay.put("LM",3);
+                if(canplayat.contains("CDM")) canPlay.put("CDM",4);
+                if(canplayat.contains("CDM")) canPlay.put("CDM",5);
+                if(canplayat.contains("RM")) canPlay.put("RM",6);
+                if(canplayat.contains("CB")) canPlay.put("CB",7);
+                if(canplayat.contains("CB")) canPlay.put("CB",8);
+                if(canplayat.contains("CB")) canPlay.put("CB",9);
+                if(canplayat.contains("GK")) canPlay.put("GK",10);
+                break;
+            case "4-1-2-1-2":
+                if(canplayat.contains("CAM")) canPlay.put("CAM",0);
+                if(canplayat.contains("ST")) canPlay.put("ST",1);
+                if(canplayat.contains("ST")) canPlay.put("ST",2);
+                if(canplayat.contains("LM")) canPlay.put("LM",3);
+                if(canplayat.contains("CB")) canPlay.put("CB",4);
+                if(canplayat.contains("CB")) canPlay.put("CB",5);
+                if(canplayat.contains("RM")) canPlay.put("RM",6);
+                if(canplayat.contains("LB")) canPlay.put("LB",7);
+                if(canplayat.contains("CDM")) canPlay.put("CDM",8);
+                if(canplayat.contains("RB")) canPlay.put("RB",9);
+                if(canplayat.contains("GK")) canPlay.put("GK",10);
+                break;
+            case "4-1-4-1":
+                if(canplayat.contains("ST")) canPlay.put("ST",0);
+                if(canplayat.contains("CM")) canPlay.put("CM",1);
+                if(canplayat.contains("CM")) canPlay.put("CM",2);
+                if(canplayat.contains("LM")) canPlay.put("LM",3);
+                if(canplayat.contains("CB")) canPlay.put("CB",4);
+                if(canplayat.contains("CB")) canPlay.put("CB",5);
+                if(canplayat.contains("RM")) canPlay.put("RM",6);
+                if(canplayat.contains("LB")) canPlay.put("LB",7);
+                if(canplayat.contains("CDM")) canPlay.put("CDM",8);
+                if(canplayat.contains("RB")) canPlay.put("RB",9);
+                if(canplayat.contains("GK")) canPlay.put("GK",10);
+                break;
+            case "4-2-2-2":
+                if(canplayat.contains("ST")) canPlay.put("ST",0);
+                if(canplayat.contains("ST")) canPlay.put("ST",1);
+                if(canplayat.contains("CDM")) canPlay.put("CDM",2);
+                if(canplayat.contains("CAM")) canPlay.put("CAM",3);
+                if(canplayat.contains("CB")) canPlay.put("CB",4);
+                if(canplayat.contains("CB")) canPlay.put("CB",5);
+                if(canplayat.contains("CAM")) canPlay.put("CAM",6);
+                if(canplayat.contains("LB")) canPlay.put("LB",7);
+                if(canplayat.contains("CDM")) canPlay.put("CDM",8);
+                if(canplayat.contains("RB")) canPlay.put("RB",9);
+                if(canplayat.contains("GK")) canPlay.put("GK",10);
+                break;
+            case "4-2-3-1":
+                if(canplayat.contains("ST")) canPlay.put("ST",0);
+                if(canplayat.contains("CAM")) canPlay.put("CAM",1);
+                if(canplayat.contains("CAM")) canPlay.put("CAM",2);
+                if(canplayat.contains("LB")) canPlay.put("LB",3);
+                if(canplayat.contains("CB")) canPlay.put("CB",4);
+                if(canplayat.contains("CB")) canPlay.put("CB",5);
+                if(canplayat.contains("RB")) canPlay.put("RB",6);
+                if(canplayat.contains("CDM")) canPlay.put("CDM",7);
+                if(canplayat.contains("CAM")) canPlay.put("CAM",8);
+                if(canplayat.contains("CDM")) canPlay.put("CDM",9);
+                if(canplayat.contains("GK")) canPlay.put("GK",10);
+                break;
+            case "4-3-1-2":
+                if(canplayat.contains("CAM")) canPlay.put("CAM",0);
+                if(canplayat.contains("ST")) canPlay.put("ST",1);
+                if(canplayat.contains("ST")) canPlay.put("ST",2);
+                if(canplayat.contains("LB")) canPlay.put("LB",3);
+                if(canplayat.contains("CB")) canPlay.put("CB",4);
+                if(canplayat.contains("CB")) canPlay.put("CB",5);
+                if(canplayat.contains("RB")) canPlay.put("RB",6);
+                if(canplayat.contains("CM")) canPlay.put("CM",7);
+                if(canplayat.contains("CM")) canPlay.put("CM",8);
+                if(canplayat.contains("CM")) canPlay.put("CM",9);
+                if(canplayat.contains("GK")) canPlay.put("GK",10);
+                break;
+            case "4-3-2-1":
+                if(canplayat.contains("ST")) canPlay.put("ST",0);
+                if(canplayat.contains("ST")) canPlay.put("ST",1);
+                if(canplayat.contains("ST")) canPlay.put("ST",2);
+                if(canplayat.contains("LB")) canPlay.put("LB",3);
+                if(canplayat.contains("CB")) canPlay.put("CB",4);
+                if(canplayat.contains("CB")) canPlay.put("CB",5);
+                if(canplayat.contains("RB")) canPlay.put("RB",6);
+                if(canplayat.contains("CM")) canPlay.put("CM",7);
+                if(canplayat.contains("CM")) canPlay.put("CM",8);
+                if(canplayat.contains("CM")) canPlay.put("CM",9);
+                if(canplayat.contains("GK")) canPlay.put("GK",10);
+                break;
+            case "4-3-3":
+                if(canplayat.contains("ST")) canPlay.put("ST",0);
+                if(canplayat.contains("LW")) canPlay.put("LW",1);
+                if(canplayat.contains("RW")) canPlay.put("RW",2);
+                if(canplayat.contains("LB")) canPlay.put("LB",3);
+                if(canplayat.contains("CB")) canPlay.put("CB",4);
+                if(canplayat.contains("CB")) canPlay.put("CB",5);
+                if(canplayat.contains("RB")) canPlay.put("RB",6);
+                if(canplayat.contains("CM")) canPlay.put("CM",7);
+                if(canplayat.contains("CM")) canPlay.put("CM",8);
+                if(canplayat.contains("CM")) canPlay.put("CM",9);
+                if(canplayat.contains("GK")) canPlay.put("GK",10);
+                break;
+            case "4-4-1-1":
+                if(canplayat.contains("ST")) canPlay.put("ST",0);
+                if(canplayat.contains("LM")) canPlay.put("LM",1);
+                if(canplayat.contains("RM")) canPlay.put("RM",2);
+                if(canplayat.contains("LB")) canPlay.put("LB",3);
+                if(canplayat.contains("CB")) canPlay.put("CB",4);
+                if(canplayat.contains("CB")) canPlay.put("CB",5);
+                if(canplayat.contains("RB")) canPlay.put("RB",6);
+                if(canplayat.contains("CM")) canPlay.put("CM",7);
+                if(canplayat.contains("CAM")) canPlay.put("CAM",8);
+                if(canplayat.contains("CM")) canPlay.put("CM",9);
+                if(canplayat.contains("GK")) canPlay.put("GK",10);
+                break;
+            case "4-4-2":
+                if(canplayat.contains("ST")) canPlay.put("ST",0);
+                if(canplayat.contains("LM")) canPlay.put("LM",1);
+                if(canplayat.contains("RM")) canPlay.put("RM",2);
+                if(canplayat.contains("LB")) canPlay.put("LB",3);
+                if(canplayat.contains("CB")) canPlay.put("CB",4);
+                if(canplayat.contains("CB")) canPlay.put("CB",5);
+                if(canplayat.contains("RB")) canPlay.put("RB",6);
+                if(canplayat.contains("CM")) canPlay.put("CM",7);
+                if(canplayat.contains("ST")) canPlay.put("ST",8);
+                if(canplayat.contains("CM")) canPlay.put("CM",9);
+                if(canplayat.contains("GK")) canPlay.put("GK",10);
+                break;
+            case "4-5-1":
+                if(canplayat.contains("ST")) canPlay.put("ST",0);
+                if(canplayat.contains("LM")) canPlay.put("LM",1);
+                if(canplayat.contains("RM")) canPlay.put("RM",2);
+                if(canplayat.contains("LB")) canPlay.put("LB",3);
+                if(canplayat.contains("CB")) canPlay.put("CB",4);
+                if(canplayat.contains("CB")) canPlay.put("CB",5);
+                if(canplayat.contains("RB")) canPlay.put("RB",6);
+                if(canplayat.contains("CAM")) canPlay.put("CAM",7);
+                if(canplayat.contains("CM")) canPlay.put("CM",8);
+                if(canplayat.contains("CAM")) canPlay.put("CAM",9);
+                if(canplayat.contains("GK")) canPlay.put("GK",10);
+                break;
+            case "5-2-2-1":
+                if(canplayat.contains("ST")) canPlay.put("ST",0);
+                if(canplayat.contains("LW")) canPlay.put("LW",1);
+                if(canplayat.contains("RW")) canPlay.put("RW",2);
+                if(canplayat.contains("LWB")) canPlay.put("LWB",3);
+                if(canplayat.contains("CM")) canPlay.put("CM",4);
+                if(canplayat.contains("CM")) canPlay.put("CM",5);
+                if(canplayat.contains("RWB")) canPlay.put("RWB",6);
+                if(canplayat.contains("CB")) canPlay.put("CB",7);
+                if(canplayat.contains("CB")) canPlay.put("CB",8);
+                if(canplayat.contains("CB")) canPlay.put("CB",9);
+                if(canplayat.contains("GK")) canPlay.put("GK",10);
+                break;
+            case "5-2-1-2":
+                if(canplayat.contains("CAM")) canPlay.put("CAM",0);
+                if(canplayat.contains("ST")) canPlay.put("ST",1);
+                if(canplayat.contains("ST")) canPlay.put("ST",2);
+                if(canplayat.contains("LWB")) canPlay.put("LWB",3);
+                if(canplayat.contains("CM")) canPlay.put("CM",4);
+                if(canplayat.contains("CM")) canPlay.put("CM",5);
+                if(canplayat.contains("RWB")) canPlay.put("RWB",6);
+                if(canplayat.contains("CB")) canPlay.put("CB",7);
+                if(canplayat.contains("CB")) canPlay.put("CB",8);
+                if(canplayat.contains("CB")) canPlay.put("CB",9);
+                if(canplayat.contains("GK")) canPlay.put("GK",10);
+                break;
+            case "5-3-2":
+                if(canplayat.contains("CM")) canPlay.put("CM",0);
+                if(canplayat.contains("ST")) canPlay.put("ST",1);
+                if(canplayat.contains("ST")) canPlay.put("ST",2);
+                if(canplayat.contains("LWB")) canPlay.put("LWB",3);
+                if(canplayat.contains("CM")) canPlay.put("CM",4);
+                if(canplayat.contains("CM")) canPlay.put("CM",5);
+                if(canplayat.contains("RWB")) canPlay.put("RWB",6);
+                if(canplayat.contains("CB")) canPlay.put("CB",7);
+                if(canplayat.contains("CB")) canPlay.put("CB",8);
+                if(canplayat.contains("CB")) canPlay.put("CB",9);
+                if(canplayat.contains("GK")) canPlay.put("GK",10);
+                break;
         }
     }
 
