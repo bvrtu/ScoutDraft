@@ -15,7 +15,7 @@ public class Player {
     public HashMap<String, Integer> getCanPlay() {
         return this.canPlay;
     }
-    public Player(String name, int id, float overall, String nation, int age, String team_name, int height, String league) {
+    public Player(String name, int id, float overall, String nation, int age, String team_name, String league) {
         this.name = name;
         this.id = id;
         this.overall = (int) overall;
