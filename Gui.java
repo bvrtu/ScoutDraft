@@ -214,8 +214,8 @@ public class Gui {
                 formationFrame.dispose();// Yeni pencereyi gizle
                 playFrame.setVisible(true); // İlk pencereyi göster
                 mainFrame.dispose();
+                //clearPreviousButtons();
                 resetState();  // Reset the formation and state
-                clearPreviousButtons();
             }
         });
 
@@ -354,8 +354,8 @@ public class Gui {
                 formationFrame.dispose();// Yeni pencereyi gizle
                 playFrame.setVisible(true); // İlk pencereyi göster
                 mainFrame.dispose();
+                //clearPreviousButtons();
                 resetState();  // Reset the formation and state
-                clearPreviousButtons();
             }
         });
 
@@ -522,7 +522,7 @@ public class Gui {
         topPanel.add(divisionDropdown);
 
         topPanel.add(new JLabel("Position:"));
-        JComboBox<String> positionsDropdown = new JComboBox<>(new String[]{"", "GK", "CB", "RB", "LB", "RWB", "LWB", "CDM", "CM", "CAM", "RW", "LW", "ST"});
+        JComboBox<String> positionsDropdown = new JComboBox<>(new String[]{"", "GK", "CB", "RB", "LB", "RWB", "LWB", "CDM", "CM", "CAM", "RM", "LM", "RW", "LW", "ST"});
         positionsDropdown.setSelectedIndex(0);
         topPanel.add(positionsDropdown);
 
@@ -542,11 +542,11 @@ public class Gui {
                 searchFrame.dispose(); // Yeni pencereyi kapat
                 playFrame.setVisible(true);  // İlk pencereyi göster
                 mainFrame.dispose();
-                if (isOnlySearch) {
+                /*if (isOnlySearch) {
                     formationFrame.setVisible(true);
-                }
+                }*/
+                //clearPreviousButtons();
                 resetState();  // Reset the formation and state
-                clearPreviousButtons();
             }
         });
 
@@ -709,7 +709,7 @@ public class Gui {
         topPanel.add(divisionDropdown);
 
         topPanel.add(new JLabel("Position:"));
-        JComboBox<String> positionsDropdown = new JComboBox<>(new String[]{"", "GK", "CB", "RB", "LB", "RWB", "LWB", "CDM", "CM", "CAM", "RW", "LW", "ST"});
+        JComboBox<String> positionsDropdown = new JComboBox<>(new String[]{"", "GK", "CB", "RB", "LB", "RWB", "LWB", "CDM", "CM", "CAM", "RM", "LM", "RW", "LW", "ST"});
         positionsDropdown.setSelectedIndex(0);
         topPanel.add(positionsDropdown);
 
