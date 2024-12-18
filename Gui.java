@@ -505,7 +505,7 @@ public class Gui {
         // Sağ üst köşe için panel ve buton
         JPanel topRightPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         JButton backButton;
-        if (isOnlySearch) {
+        if (isOnlySearch && (isRandom && isBuildTeam)) {
             backButton = new JButton("Back to Formation Window");
         } else {
             backButton = new JButton("Back to Play Options");
@@ -572,6 +572,15 @@ public class Gui {
             bottomPanel.add(scrollPane, BorderLayout.CENTER); // Yeni tabloyu ekle
             bottomPanel.revalidate(); // Paneli yeniden çiz
             bottomPanel.repaint();
+
+            // TableRowSorter ekleyerek sıralama özelliği ekle
+            TableRowSorter<TableModel> sorter = new TableRowSorter<>(resultTable.getModel());
+
+            // ID ve Overall sütunları için sayısal sıralama
+            sorter.setComparator(0, Comparator.comparingInt(o -> Integer.parseInt(o.toString()))); // ID sütunu
+            sorter.setComparator(5, Comparator.comparingInt(o -> Integer.parseInt(o.toString()))); // Overall sütunu
+
+            resultTable.setRowSorter(sorter);
 
             // Tabloya tıklama özelliği ekleyerek seçilen oyuncuyu kaydetme
             resultTable.getSelectionModel().addListSelectionListener(e1 -> {
