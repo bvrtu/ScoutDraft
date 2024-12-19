@@ -5,6 +5,12 @@ public class Formation {
     public HashMap<Integer, Integer> getUiToGraph(){
         return this.uiToGraph;
     }
+    public HashMap<Integer, Integer> getGraphToUI(){
+        Map<Integer, Integer> graphToUI = new HashMap<>();
+        for (Map.Entry<Integer, Integer> entry : uiToGraph.entrySet()) {
+            graphToUI.put(entry.getValue(), entry.getKey());
+        }
+        return new HashMap(graphToUI);}
     private String formation_name;
     Graph<Integer> the_graph = new Graph<Integer>();
     public Graph create_graph(){

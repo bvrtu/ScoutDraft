@@ -7,10 +7,7 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.*;
 
 public class Gui {
     private JFrame mainFrame;
@@ -284,21 +281,41 @@ public class Gui {
         formationFrame.add(container);
         formationFrame.setVisible(true);
     }
-
+    private int checkLink(int a, int b){
+        int rank = 0;
+        if(a<b || currentFormation.getPlayers()[currentFormation.getUiToGraph().get(a)] == null
+                || currentFormation.getPlayers()[currentFormation.getUiToGraph().get(b)] == null) return 0;
+        if(Objects.equals(currentFormation.getPlayers()[currentFormation.getUiToGraph().get(a)].getNation(), currentFormation.getPlayers()[currentFormation.getUiToGraph().get(b)].getNation()))
+            rank++;
+        if(Objects.equals(currentFormation.getPlayers()[currentFormation.getUiToGraph().get(a)].getLeague(), currentFormation.getPlayers()[currentFormation.getUiToGraph().get(b)].getLeague()))
+            rank++;
+        if(Objects.equals(currentFormation.getPlayers()[currentFormation.getUiToGraph().get(a)].getTeam_name(), currentFormation.getPlayers()[currentFormation.getUiToGraph().get(b)].getTeam_name()))
+            rank++;
+        return rank;
+    }
     private void addFormationLabels(String selectedFormation, JLabel formationImageLabel) {
         Point[] coordinates = getFormationBoxCoordinates(selectedFormation);
-
-        for (int i = 0; i < coordinates.length; i++) {
-            labels[i] = new JLabel("Link Rank: 0", SwingConstants.CENTER);
-            labels[i].setBounds(coordinates[i].x - 90, coordinates[i].y + 20, 90, 20);
-            labels[i].setOpaque(true);
-
-            labels[i].setBackground(Color.RED);
-            labels[i].setForeground(Color.WHITE);
-
-            formationImageLabel.add(labels[i]);
+        for(int main  = 0; main < 10; main++) {
+            for(int j : currentFormation.the_graph.neighbours(main)){
+                int rank = checkLink(main, currentFormation.getGraphToUI().get(j));
+                labels[main] = new JLabel("Link Rank: " + String.valueOf(rank), SwingConstants.CENTER);
+                labels[main].setBounds((coordinates[main].x -coordinates[currentFormation.getGraphToUI().get(j)].x)/2,
+                        (coordinates[main].y -coordinates[currentFormation.getGraphToUI().get(j)].y)/2, 90, 20);
+                labels[main].setOpaque(true);
+                switch (rank){
+                    case 0:
+                        labels[main].setBackground(Color.RED);
+                        break;
+                    case 1:
+                        labels[main].setBackground(Color.YELLOW);
+                        break;
+                    case 2:
+                        labels[main].setBackground(Color.GREEN);
+                        break;
+                }
+                labels[main].setForeground(Color.WHITE);
+            }
         }
-
         formationImageLabel.repaint();
     }
 
