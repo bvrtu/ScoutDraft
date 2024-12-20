@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -81,13 +83,25 @@ public class Gui {
 
         mainFrame.add(container);
 
-        authorsButton.addActionListener(e -> openAuthorsWindow());
+        authorsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainFrame.dispose();
+                openAuthorsWindow();
+            }
+        });
 
-        playButton.addActionListener(e -> openPlayWindow());
+        playButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainFrame.dispose();
+                openPlayWindow();
+            }
+        });
     }
 
     private void openAuthorsWindow() {
-        mainFrame.setVisible(false);
+        //mainFrame.setVisible(false);
         JFrame authorsFrame = new JFrame("Authors");
 
         JButton backButton = new JButton("Back to Main Screen");
@@ -132,7 +146,7 @@ public class Gui {
     }
 
     private void openPlayWindow() {
-        mainFrame.setVisible(false);
+        //mainFrame.setVisible(false);
 
         JButton backButton = new JButton("Back to Main Screen");
         backButton.setBounds(50, 50, 200, 30);
@@ -185,9 +199,27 @@ public class Gui {
         playPanel.add(label3, gbc);
 
         // Butonlara aksiyon ekleme
-        button1.addActionListener(e -> openFormationSelectionWindow());
-        button2.addActionListener(e -> showRandomFormations());
-        button3.addActionListener(e -> openSearchWindow());
+        button1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                playFrame.dispose();
+                openFormationSelectionWindow();
+            }
+        });
+        button2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                playFrame.dispose();
+                showRandomFormations();
+            }
+        });
+        button3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                playFrame.dispose();
+                openSearchWindow();
+            }
+        });
 
         playFrame.add(playPanel);
         playFrame.setVisible(true);
@@ -198,7 +230,7 @@ public class Gui {
         isRandom = false;
         isOnlySearch = false;
 
-        playFrame.setVisible(false);
+        //playFrame.setVisible(false);
 
         formationFrame = new JFrame("Build Your Team");
         formationFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -397,7 +429,7 @@ public class Gui {
         isBuildTeam = false;
         isOnlySearch = false;
 
-        playFrame.setVisible(false);
+        //playFrame.setVisible(false);
 
         formationFrame = new JFrame("Random Draft");
         formationFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -505,7 +537,7 @@ public class Gui {
     }
 
     private void openSearchWindow() {
-        playFrame.setVisible(false);
+        //playFrame.setVisible(false);
 
         // Yeni pencere
         JFrame searchFrame = new JFrame("Search Player");
@@ -697,6 +729,14 @@ public class Gui {
         // Yeni pencere
         JFrame searchFrame = new JFrame("Search Player");
         searchFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        searchFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // Yeni pencere kapandığında arkadaki pencereyi tekrar görünür yap
+                formationFrame.setVisible(true);
+                searchFrame.dispose(); // Yeni pencereyi kapat
+            }
+        });
         Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screenSize = kit.getScreenSize();
         searchFrame.setSize(screenSize);
@@ -1148,6 +1188,14 @@ public class Gui {
         // Yeni pencereyi tam ekran olarak aç
         JFrame randomPlayerFrame = new JFrame("Select Random Player");
         randomPlayerFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        randomPlayerFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // Yeni pencere kapandığında arkadaki pencereyi tekrar görünür yap
+                formationFrame.setVisible(true);
+                randomPlayerFrame.dispose(); // Yeni pencereyi kapat
+            }
+        });
 
         // Ekran boyutuna göre pencereyi tam ekran yap
         randomPlayerFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
