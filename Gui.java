@@ -300,39 +300,42 @@ public class Gui {
     private void addFormationLabels(String selectedFormation, JLabel formationImageLabel) {
         Point[] coordinates = getFormationBoxCoordinates(selectedFormation);
 
-        // Iterate over each player in the formation
         for (int main = 0; main < 10; main++) {
             for (int j : currentFormation.the_graph.neighbours(main)) {
                 int graphIndex1 = main;
                 int graphIndex2 = j;
 
-                int uiIndex1 = currentFormation.getGraphToUI().get(graphIndex1);
-                int uiIndex2 = currentFormation.getGraphToUI().get(graphIndex2);
+                int uiIndex1 = currentFormation.getGraphToUI().getOrDefault(graphIndex1, -1);
+                int uiIndex2 = currentFormation.getGraphToUI().getOrDefault(graphIndex2, -1);
 
-                int rank = checkLink(graphIndex1, graphIndex2);
-
-                // Benzersiz bir anahtar oluştur
-                String key = graphIndex1 + "-" + graphIndex2;
-
-                // Label oluştur ve yerleştir
-                JLabel label = new JLabel(String.valueOf(rank), SwingConstants.CENTER);
-                label.setOpaque(true);
-
-                int x = (coordinates[uiIndex1].x + coordinates[uiIndex2].x) / 2;
-                int y = (coordinates[uiIndex1].y + coordinates[uiIndex2].y) / 2;
-                label.setBounds(x + 20, y + 60, 20, 20);
-
-                switch (rank) {
-                    case 0 -> label.setBackground(Color.RED);
-                    case 1 -> label.setBackground(Color.YELLOW);
-                    case 2 -> label.setBackground(Color.GREEN);
+                if (uiIndex1 == -1 || uiIndex2 == -1) {
+                    continue;
                 }
 
-                label.setForeground(Color.WHITE);
-                formationImageLabel.add(label);
+                String key = generateKey(graphIndex1, graphIndex2);
 
-                // Map'e ekle
-                linkLabels.put(key, label);
+                if (!linkLabels.containsKey(key)) {
+                    int rank = checkLink(graphIndex1, graphIndex2);
+
+                    JLabel label = new JLabel(String.valueOf(rank), SwingConstants.CENTER);
+                    label.setOpaque(true);
+
+                    int x = (coordinates[uiIndex1].x + coordinates[uiIndex2].x) / 2;
+                    int y = (coordinates[uiIndex1].y + coordinates[uiIndex2].y) / 2;
+                    label.setBounds(x + 20, y + 60, 20, 20);
+
+                    switch (rank) {
+                        case 0 -> label.setBackground(Color.RED);
+                        case 1 -> label.setBackground(Color.YELLOW);
+                        case 2 -> label.setBackground(Color.GREEN);
+                    }
+
+                    label.setForeground(Color.WHITE);
+                    formationImageLabel.add(label);
+
+                    linkLabels.put(key, label);
+                    System.out.println("Added label for key: " + key);
+                }
             }
         }
 
@@ -340,20 +343,17 @@ public class Gui {
     }
 
     private void updateLinkRank(int index) {
-        // İlgili oyuncunun bağlantılarını al
         ArrayList<Formation.Link> links = currentFormation.checkLinks(index);
 
         for (Formation.Link link : links) {
             int graphIndex1 = link.vertex1;
             int graphIndex2 = link.vertex2;
 
-            // Anahtar oluştur
-            String key = graphIndex1 + "-" + graphIndex2;
+            String key = generateKey(graphIndex1, graphIndex2);
 
-            // Doğru label'ı bul
             JLabel label = linkLabels.get(key);
+
             if (label != null) {
-                // Rank'e göre güncelle
                 switch (link.rank) {
                     case 0 -> label.setBackground(Color.RED);
                     case 1, 2 -> label.setBackground(Color.YELLOW);
@@ -361,8 +361,20 @@ public class Gui {
                 }
                 label.setText(String.valueOf(link.rank));
                 label.repaint();
+                System.out.println("Updated label for key: " + key + " to rank: " + link.rank);
+            } else {
+                System.out.println("No label found for key: " + key);
             }
         }
+    }
+
+    private String generateKey(int graphIndex1, int graphIndex2) {
+        if (graphIndex1 > graphIndex2) {
+            int temp = graphIndex1;
+            graphIndex1 = graphIndex2;
+            graphIndex2 = temp;
+        }
+        return graphIndex1 + "-" + graphIndex2;
     }
 
     // Seçilen formasyonun görselini mevcut pencereye ekleyen metot
