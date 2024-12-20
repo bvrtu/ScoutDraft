@@ -30,6 +30,7 @@ public class Gui {
     private boolean isRandom = false;
     private boolean isBuildTeam = false;
     private boolean isOnlySearch = true;
+    private boolean isOkClicked = false;
 
     private int selectedBoxIndex = -1;
 
@@ -37,7 +38,7 @@ public class Gui {
 
     private boolean isCanPlay;
 
-    JLabel[] labels = new JLabel[11];
+    private Map<String, JLabel> linkLabels = new HashMap<>();
 
     public Gui() {
         initializeMainGUI();
@@ -257,6 +258,8 @@ public class Gui {
             formationComboBox.setEnabled(false); // ComboBox'ı devre dışı bırak
             okButton.setEnabled(false); // OK butonunu da devre dışı bırak
             JOptionPane.showMessageDialog(formationFrame, "Formation selection confirmed!");
+            isOkClicked = true;
+            if (isOkClicked) backButton.setEnabled(false);
             lastSelectedFormation = (String) formationComboBox.getSelectedItem();
             currentFormation.setFormation_name(lastSelectedFormation);
             currentFormation.create_graph();
@@ -293,47 +296,72 @@ public class Gui {
             rank++;
         return rank;
     }
+
     private void addFormationLabels(String selectedFormation, JLabel formationImageLabel) {
         Point[] coordinates = getFormationBoxCoordinates(selectedFormation);
-        for(int main  = 0; main < 10; main++) {
-            for(int j : currentFormation.the_graph.neighbours(main)){
-                int rank = checkLink(main, currentFormation.getGraphToUI().get(j));
-                labels[main] = new JLabel("Link Rank: " + String.valueOf(rank), SwingConstants.CENTER);
-                labels[main].setBounds((coordinates[main].x -coordinates[currentFormation.getGraphToUI().get(j)].x)/2,
-                        (coordinates[main].y -coordinates[currentFormation.getGraphToUI().get(j)].y)/2, 90, 20);
-                labels[main].setOpaque(true);
-                switch (rank){
-                    case 0:
-                        labels[main].setBackground(Color.RED);
-                        break;
-                    case 1:
-                        labels[main].setBackground(Color.YELLOW);
-                        break;
-                    case 2:
-                        labels[main].setBackground(Color.GREEN);
-                        break;
+
+        // Iterate over each player in the formation
+        for (int main = 0; main < 10; main++) {
+            for (int j : currentFormation.the_graph.neighbours(main)) {
+                int graphIndex1 = main;
+                int graphIndex2 = j;
+
+                int uiIndex1 = currentFormation.getGraphToUI().get(graphIndex1);
+                int uiIndex2 = currentFormation.getGraphToUI().get(graphIndex2);
+
+                int rank = checkLink(graphIndex1, graphIndex2);
+
+                // Benzersiz bir anahtar oluştur
+                String key = graphIndex1 + "-" + graphIndex2;
+
+                // Label oluştur ve yerleştir
+                JLabel label = new JLabel(String.valueOf(rank), SwingConstants.CENTER);
+                label.setOpaque(true);
+
+                int x = (coordinates[uiIndex1].x + coordinates[uiIndex2].x) / 2;
+                int y = (coordinates[uiIndex1].y + coordinates[uiIndex2].y) / 2;
+                label.setBounds(x + 20, y + 60, 20, 20);
+
+                switch (rank) {
+                    case 0 -> label.setBackground(Color.RED);
+                    case 1 -> label.setBackground(Color.YELLOW);
+                    case 2 -> label.setBackground(Color.GREEN);
                 }
-                labels[main].setForeground(Color.WHITE);
+
+                label.setForeground(Color.WHITE);
+                formationImageLabel.add(label);
+
+                // Map'e ekle
+                linkLabels.put(key, label);
             }
         }
+
         formationImageLabel.repaint();
     }
 
     private void updateLinkRank(int index) {
-        if (index >= 0 && index < labels.length) {
-            JLabel label = labels[index];
-            ArrayList<Formation.Link> links = currentFormation.checkLinks(index);
-            for (Formation.Link link : links) {
-                if (link.rank == 0) {
-                    label.setBackground(Color.RED);
-                } else if (link.rank == 1 || link.rank == 2) {
-                    label.setBackground(Color.YELLOW);
-                } else if (link.rank == 3) {
-                    label.setBackground(Color.GREEN);
+        // İlgili oyuncunun bağlantılarını al
+        ArrayList<Formation.Link> links = currentFormation.checkLinks(index);
+
+        for (Formation.Link link : links) {
+            int graphIndex1 = link.vertex1;
+            int graphIndex2 = link.vertex2;
+
+            // Anahtar oluştur
+            String key = graphIndex1 + "-" + graphIndex2;
+
+            // Doğru label'ı bul
+            JLabel label = linkLabels.get(key);
+            if (label != null) {
+                // Rank'e göre güncelle
+                switch (link.rank) {
+                    case 0 -> label.setBackground(Color.RED);
+                    case 1, 2 -> label.setBackground(Color.YELLOW);
+                    case 3 -> label.setBackground(Color.GREEN);
                 }
-                label.setText("Link Rank: " + link.rank);
+                label.setText(String.valueOf(link.rank));
+                label.repaint();
             }
-            label.repaint();
         }
     }
 
@@ -435,6 +463,8 @@ public class Gui {
             formationComboBox.setEnabled(false); // ComboBox'ı devre dışı bırak
             okButton.setEnabled(false); // OK butonunu da devre dışı bırak
             JOptionPane.showMessageDialog(formationFrame, "Formation selection confirmed!");
+            isOkClicked = true;
+            if (isOkClicked) backButton.setEnabled(false);
             addClickableButtons();
             lastSelectedFormation = (String) formationComboBox.getSelectedItem();
             currentFormation.setFormation_name(lastSelectedFormation);
