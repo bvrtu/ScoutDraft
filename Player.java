@@ -1,8 +1,9 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Player {
+public class Player implements Serializable {
     private String name;
     private int id;
     private int overall;

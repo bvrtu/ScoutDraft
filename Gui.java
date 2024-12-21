@@ -663,7 +663,7 @@ public class Gui {
             String division = (String) divisionDropdown.getSelectedItem();
             String position = (String) positionsDropdown.getSelectedItem();
 
-            ArrayList<Player> results = DatabaseAction.query(name, nation, ageValue, ability, division, position); // Query fonksiyonundan sonuçları al
+            ArrayList<Player> results = Client.asktoDatabase(name, nation, ageValue, ability, division, position); // Query fonksiyonundan sonuçları al
 
             if (results.isEmpty()) {
                 JOptionPane.showMessageDialog(searchFrame, "No players found!");
