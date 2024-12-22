@@ -1,10 +1,12 @@
 import java.util.*;
 public class Formation {
     private Player[] players = new Player[11];
+    // We need to add uiToGraph and graphToUI because, the sorting in the ui and sorting in the system differs
     private HashMap<Integer, Integer> uiToGraph = new HashMap<Integer, Integer>();
     public HashMap<Integer, Integer> getUiToGraph(){
         return this.uiToGraph;
     }
+    // There is no graphToUI because there is no need, we reverse uiToGraph and return it.
     public HashMap<Integer, Integer> getGraphToUI(){
         Map<Integer, Integer> graphToUI = new HashMap<>();
         for (Map.Entry<Integer, Integer> entry : uiToGraph.entrySet()) {
@@ -14,6 +16,7 @@ public class Formation {
     private String formation_name;
     Graph<Integer> the_graph = new Graph<Integer>();
     public Graph create_graph(){
+        //The creation of formations. This has to be done manually.
         switch(this.formation_name){
             case "3-4-3":
                 the_graph.addEdge(0,1,true);
@@ -34,7 +37,7 @@ public class Formation {
                 the_graph.addEdge(7,9,true);
                 the_graph.addEdge(8,10,true);
                 the_graph.addEdge(9,10,true);
-
+                // Difference to UI
                 uiToGraph.put(10,0);
                 uiToGraph.put(9,3);
                 uiToGraph.put(8,2);
@@ -600,6 +603,8 @@ public class Formation {
         players[uiToGraph.get(index)] = player;
     }
     public  ArrayList<Link> checkLinks(int index){
+        // This method allows us to check the vertex's connected vertexes and rank the link between them.
+        // This creates a list that stores links.
         index = uiToGraph.get(index);
         ArrayList<Link> links = new ArrayList<>();
         if(players[index]== null) System.out.println("The position is empty.");
@@ -620,6 +625,7 @@ public class Formation {
          return links;
     }
     public class Link{
+        // Links has the vertexes and a rank
         public Link(int rank, int vertex1, int vertex2){
             this.rank = rank;
             this.vertex1 = vertex1;

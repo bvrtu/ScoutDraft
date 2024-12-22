@@ -31,6 +31,7 @@ public class Connect {
     public static void create_table() {
         try{
             var conn = DriverManager.getConnection("jdbc:sqlite:database.db");
+            // Get the connection to database
             var stmt = conn.createStatement();
             var create = "CREATE TABLE IF NOT EXISTS PlayerAttributes(" +
                     "    ID INT PRIMARY KEY," +
@@ -42,6 +43,7 @@ public class Connect {
                     "    Position VARCHAR(50)," +
                     "    Division VARCHAR(255)" +
                     ");";
+            //The SQL code for creating table
             stmt.execute(create);
         }catch (SQLException e){
             System.out.println(e.getMessage());
@@ -53,7 +55,8 @@ public class Connect {
                 INSERT INTO PlayerAttributes (
                     ID, Name, Club, CA, Age, Nati, Position, Division
                 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?);
-                """;
+                """; // Insertion SQL code
+        // The question marks will be filled after
 
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:database.db");
              PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
@@ -66,8 +69,9 @@ public class Connect {
             pstmt.setString(6, nati);
             pstmt.setString(7, position);
             pstmt.setString(8, division);
-
+            // Filling the question marks
             pstmt.executeUpdate();
+            // Saving the changes
             System.out.println("Player data inserted successfully.");
 
         } catch (Exception e) {
@@ -89,6 +93,8 @@ public class Connect {
             insertPlayer(Integer.parseInt(cols[0]),cols[1],cols[2],Integer.parseInt(cols[3]),
                     Integer.parseInt(cols[4]),cols[5],cols[6],cols[7]);
         }
+        // In the loop, scanner reads every line except first line, then splits when an ";" occurs
+        // After that, inserts data to the table
         sc.close();
     }
 }
