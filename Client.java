@@ -8,6 +8,7 @@ public class Client implements Serializable {
     private static final int SERVER_PORT = 22879;
     // Determining the address and the port
     private static Socket socket;
+    public static boolean done = false;
 
     public void startClient() {
         try {
@@ -28,6 +29,8 @@ public class Client implements Serializable {
     public static ArrayList<Player> asktoDatabase(String name, String nation, int age,int ability, String division, String position){
         Player senderobject = new Player(name,0,ability,nation,age,"",division,position);
         // Stores the parameter data in an object to serialize it.
+        Client client = new Client();
+        client.startClient();
         try{
             OutputStream outputStream = socket.getOutputStream();
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
@@ -44,11 +47,8 @@ public class Client implements Serializable {
         return null;
     }
     public static void main(String[] args) {
-        Client client = new Client();
-        client.startClient();
         // Starts the client socket
         Gui gui = new Gui();
         gui.show();
-        client.closeConnection();
     }
 }

@@ -629,7 +629,9 @@ public class Gui {
             String name = nameField.getText();
             String nation = (String) nationDropdown.getSelectedItem();
             Integer ageValue = (Integer) age.getSelectedItem();
+            if(ageValue == null) ageValue = -1;
             Integer ability = (Integer) abilityDropdown.getSelectedItem();
+            if(ability == null) ability = -1;
             String division = (String) divisionDropdown.getSelectedItem();
             String position = (String) positionsDropdown.getSelectedItem();
 
@@ -810,11 +812,13 @@ public class Gui {
             String name = nameField.getText();
             String nation = (String) nationDropdown.getSelectedItem();
             Integer ageValue = (Integer) age.getSelectedItem();
+            if(ageValue == null) ageValue = -1;
             Integer ability = (Integer) abilityDropdown.getSelectedItem();
+            if(ability == null) ability = -1;
             String division = (String) divisionDropdown.getSelectedItem();
             String position = (String) positionsDropdown.getSelectedItem();
 
-            ArrayList<Player> results = DatabaseAction.query(name, nation, ageValue, ability, division, position);
+            ArrayList<Player> results = Client.asktoDatabase(name, nation, ageValue, ability, division, position);
 
             if (results.isEmpty()) {
                 JOptionPane.showMessageDialog(searchFrame, "No players found!");
@@ -1146,6 +1150,7 @@ public class Gui {
             public void windowClosing(WindowEvent e) {
                 formationFrame.setVisible(true);
                 randomPlayerFrame.dispose();
+                Client.done = true;
             }
         });
 
@@ -1215,7 +1220,7 @@ public class Gui {
     // For Random Draft mode, throws an empty query for take all players. And eliminates the selected players.
     private ArrayList<Player> getAvailablePlayers() {
         ArrayList<Player> availablePlayers = new ArrayList<>();
-        ArrayList<Player> allPlayers = DatabaseAction.query(null,null,null,null,null,null);
+        ArrayList<Player> allPlayers = Client.asktoDatabase(null,null,-1,-1,null,null);
 
         for (Player player : allPlayers) {
             if (!isPlayerSelected(player)) { // Implement this check

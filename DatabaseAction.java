@@ -20,12 +20,12 @@ public class DatabaseAction {
             parameters.add(nation);
         }
         // For searching by age
-        if (age != null) {
+        if (age != -1) {
             queryBuilder.append(" AND Age = ?");
             parameters.add(age);
         }
         // For searching by overall
-        if (ability != null) {
+        if (ability != -1) {
             queryBuilder.append(" AND CA = ?");
             parameters.add(ability);
         }
