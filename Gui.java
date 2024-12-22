@@ -292,9 +292,9 @@ public class Gui {
         // When you clicked on this button, it locks the "Select Formation", "OK" and "Back to Play Options" buttons.
         // And after that, the buttons of the players and link presentations (labels) pops up. And you can start the building your team.
         okButton.addActionListener(e -> {
-            selectButton.setEnabled(false); // Select Formation butonunu devre dışı bırak
-            formationComboBox.setEnabled(false); // ComboBox'ı devre dışı bırak
-            okButton.setEnabled(false); // OK butonunu da devre dışı bırak
+            selectButton.setEnabled(false);
+            formationComboBox.setEnabled(false);
+            okButton.setEnabled(false);
             JOptionPane.showMessageDialog(formationFrame, "Formation selection confirmed!");
             isOkClicked = true;
             if (isOkClicked) backButton.setEnabled(false);
