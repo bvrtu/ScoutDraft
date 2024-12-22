@@ -15,576 +15,325 @@ public class Formation {
         return new HashMap(graphToUI);}
     private String formation_name;
     Graph<Integer> the_graph = new Graph<Integer>();
-    public Graph create_graph(){
+    public void create_graph(){
         //The creation of formations. This has to be done manually.
         switch(this.formation_name){
             case "3-4-3":
-                the_graph.addEdge(0,1,true);
-                the_graph.addEdge(0,2,true);
-                the_graph.addEdge(0,3,true);
-                the_graph.addEdge(1,2,true);
-                the_graph.addEdge(1,4,true);
-                the_graph.addEdge(2,3,true);
-                the_graph.addEdge(2,5,true);
-                the_graph.addEdge(2,6,true);
-                the_graph.addEdge(3,7,true);
-                the_graph.addEdge(4,8,true);
-                the_graph.addEdge(4,5,true);
-                the_graph.addEdge(5,6,true);
-                the_graph.addEdge(5,10,true);
-                the_graph.addEdge(6,7,true);
-                the_graph.addEdge(6,10,true);
-                the_graph.addEdge(7,9,true);
-                the_graph.addEdge(8,10,true);
-                the_graph.addEdge(9,10,true);
+                // Store the edge data in an array
+                int[][] edges1 = {
+                        {0, 1}, {0, 2}, {0, 3}, {1, 2}, {1, 4},
+                        {2, 3}, {2, 5}, {2, 6}, {3, 7}, {4, 8},
+                        {4, 5}, {5, 6}, {5, 10}, {6, 7}, {6, 10},
+                        {7, 9}, {8, 10}, {9, 10}
+                };
+                // Adding all edges to graph
+                for (int[] edge : edges1) {
+                    the_graph.addEdge(edge[0], edge[1], true);
+                }
                 // Difference to UI
-                uiToGraph.put(10,0);
-                uiToGraph.put(9,3);
-                uiToGraph.put(8,2);
-                uiToGraph.put(7,1);
-                uiToGraph.put(6,7);
-                uiToGraph.put(5,6);
-                uiToGraph.put(4,5);
-                uiToGraph.put(3,4);
-                uiToGraph.put(2,9);
-                uiToGraph.put(1,8);
-                uiToGraph.put(0,10);
-
+                int[][] mappings1 = {
+                        {10, 0}, {9, 3}, {8, 2}, {7, 1}, {6, 7},
+                        {5, 6}, {4, 5}, {3, 4}, {2, 9}, {1, 8}, {0, 10}
+                };
+                for (int[] mapping : mappings1) {
+                    uiToGraph.put(mapping[0], mapping[1]);
+                }
                 break;
             case "3-4-1-2":
-                the_graph.addEdge(0,1,true);
-                the_graph.addEdge(0,2,true);
-                the_graph.addEdge(0,3,true);
-                the_graph.addEdge(1,2,true);
-                the_graph.addEdge(1,4,true);
-                the_graph.addEdge(2,3,true);
-                the_graph.addEdge(2,5,true);
-                the_graph.addEdge(2,6,true);
-                the_graph.addEdge(3,7,true);
-                the_graph.addEdge(4,8,true);
-                the_graph.addEdge(4,5,true);
-                the_graph.addEdge(5,6,true);
-                the_graph.addEdge(5,10,true);
-                the_graph.addEdge(6,7,true);
-                the_graph.addEdge(6,10,true);
-                the_graph.addEdge(7,9,true);
-                the_graph.addEdge(8,10,true);
-                the_graph.addEdge(9,10,true);
-                the_graph.addEdge(8,9,true);
+                int[][] edges2 = {
+                        {0, 1}, {0, 2}, {0, 3}, {1, 2}, {1, 4},
+                        {2, 3}, {2, 5}, {2, 6}, {3, 7}, {4, 8},
+                        {4, 5}, {5, 6}, {5, 10}, {6, 7}, {6, 10},
+                        {7, 9}, {8, 10}, {9, 10}, {8, 9}
+                };
+                for (int[] edge : edges2) {
+                    the_graph.addEdge(edge[0], edge[1], true);
+                }
 
-                uiToGraph.put(10,0);
-                uiToGraph.put(9,3);
-                uiToGraph.put(8,2);
-                uiToGraph.put(7,1);
-                uiToGraph.put(6,7);
-                uiToGraph.put(5,6);
-                uiToGraph.put(4,5);
-                uiToGraph.put(3,4);
-                uiToGraph.put(2,9);
-                uiToGraph.put(1,8);
-                uiToGraph.put(0,10);
+                int[][] mappings2 = {
+                        {10, 0}, {9, 3}, {8, 2}, {7, 1}, {6, 7},
+                        {5, 6}, {4, 5}, {3, 4}, {2, 9}, {1, 8}, {0, 10}
+                };
+                for (int[] mapping : mappings2) {
+                    uiToGraph.put(mapping[0], mapping[1]);
+                }
 
                 break;
             case "3-4-2-1":
-                the_graph.addEdge(0,1,true);
-                the_graph.addEdge(0,2,true);
-                the_graph.addEdge(0,3,true);
-                the_graph.addEdge(1,2,true);
-                the_graph.addEdge(1,4,true);
-                the_graph.addEdge(2,3,true);
-                the_graph.addEdge(2,5,true);
-                the_graph.addEdge(2,6,true);
-                the_graph.addEdge(3,7,true);
-                the_graph.addEdge(4,8,true);
-                the_graph.addEdge(4,5,true);
-                the_graph.addEdge(5,6,true);
-                the_graph.addEdge(5,8,true);
-                the_graph.addEdge(6,7,true);
-                the_graph.addEdge(6,9,true);
-                the_graph.addEdge(7,9,true);
-                the_graph.addEdge(8,10,true);
-                the_graph.addEdge(9,10,true);
+                int[][] edges3 = {
+                        {0, 1}, {0, 2}, {0, 3}, {1, 2}, {1, 4},
+                        {2, 3}, {2, 5}, {2, 6}, {3, 7}, {4, 8},
+                        {4, 5}, {5, 6}, {5, 8}, {6, 7}, {6, 9},
+                        {7, 9}, {8, 10}, {9, 10}
+                };
+                for (int[] edge : edges3) {
+                    the_graph.addEdge(edge[0], edge[1], true);
+                }
 
-                uiToGraph.put(10,0);
-                uiToGraph.put(9,3);
-                uiToGraph.put(8,2);
-                uiToGraph.put(7,1);
-                uiToGraph.put(6,7);
-                uiToGraph.put(5,6);
-                uiToGraph.put(4,5);
-                uiToGraph.put(3,4);
-                uiToGraph.put(2,9);
-                uiToGraph.put(1,8);
-                uiToGraph.put(0,10);
+                int[][] mappings3 = {
+                        {10, 0}, {9, 3}, {8, 2}, {7, 1}, {6, 7},
+                        {5, 6}, {4, 5}, {3, 4}, {2, 9}, {1, 8}, {0, 10}
+                };
+                for (int[] mapping : mappings3) {
+                    uiToGraph.put(mapping[0], mapping[1]);
+                }
 
                 break;
             case "3-5-2":
-                the_graph.addEdge(0,1,true);
-                the_graph.addEdge(0,2,true);
-                the_graph.addEdge(0,3,true);
-                the_graph.addEdge(1,2,true);
-                the_graph.addEdge(1,4,true);
-                the_graph.addEdge(1,5,true);
-                the_graph.addEdge(2,3,true);
-                the_graph.addEdge(2,5,true);
-                the_graph.addEdge(2,6,true);
-                the_graph.addEdge(3,6,true);
-                the_graph.addEdge(3,7,true);
-                the_graph.addEdge(4,8,true);
-                the_graph.addEdge(4,5,true);
-                the_graph.addEdge(5,6,true);
-                the_graph.addEdge(5,10,true);
-                the_graph.addEdge(6,7,true);
-                the_graph.addEdge(6,10,true);
-                the_graph.addEdge(7,9,true);
-                the_graph.addEdge(8,10,true);
-                the_graph.addEdge(9,10,true);
-                the_graph.addEdge(8,9,true);
-
-                uiToGraph.put(10,0);
-                uiToGraph.put(9,3);
-                uiToGraph.put(8,2);
-                uiToGraph.put(7,1);
-                uiToGraph.put(6,7);
-                uiToGraph.put(5,6);
-                uiToGraph.put(4,5);
-                uiToGraph.put(3,4);
-                uiToGraph.put(2,9);
-                uiToGraph.put(1,8);
-                uiToGraph.put(0,10);
-
+                int[][] edges4 = {
+                        {0, 1}, {0, 2}, {0, 3}, {1, 2}, {1, 4}, {1, 5},
+                        {2, 3}, {2, 5}, {2, 6}, {3, 6}, {3, 7},
+                        {4, 8}, {4, 5}, {5, 6}, {5, 10}, {6, 7},
+                        {6, 10}, {7, 9}, {8, 10}, {9, 10}, {8, 9}
+                };
+                for (int[] edge : edges4) {
+                    the_graph.addEdge(edge[0], edge[1], true);
+                }
+                int[][] mappings4 = {
+                        {10, 0}, {9, 3}, {8, 2}, {7, 1}, {6, 7},
+                        {5, 6}, {4, 5}, {3, 4}, {2, 9}, {1, 8}, {0, 10}
+                };
+                for (int[] mapping : mappings4) {
+                    uiToGraph.put(mapping[0], mapping[1]);
+                }
                 break;
             case "4-1-2-1-2":
-                the_graph.addEdge(0,1,true);
-                the_graph.addEdge(0,2,true);
-                the_graph.addEdge(1,2,true);
-                the_graph.addEdge(1,4,true);
-                the_graph.addEdge(1,6,true);
-                the_graph.addEdge(2,3,true);
-                the_graph.addEdge(2,6,true);
-                the_graph.addEdge(3,7,true);
-                the_graph.addEdge(4,5,true);
-                the_graph.addEdge(5,6,true);
-                the_graph.addEdge(5,8,true);
-                the_graph.addEdge(5,10,true);
-                the_graph.addEdge(6,7,true);
-                the_graph.addEdge(6,10,true);
-                the_graph.addEdge(7,9,true);
-                the_graph.addEdge(7,10,true);
-                the_graph.addEdge(8,9,true);
-                the_graph.addEdge(8,10,true);
-                the_graph.addEdge(9,10,true);
-
-                uiToGraph.put(10,0);
-                uiToGraph.put(9,3);
-                uiToGraph.put(8,6);
-                uiToGraph.put(7,4);
-                uiToGraph.put(6,7);
-                uiToGraph.put(5,2);
-                uiToGraph.put(4,1);
-                uiToGraph.put(3,5);
-                uiToGraph.put(2,9);
-                uiToGraph.put(1,8);
-                uiToGraph.put(0,10);
+                int[][] edges5 = {
+                        {0, 1}, {0, 2}, {1, 2}, {1, 4}, {1, 6},
+                        {2, 3}, {2, 6}, {3, 7}, {4, 5}, {5, 6},
+                        {5, 8}, {5, 10}, {6, 7}, {6, 10}, {7, 9},
+                        {7, 10}, {8, 9}, {8, 10}, {9, 10}
+                };
+                for (int[] edge : edges5) {
+                    the_graph.addEdge(edge[0], edge[1], true);
+                }
+                int[][] mappings5 = {
+                        {10, 0}, {9, 3}, {8, 6}, {7, 4}, {6, 7},
+                        {5, 2}, {4, 1}, {3, 5}, {2, 9}, {1, 8}, {0, 10}
+                };
+                for (int[] mapping : mappings5) {
+                    uiToGraph.put(mapping[0], mapping[1]);
+                }
 
                 break;
             case "4-1-4-1":
-                the_graph.addEdge(0,1,true);
-                the_graph.addEdge(0,2,true);
-                the_graph.addEdge(1,2,true);
-                the_graph.addEdge(1,4,true);
-                the_graph.addEdge(1,6,true);
-                the_graph.addEdge(2,3,true);
-                the_graph.addEdge(2,6,true);
-                the_graph.addEdge(3,7,true);
-                the_graph.addEdge(4,5,true);
-                the_graph.addEdge(5,8,true);
-                the_graph.addEdge(5,9,true);
-                the_graph.addEdge(6,8,true);
-                the_graph.addEdge(6,10,true);
-                the_graph.addEdge(7,9,true);
-                the_graph.addEdge(7,10,true);
-                the_graph.addEdge(8,9,true);
-                the_graph.addEdge(8,10,true);
-                the_graph.addEdge(9,10,true);
-
-                uiToGraph.put(10,0);
-                uiToGraph.put(9,3);
-                uiToGraph.put(8,6);
-                uiToGraph.put(7,4);
-                uiToGraph.put(6,7);
-                uiToGraph.put(5,2);
-                uiToGraph.put(4,1);
-                uiToGraph.put(3,5);
-                uiToGraph.put(2,10);
-                uiToGraph.put(1,8);
-                uiToGraph.put(0,9);
+                int[][] edges6 = {
+                        {0, 1}, {0, 2}, {1, 2}, {1, 4}, {1, 6},
+                        {2, 3}, {2, 6}, {3, 7}, {4, 5}, {5, 8},
+                        {5, 9}, {6, 8}, {6, 10}, {7, 9}, {7, 10},
+                        {8, 9}, {8, 10}, {9, 10}
+                };
+                for (int[] edge : edges6) {
+                    the_graph.addEdge(edge[0], edge[1], true);
+                }
+                int[][] mappings6 = {
+                        {10, 0}, {9, 3}, {8, 6}, {7, 4}, {6, 7},
+                        {5, 2}, {4, 1}, {3, 5}, {2, 10}, {1, 8}, {0, 9}
+                };
+                for (int[] mapping : mappings6) {
+                    uiToGraph.put(mapping[0], mapping[1]);
+                }
 
                 break;
             case "4-2-2-2":
-                the_graph.addEdge(0,1,true);
-                the_graph.addEdge(0,2,true);
-                the_graph.addEdge(1,2,true);
-                the_graph.addEdge(1,4,true);
-                the_graph.addEdge(1,8,true);
-                the_graph.addEdge(2,3,true);
-                the_graph.addEdge(2,6,true);
-                the_graph.addEdge(3,7,true);
-                the_graph.addEdge(4,5,true);
-                the_graph.addEdge(5,8,true);
-                the_graph.addEdge(5,10,true);
-                the_graph.addEdge(6,7,true);
-                the_graph.addEdge(6,8,true);
-                the_graph.addEdge(6,9,true);
-                the_graph.addEdge(7,9,true);
-                the_graph.addEdge(8,10,true);
-                the_graph.addEdge(9,10,true);
-
-                uiToGraph.put(10,0);
-                uiToGraph.put(9,3);
-                uiToGraph.put(8,8);
-                uiToGraph.put(7,4);
-                uiToGraph.put(6,7);
-                uiToGraph.put(5,2);
-                uiToGraph.put(4,1);
-                uiToGraph.put(3,5);
-                uiToGraph.put(2,6);
-                uiToGraph.put(1,9);
-                uiToGraph.put(0,10);
+                int[][] edges7 = {
+                        {0, 1}, {0, 2}, {1, 2}, {1, 4}, {1, 8},
+                        {2, 3}, {2, 6}, {3, 7}, {4, 5}, {5, 8},
+                        {5, 10}, {6, 7}, {6, 8}, {6, 9}, {7, 9},
+                        {8, 10}, {9, 10}
+                };
+                for (int[] edge : edges7) {
+                    the_graph.addEdge(edge[0], edge[1], true);
+                }
+                int[][] mappings7 = {
+                        {10, 0}, {9, 3}, {8, 8}, {7, 4}, {6, 7},
+                        {5, 2}, {4, 1}, {3, 5}, {2, 6}, {1, 9}, {0, 10}
+                };
+                for (int[] mapping : mappings7) {
+                    uiToGraph.put(mapping[0], mapping[1]);
+                }
 
                 break;
             case "4-2-3-1":
-                the_graph.addEdge(0,1,true);
-                the_graph.addEdge(0,2,true);
-                the_graph.addEdge(1,2,true);
-                the_graph.addEdge(1,4,true);
-                the_graph.addEdge(1,8,true);
-                the_graph.addEdge(2,3,true);
-                the_graph.addEdge(2,6,true);
-                the_graph.addEdge(3,6,true);
-                the_graph.addEdge(4,8,true);
-                the_graph.addEdge(5,8,true);
-                the_graph.addEdge(5,9,true);
-                the_graph.addEdge(5,10,true);
-                the_graph.addEdge(6,7,true);
-                the_graph.addEdge(6,8,true);
-                the_graph.addEdge(6,10,true);
-                the_graph.addEdge(7,9,true);
-                the_graph.addEdge(7,10,true);
-                the_graph.addEdge(8,10,true);
-                the_graph.addEdge(9,10,true);
-
-                uiToGraph.put(10,0);
-                uiToGraph.put(9,6);
-                uiToGraph.put(8,10);
-                uiToGraph.put(7,8);
-                uiToGraph.put(6,3);
-                uiToGraph.put(5,2);
-                uiToGraph.put(4,1);
-                uiToGraph.put(3,4);
-                uiToGraph.put(2,7);
-                uiToGraph.put(1,5);
-                uiToGraph.put(0,9);
-
+                int[][] edges8 = {
+                        {0, 1}, {0, 2}, {1, 2}, {1, 4}, {1, 8},
+                        {2, 3}, {2, 6}, {3, 6}, {4, 8}, {5, 8},
+                        {5, 9}, {5, 10}, {6, 7}, {6, 8}, {6, 10},
+                        {7, 9}, {7, 10}, {8, 10}, {9, 10}
+                };
+                for (int[] edge : edges8) {
+                    the_graph.addEdge(edge[0], edge[1], true);
+                }
+                int[][] mappings8 = {
+                        {10, 0}, {9, 6}, {8, 10}, {7, 8}, {6, 3},
+                        {5, 2}, {4, 1}, {3, 4}, {2, 7}, {1, 5}, {0, 9}
+                };
+                for (int[] mapping : mappings8) {
+                    uiToGraph.put(mapping[0], mapping[1]);
+                }
                 break;
             case "4-3-1-2":
-                the_graph.addEdge(0,1,true);
-                the_graph.addEdge(0,2,true);
-                the_graph.addEdge(1,2,true);
-                the_graph.addEdge(1,4,true);
-                the_graph.addEdge(2,3,true);
-                the_graph.addEdge(1,5,true);
-                the_graph.addEdge(1,6,true);
-                the_graph.addEdge(2,6,true);
-                the_graph.addEdge(2,7,true);
-                the_graph.addEdge(3,7,true);
-                the_graph.addEdge(4,5,true);
-                the_graph.addEdge(5,6,true);
-                the_graph.addEdge(5,8,true);
-                the_graph.addEdge(6,7,true);
-                the_graph.addEdge(6,10,true);
-                the_graph.addEdge(7,9,true);
-                the_graph.addEdge(8,9,true);
-                the_graph.addEdge(8,10,true);
-                the_graph.addEdge(9,10,true);
-
-                uiToGraph.put(10,0);
-                uiToGraph.put(9,7);
-                uiToGraph.put(8,6);
-                uiToGraph.put(7,5);
-                uiToGraph.put(6,3);
-                uiToGraph.put(5,2);
-                uiToGraph.put(4,1);
-                uiToGraph.put(3,4);
-                uiToGraph.put(2,9);
-                uiToGraph.put(1,8);
-                uiToGraph.put(0,10);
-
+                int[][] edges9 = {
+                        {0, 1}, {0, 2}, {1, 2}, {1, 4}, {2, 3},
+                        {1, 5}, {1, 6}, {2, 6}, {2, 7}, {3, 7},
+                        {4, 5}, {5, 6}, {5, 8}, {6, 7}, {6, 10},
+                        {7, 9}, {8, 9}, {8, 10}, {9, 10}
+                };
+                for (int[] edge : edges9) {
+                    the_graph.addEdge(edge[0], edge[1], true);
+                }
+                int[][] mappings9 = {
+                        {10, 0}, {9, 7}, {8, 6}, {7, 5}, {6, 3},
+                        {5, 2}, {4, 1}, {3, 4}, {2, 9}, {1, 8}, {0, 10}
+                };
+                for (int[] mapping : mappings9) {
+                    uiToGraph.put(mapping[0], mapping[1]);
+                }
                 break;
             case "4-3-2-1":
-                the_graph.addEdge(0,1,true);
-                the_graph.addEdge(0,2,true);
-                the_graph.addEdge(1,2,true);
-                the_graph.addEdge(1,4,true);
-                the_graph.addEdge(1,5,true);
-                the_graph.addEdge(2,3,true);
-                the_graph.addEdge(2,7,true);
-                the_graph.addEdge(3,7,true);
-                the_graph.addEdge(4,5,true);
-                the_graph.addEdge(5,6,true);
-                the_graph.addEdge(5,8,true);
-                the_graph.addEdge(6,7,true);
-                the_graph.addEdge(6,8,true);
-                the_graph.addEdge(6,9,true);
-                the_graph.addEdge(7,9,true);
-                the_graph.addEdge(8,10,true);
-                the_graph.addEdge(9,10,true);
-
-                uiToGraph.put(10,0);
-                uiToGraph.put(9,7);
-                uiToGraph.put(8,6);
-                uiToGraph.put(7,5);
-                uiToGraph.put(6,3);
-                uiToGraph.put(5,2);
-                uiToGraph.put(4,1);
-                uiToGraph.put(3,4);
-                uiToGraph.put(2,9);
-                uiToGraph.put(1,8);
-                uiToGraph.put(0,10);
+                int[][] edges10 = {
+                        {0, 1}, {0, 2}, {1, 2}, {1, 4}, {1, 5},
+                        {2, 3}, {2, 7}, {3, 7}, {4, 5}, {5, 6},
+                        {5, 8}, {6, 7}, {6, 8}, {6, 9}, {7, 9},
+                        {8, 10}, {9, 10}
+                };
+                for (int[] edge : edges10) {
+                    the_graph.addEdge(edge[0], edge[1], true);
+                }
+                int[][] mappings10 = {
+                        {10, 0}, {9, 7}, {8, 6}, {7, 5}, {6, 3},
+                        {5, 2}, {4, 1}, {3, 4}, {2, 9}, {1, 8}, {0, 10}
+                };
+                for (int[] mapping : mappings10) {
+                    uiToGraph.put(mapping[0], mapping[1]);
+                }
 
                 break;
             case "4-3-3":
-                the_graph.addEdge(0,1,true);
-                the_graph.addEdge(0,2,true);
-                the_graph.addEdge(1,2,true);
-                the_graph.addEdge(1,4,true);
-                the_graph.addEdge(1,6,true);
-                the_graph.addEdge(2,3,true);
-                the_graph.addEdge(2,6,true);
-                the_graph.addEdge(3,7,true);
-                the_graph.addEdge(4,5,true);
-                the_graph.addEdge(5,6,true);
-                the_graph.addEdge(5,8,true);
-                the_graph.addEdge(6,7,true);
-                the_graph.addEdge(6,10,true);
-                the_graph.addEdge(7,9,true);
-                the_graph.addEdge(8,10,true);
-                the_graph.addEdge(9,10,true);
-
-                uiToGraph.put(10,0);
-                uiToGraph.put(9,7);
-                uiToGraph.put(8,6);
-                uiToGraph.put(7,5);
-                uiToGraph.put(6,3);
-                uiToGraph.put(5,2);
-                uiToGraph.put(4,1);
-                uiToGraph.put(3,4);
-                uiToGraph.put(2,9);
-                uiToGraph.put(1,8);
-                uiToGraph.put(0,10);
+                int[][] edges11 = {
+                        {0, 1}, {0, 2}, {1, 2}, {1, 4}, {1, 6},
+                        {2, 3}, {2, 6}, {3, 7}, {4, 5}, {5, 6},
+                        {5, 8}, {6, 7}, {6, 10}, {7, 9}, {8, 10},
+                        {9, 10}
+                };
+                for (int[] edge : edges11) {
+                    the_graph.addEdge(edge[0], edge[1], true);
+                }
+                int[][] mappings11 = {
+                        {10, 0}, {9, 7}, {8, 6}, {7, 5}, {6, 3},
+                        {5, 2}, {4, 1}, {3, 4}, {2, 9}, {1, 8}, {0, 10}
+                };
+                for (int[] mapping : mappings11) {
+                    uiToGraph.put(mapping[0], mapping[1]);
+                }
 
                 break;
             case "4-4-1-1":
-                the_graph.addEdge(0,1,true);
-                the_graph.addEdge(0,2,true);
-                the_graph.addEdge(1,2,true);
-                the_graph.addEdge(1,4,true);
-                the_graph.addEdge(1,6,true);
-                the_graph.addEdge(2,3,true);
-                the_graph.addEdge(2,8,true);
-                the_graph.addEdge(3,7,true);
-                the_graph.addEdge(4,5,true);
-                the_graph.addEdge(5,6,true);
-                the_graph.addEdge(5,9,true);
-                the_graph.addEdge(6,8,true);
-                the_graph.addEdge(6,10,true);
-                the_graph.addEdge(7,8,true);
-                the_graph.addEdge(7,9,true);
-                the_graph.addEdge(8,10,true);
-                the_graph.addEdge(9,10,true);
-
-                uiToGraph.put(10,0);
-                uiToGraph.put(9,8);
-                uiToGraph.put(8,10);
-                uiToGraph.put(7,6);
-                uiToGraph.put(6,3);
-                uiToGraph.put(5,2);
-                uiToGraph.put(4,1);
-                uiToGraph.put(3,4);
-                uiToGraph.put(2,7);
-                uiToGraph.put(1,5);
-                uiToGraph.put(0,9);
-
+                int[][] edges12 = {
+                        {0, 1}, {0, 2}, {1, 2}, {1, 4}, {1, 6},
+                        {2, 3}, {2, 8}, {3, 7}, {4, 5}, {5, 6},
+                        {5, 9}, {6, 8}, {6, 10}, {7, 8}, {7, 9},
+                        {8, 10}, {9, 10}
+                };
+                for (int[] edge : edges12) {
+                    the_graph.addEdge(edge[0], edge[1], true);
+                }
+                int[][] mappings12 = {
+                        {10, 0}, {9, 8}, {8, 10}, {7, 6}, {6, 3},
+                        {5, 2}, {4, 1}, {3, 4}, {2, 7}, {1, 5}, {0, 9}
+                };
+                for (int[] mapping : mappings12) {
+                    uiToGraph.put(mapping[0], mapping[1]);
+                }
                 break;
             case "4-4-2":
-                the_graph.addEdge(0,1,true);
-                the_graph.addEdge(0,2,true);
-                the_graph.addEdge(1,2,true);
-                the_graph.addEdge(1,4,true);
-                the_graph.addEdge(1,6,true);
-                the_graph.addEdge(2,3,true);
-                the_graph.addEdge(2,8,true);
-                the_graph.addEdge(3,7,true);
-                the_graph.addEdge(4,5,true);
-                the_graph.addEdge(5,6,true);
-                the_graph.addEdge(5,10,true);
-                the_graph.addEdge(6,8,true);
-                the_graph.addEdge(6,10,true);
-                the_graph.addEdge(7,8,true);
-                the_graph.addEdge(7,9,true);
-                the_graph.addEdge(8,9,true);
-                the_graph.addEdge(9,10,true);
-
-                uiToGraph.put(10,0);
-                uiToGraph.put(9,8);
-                uiToGraph.put(8,10);
-                uiToGraph.put(7,6);
-                uiToGraph.put(6,3);
-                uiToGraph.put(5,2);
-                uiToGraph.put(4,1);
-                uiToGraph.put(3,4);
-                uiToGraph.put(2,7);
-                uiToGraph.put(1,5);
-                uiToGraph.put(0,9);
-
+                int[][] edges13 = {
+                        {0, 1}, {0, 2}, {1, 2}, {1, 4}, {1, 6},
+                        {2, 3}, {2, 8}, {3, 7}, {4, 5}, {5, 6},
+                        {5, 10}, {6, 8}, {6, 10}, {7, 8}, {7, 9},
+                        {8, 9}, {9, 10}
+                };
+                for (int[] edge : edges13) {
+                    the_graph.addEdge(edge[0], edge[1], true);
+                }
+                int[][] mappings13 = {
+                        {10, 0}, {9, 8}, {8, 10}, {7, 6}, {6, 3},
+                        {5, 2}, {4, 1}, {3, 4}, {2, 7}, {1, 5}, {0, 9}
+                };
+                for (int[] mapping : mappings13) {
+                    uiToGraph.put(mapping[0], mapping[1]);
+                }
                 break;
             case "4-5-1":
-                the_graph.addEdge(0,1,true);
-                the_graph.addEdge(0,2,true);
-                the_graph.addEdge(1,2,true);
-                the_graph.addEdge(1,4,true);
-                the_graph.addEdge(1,6,true);
-                the_graph.addEdge(2,3,true);
-                the_graph.addEdge(2,6,true);
-                the_graph.addEdge(3,7,true);
-                the_graph.addEdge(4,5,true);
-                the_graph.addEdge(5,8,true);
-                the_graph.addEdge(6,8,true);
-                the_graph.addEdge(6,10,true);
-                the_graph.addEdge(7,10,true);
-                the_graph.addEdge(8,9,true);
-                the_graph.addEdge(8,10,true);
-                the_graph.addEdge(9,10,true);
-
-                uiToGraph.put(10,0);
-                uiToGraph.put(9,10);
-                uiToGraph.put(8,6);
-                uiToGraph.put(7,8);
-                uiToGraph.put(6,3);
-                uiToGraph.put(5,2);
-                uiToGraph.put(4,1);
-                uiToGraph.put(3,4);
-                uiToGraph.put(2,7);
-                uiToGraph.put(1,5);
-                uiToGraph.put(0,9);
-
+                int[][] edges14 = {
+                        {0, 1}, {0, 2}, {1, 2}, {1, 4}, {1, 6},
+                        {2, 3}, {2, 6}, {3, 7}, {4, 5}, {5, 8},
+                        {6, 8}, {6, 10}, {7, 10}, {8, 9}, {8, 10}, {9, 10}
+                };
+                for (int[] edge : edges14) {
+                    the_graph.addEdge(edge[0], edge[1], true);
+                }
+                int[][] pairs14 = {
+                        {10, 0}, {9, 10}, {8, 6}, {7, 8}, {6, 3},
+                        {5, 2}, {4, 1}, {3, 4}, {2, 7}, {1, 5}, {0, 9}
+                };
+                for (int[] pair : pairs14) {
+                    uiToGraph.put(pair[0], pair[1]);
+                }
                 break;
             case "5-2-2-1":
-                the_graph.addEdge(0,1,true);
-                the_graph.addEdge(0,2,true);
-                the_graph.addEdge(0,3,true);
-                the_graph.addEdge(1,2,true);
-                the_graph.addEdge(1,4,true);
-                the_graph.addEdge(2,3,true);
-                the_graph.addEdge(2,5,true);
-                the_graph.addEdge(2,6,true);
-                the_graph.addEdge(3,7,true);
-                the_graph.addEdge(4,8,true);
-                the_graph.addEdge(4,5,true);
-                the_graph.addEdge(5,6,true);
-                the_graph.addEdge(5,8,true);
-                the_graph.addEdge(5,10,true);
-                the_graph.addEdge(6,7,true);
-                the_graph.addEdge(6,9,true);
-                the_graph.addEdge(6,10,true);
-                the_graph.addEdge(7,9,true);
-                the_graph.addEdge(8,10,true);
-                the_graph.addEdge(9,10,true);
-
-                uiToGraph.put(10,0);
-                uiToGraph.put(9,3);
-                uiToGraph.put(8,2);
-                uiToGraph.put(7,1);
-                uiToGraph.put(6,7);
-                uiToGraph.put(5,6);
-                uiToGraph.put(4,5);
-                uiToGraph.put(3,4);
-                uiToGraph.put(2,9);
-                uiToGraph.put(1,8);
-                uiToGraph.put(0,10);
-
+                int[][] edges15 = {
+                        {0, 1}, {0, 2}, {0, 3}, {1, 2}, {1, 4}, {2, 3}, {2, 5}, {2, 6},
+                        {3, 7}, {4, 8}, {4, 5}, {5, 6}, {5, 8}, {5, 10}, {6, 7}, {6, 9},
+                        {6, 10}, {7, 9}, {8, 10}, {9, 10}
+                };
+                for (int[] edge : edges15) {
+                    the_graph.addEdge(edge[0], edge[1], true);
+                }
+                int[][] pairs15 = {
+                        {10, 0}, {9, 3}, {8, 2}, {7, 1}, {6, 7}, {5, 6}, {4, 5}, {3, 4},
+                        {2, 9}, {1, 8}, {0, 10}
+                };
+                for (int[] pair : pairs15) {
+                    uiToGraph.put(pair[0], pair[1]);
+                }
                 break;
             case "5-2-1-2":
-                the_graph.addEdge(0,1,true);
-                the_graph.addEdge(0,2,true);
-                the_graph.addEdge(0,3,true);
-                the_graph.addEdge(1,2,true);
-                the_graph.addEdge(1,4,true);
-                the_graph.addEdge(2,3,true);
-                the_graph.addEdge(2,5,true);
-                the_graph.addEdge(2,6,true);
-                the_graph.addEdge(3,7,true);
-                the_graph.addEdge(4,5,true);
-                the_graph.addEdge(5,6,true);
-                the_graph.addEdge(5,10,true);
-                the_graph.addEdge(5,8,true);
-                the_graph.addEdge(6,7,true);
-                the_graph.addEdge(6,9,true);
-                the_graph.addEdge(6,10,true);
-                the_graph.addEdge(8,10,true);
-                the_graph.addEdge(9,10,true);
-                the_graph.addEdge(8,9,true);
-
-                uiToGraph.put(10,0);
-                uiToGraph.put(9,3);
-                uiToGraph.put(8,2);
-                uiToGraph.put(7,1);
-                uiToGraph.put(6,7);
-                uiToGraph.put(5,6);
-                uiToGraph.put(4,5);
-                uiToGraph.put(3,4);
-                uiToGraph.put(2,9);
-                uiToGraph.put(1,8);
-                uiToGraph.put(0,10);
-
+                int[][] edges16 = {
+                        {0, 1}, {0, 2}, {0, 3}, {1, 2}, {1, 4},
+                        {2, 3}, {2, 5}, {2, 6}, {3, 7}, {4, 5},
+                        {5, 6}, {5, 10}, {5, 8}, {6, 7}, {6, 9},
+                        {6, 10}, {8, 10}, {9, 10}, {8, 9}
+                };
+                for (int[] edge : edges16) {
+                    the_graph.addEdge(edge[0], edge[1], true);
+                }
+                int[][] uiToGraphData16 = {
+                        {10, 0}, {9, 3}, {8, 2}, {7, 1}, {6, 7},
+                        {5, 6}, {4, 5}, {3, 4}, {2, 9}, {1, 8}, {0, 10}
+                };
+                for (int[] pair : uiToGraphData16) {
+                    uiToGraph.put(pair[0], pair[1]);
+                }
                 break;
             case "5-3-2":
-                the_graph.addEdge(0,1,true);
-                the_graph.addEdge(0,2,true);
-                the_graph.addEdge(0,3,true);
-                the_graph.addEdge(1,2,true);
-                the_graph.addEdge(1,4,true);
-                the_graph.addEdge(1,5,true);
-                the_graph.addEdge(2,3,true);
-                the_graph.addEdge(2,8,true);
-                the_graph.addEdge(3,6,true);
-                the_graph.addEdge(3,7,true);
-                the_graph.addEdge(4,5,true);
-                the_graph.addEdge(5,8,true);
-                the_graph.addEdge(5,10,true);
-                the_graph.addEdge(6,7,true);
-                the_graph.addEdge(6,8,true);
-                the_graph.addEdge(6,9,true);
-                the_graph.addEdge(8,9,true);
-                the_graph.addEdge(8,10,true);
-                the_graph.addEdge(9,10,true);
-
-                uiToGraph.put(10,0);
-                uiToGraph.put(9,3);
-                uiToGraph.put(8,2);
-                uiToGraph.put(7,1);
-                uiToGraph.put(6,7);
-                uiToGraph.put(5,6);
-                uiToGraph.put(4,5);
-                uiToGraph.put(3,4);
-                uiToGraph.put(2,9);
-                uiToGraph.put(1,10);
-                uiToGraph.put(0,8);
-
+                int[][] edges17 = {
+                        {0, 1}, {0, 2}, {0, 3}, {1, 2}, {1, 4}, {1, 5}, {2, 3}, {2, 8},
+                        {3, 6}, {3, 7}, {4, 5}, {5, 8}, {5, 10}, {6, 7}, {6, 8}, {6, 9},
+                        {8, 9}, {8, 10}, {9, 10}
+                };
+                for (int[] edge : edges17) {
+                    the_graph.addEdge(edge[0], edge[1], true);
+                }
+                int[][] uiToGraphData17 = {
+                        {10, 0}, {9, 3}, {8, 2}, {7, 1}, {6, 7},
+                        {5, 6}, {4, 5}, {3, 4}, {2, 9}, {1, 10}, {0, 18}
+                };
+                for (int[] pair : uiToGraphData17) {
+                    uiToGraph.put(pair[0], pair[1]);
+                }
                 break;
-
         }
-        return the_graph;
     }
     public String getFormation_name() {
         return formation_name;
