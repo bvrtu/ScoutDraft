@@ -161,8 +161,8 @@ public class Gui {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                playFrame.dispose(); // Yeni pencereyi gizle
-                mainFrame.setVisible(true); // İlk pencereyi göster
+                playFrame.dispose();
+                mainFrame.setVisible(true);
             }
         });
 
